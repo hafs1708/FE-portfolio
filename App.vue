@@ -45,4 +45,12 @@ export default {
     color: #444;
     margin-top: 60px;
 }
+button {
+    background: #0faf87;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 16px;
+}
 </style>
