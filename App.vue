@@ -1,23 +1,33 @@
 <template>
     <h1>Ninja Reaction Timer</h1>
-    <button @click="start">Play</button>
+    <button @click="start" :disabled="isPlaying">Play</button>
+    <Block v-if="isPlaying" :delay="delay" @end="endGame" />
+    <p v-if="showResults">Reaction Time: {{ score }} ms</p>
 </template>
 
 <script>
+import Block from './components/Block.vue'
+
 export default {
     name: 'App',
-    components: { },
+    components: { Block },
     data() {
         return {
             isPlaying: false,
-            delay: null
+            delay: null,
+            score: null,
+            showResults: false
         }
     },
     methods: {
         start() {
             this.delay = 2000 + Math.random() * 5000
             this.isPlaying = true
-            console.log(this.delay)
+        },
+        endGame(reactionTime) {
+            this.score = reactionTime
+            this.isPlaying = false,
+            this.showResults = true
         }
     }
 }
@@ -25,9 +35,7 @@ export default {
 
 <style>
 #app {
-    font-family: Arial, Helvetica, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    font-family: Arial;
     text-align: center;
     color: #444;
     margin-top: 60px;
