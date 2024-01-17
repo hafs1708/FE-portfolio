@@ -14,10 +14,9 @@
                     </NuxtLink>
                 </div>
             </div>
-
         </div>
         <!-- SIDE MENU TOGGLE BUTTON -->
-        <div class="md:hidden drawer-content fixed right-8">
+        <div class="z-10 md:hidden drawer-content fixed right-8">
             <!-- Page content here -->
             <label for="my-drawer-4" class="btn btn-outline border-neutral btn-circle mt-8">
                 <lucideMenu :size="22" class="text-accent" />
@@ -34,13 +33,6 @@
                 <div class="px-4 text-2xl">Menu</div>
                 <ul class="menu">
                     <!-- Sidebar content here -->
-                    <!-- <li>
-                        <NuxtLink :to="{ path: '/', hash: '#home' }" @click="toggleDrawer = !toggleDrawer"
-                            class="flex gap items-start">
-                            <LucideHome :size="16" class="text-secondary" />
-                            <div>Home</div>
-                        </NuxtLink>
-                    </li> -->
                     <li v-for="(menu, i) in menus" :key="i">
                         <NuxtLink :to="{ path: '/', hash: '#about' }" @click="toggleDrawer = !toggleDrawer"
                             class="flex gap items-start">
@@ -48,44 +40,16 @@
                             <div>{{ menu.title }}</div>
                         </NuxtLink>
                     </li>
-                    <!-- <li>
-                        <NuxtLink :to="{ path: '/', hash: '#resume' }" @click="toggleDrawer = !toggleDrawer"
-                            class="flex gap items-start">
-                            <LucideLayoutPanelLeft :size="16" class="text-secondary" />
-                            <div>Resume</div>
-                        </NuxtLink>
-                    </li>
-                    <li>
-                        <NuxtLink :to="{ path: '/', hash: '#project' }" @click="toggleDrawer = !toggleDrawer"
-                            class="flex gap items-start">
-                            <LucideBriefcase :size="16" class="text-secondary" />
-                            <div>Project</div>
-                        </NuxtLink>
-                    </li>
-                    <li>
-                        <NuxtLink :to="{ path: '/', hash: '#testimonial' }" @click="toggleDrawer = !toggleDrawer"
-                            class="flex gap items-start">
-                            <LucideUserRound :size="16" class="text-secondary" />
-                            <div>Testimonial</div>
-                        </NuxtLink>
-                    </li>
-                    <li>
-                        <NuxtLink :to="{ path: '/', hash: '#content' }" @click="toggleDrawer = !toggleDrawer"
-                            class="flex gap items-start">
-                            <LucideMail :size="16" class="text-secondary" />
-                            <div>Content</div>
-                        </NuxtLink>
-                    </li> -->
                 </ul>
                 <div class="px-4 py-4 text-2xl">Social</div>
                 <div class="menu flex flex-row gap-6 pl-6">
-                    <a href="#">
+                    <a href="https://www.instagram.com/" target="__blank">
                         <LucideInstagram :size="16" class="text-secondary" />
                     </a>
-                    <a href="#">
+                    <a href="https://twitter.com/" target="__blank">
                         <LucideTwitter :size="16" class="text-secondary" />
                     </a>
-                    <a href="#">
+                    <a href="https://google.com/" target="__blank">
                         <LucideGlobe2 :size="16" class="text-secondary" />
                     </a>
                 </div>
