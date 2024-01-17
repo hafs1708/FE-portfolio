@@ -11,21 +11,21 @@
                     <a href="#" class="tooltip tooltip-left" data-tip="Home">
                         <lucideHome :size="16" class="text-secondary" />
                     </a>
-                    <a href="#" class="tooltip tooltip-left" data-tip="About">
+                    <NuxtLink :to="{ path: '/', hash: '#about' }" class="tooltip tooltip-left" data-tip="About">
                         <LucideUserRound :size="16" class="text-secondary" />
-                    </a>
-                    <a href="#" class="tooltip tooltip-left" data-tip="Resume">
+                    </NuxtLink>
+                    <NuxtLink :to="{ path: '/', hash: '#resume' }" class="tooltip tooltip-left" data-tip="Resume">
                         <LucideLayoutPanelLeft :size="16" class="text-secondary" />
-                    </a>
-                    <a href="#" class="tooltip tooltip-left" data-tip="Project">
+                    </NuxtLink>
+                    <NuxtLink :to="{ path: '/', hash: '#project' }" class="tooltip tooltip-left" data-tip="Project">
                         <LucideBriefcase :size="16" class="text-secondary" />
-                    </a>
-                    <a href="#" class="tooltip tooltip-left" data-tip="Testimonial">
+                    </NuxtLink>
+                    <NuxtLink :to="{ path: '/', hash: '#testimonial' }" class="tooltip tooltip-left" data-tip="Testimonial">
                         <LucideUserRound :size="16" class="text-secondary" />
-                    </a>
-                    <a href="#" class="tooltip tooltip-left" data-tip="Content">
+                    </NuxtLink>
+                    <NuxtLink :to="{ path: '/', hash: '#content' }" class="tooltip tooltip-left" data-tip="Content">
                         <LucideMail :size="16" class="text-secondary" />
-                    </a>
+                    </NuxtLink>
                 </div>
             </div>
 
@@ -49,40 +49,40 @@
                 <ul class="menu">
                     <!-- Sidebar content here -->
                     <li>
-                        <a href="#" class="flex gap items-start">
+                        <NuxtLink :to="{ path: '/', hash: '#home' }" class="flex gap items-start">
                             <LucideHome :size="16" class="text-secondary" />
                             <div>Home</div>
-                        </a>
+                        </NuxtLink>
                     </li>
                     <li>
-                        <a href="#" class="flex gap items-start">
+                        <NuxtLink :to="{ path: '/', hash: '#about' }" class="flex gap items-start">
                             <LucideUserRound :size="16" class="text-secondary" />
                             <div>About</div>
-                        </a>
+                        </NuxtLink>
                     </li>
                     <li>
-                        <a href="#" class="flex gap items-start">
+                        <NuxtLink :to="{ path: '/', hash: '#resume' }" class="flex gap items-start">
                             <LucideLayoutPanelLeft :size="16" class="text-secondary" />
                             <div>Resume</div>
-                        </a>
+                        </NuxtLink>
                     </li>
                     <li>
-                        <a href="#" class="flex gap items-start">
+                        <NuxtLink :to="{ path: '/', hash: '#project' }" class="flex gap items-start">
                             <LucideBriefcase :size="16" class="text-secondary" />
                             <div>Project</div>
-                        </a>
+                        </NuxtLink>
                     </li>
                     <li>
-                        <a href="#" class="flex gap items-start">
+                        <NuxtLink :to="{ path: '/', hash: '#testimonial' }" class="flex gap items-start">
                             <LucideUserRound :size="16" class="text-secondary" />
                             <div>Testimonial</div>
-                        </a>
+                        </NuxtLink>
                     </li>
                     <li>
-                        <a href="#" class="flex gap items-start">
+                        <NuxtLink :to="{ path: '/', hash: '#content' }" class="flex gap items-start">
                             <LucideMail :size="16" class="text-secondary" />
                             <div>Content</div>
-                        </a>
+                        </NuxtLink>
                     </li>
                 </ul>
                 <div class="px-4 py-4 text-2xl">Social</div>
@@ -102,8 +102,8 @@
     </div>
 </template>
 
-<!-- <script setup>
-definePageMeta({
-    layout: 'custom-layout'
-})
-</script> -->
+<style>
+html {
+    scroll-behavior: smooth;
+}
+</style>
