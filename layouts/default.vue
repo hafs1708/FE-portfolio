@@ -33,9 +33,9 @@
                 <div class="px-4 text-2xl">Menu</div>
                 <ul class="menu">
                     <!-- Sidebar content here -->
-                    <li v-for="(menu, i) in menus" :key="i">
-                        <NuxtLink :to="{ path: '/', hash: '#about' }" @click="toggleDrawer = !toggleDrawer"
-                            class="flex gap items-start">
+                    <li v-for="(menu, i) in menus" :key="i" class="my-2">
+                        <NuxtLink :to="{ path: '/', hash: menu.hash }" @click="toggleDrawer = !toggleDrawer"
+                            class="flex gap-2 items-start">
                             <component :is="menu.icon" size="16" class="text-secondary" />
                             <div>{{ menu.title }}</div>
                         </NuxtLink>
