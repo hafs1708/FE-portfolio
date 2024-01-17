@@ -8,23 +8,9 @@
         <div class="min-h-screen w-28 flex-none max-md:hidden relative">
             <div class="fixed min-h-screen flex items-center">
                 <div class="border border-neutral p-5 rounded-full flex flex-col gap-6">
-                    <a href="#" class="tooltip tooltip-left" data-tip="Home">
-                        <lucideHome :size="16" class="text-secondary" />
-                    </a>
-                    <NuxtLink :to="{ path: '/', hash: '#about' }" class="tooltip tooltip-left" data-tip="About">
-                        <LucideUserRound :size="16" class="text-secondary" />
-                    </NuxtLink>
-                    <NuxtLink :to="{ path: '/', hash: '#resume' }" class="tooltip tooltip-left" data-tip="Resume">
-                        <LucideLayoutPanelLeft :size="16" class="text-secondary" />
-                    </NuxtLink>
-                    <NuxtLink :to="{ path: '/', hash: '#project' }" class="tooltip tooltip-left" data-tip="Project">
-                        <LucideBriefcase :size="16" class="text-secondary" />
-                    </NuxtLink>
-                    <NuxtLink :to="{ path: '/', hash: '#testimonial' }" class="tooltip tooltip-left" data-tip="Testimonial">
-                        <LucideUserRound :size="16" class="text-secondary" />
-                    </NuxtLink>
-                    <NuxtLink :to="{ path: '/', hash: '#content' }" class="tooltip tooltip-left" data-tip="Content">
-                        <LucideMail :size="16" class="text-secondary" />
+                    <NuxtLink v-for="(menu, i) in menus" :key="i" :to="{ path: menu.path, hash: menu.hash }"
+                        class="tooltip tooltip-left" :data-tip="menu.title">
+                        <component :is="menu.icon" :size="16" class="text-secondary" />
                     </NuxtLink>
                 </div>
             </div>
@@ -48,21 +34,21 @@
                 <div class="px-4 text-2xl">Menu</div>
                 <ul class="menu">
                     <!-- Sidebar content here -->
-                    <li>
+                    <!-- <li>
                         <NuxtLink :to="{ path: '/', hash: '#home' }" @click="toggleDrawer = !toggleDrawer"
                             class="flex gap items-start">
                             <LucideHome :size="16" class="text-secondary" />
                             <div>Home</div>
                         </NuxtLink>
-                    </li>
-                    <li>
+                    </li> -->
+                    <li v-for="(menu, i) in menus" :key="i">
                         <NuxtLink :to="{ path: '/', hash: '#about' }" @click="toggleDrawer = !toggleDrawer"
                             class="flex gap items-start">
-                            <LucideUserRound :size="16" class="text-secondary" />
-                            <div>About</div>
+                            <component :is="menu.icon" size="16" class="text-secondary" />
+                            <div>{{ menu.title }}</div>
                         </NuxtLink>
                     </li>
-                    <li>
+                    <!-- <li>
                         <NuxtLink :to="{ path: '/', hash: '#resume' }" @click="toggleDrawer = !toggleDrawer"
                             class="flex gap items-start">
                             <LucideLayoutPanelLeft :size="16" class="text-secondary" />
@@ -89,7 +75,7 @@
                             <LucideMail :size="16" class="text-secondary" />
                             <div>Content</div>
                         </NuxtLink>
-                    </li>
+                    </li> -->
                 </ul>
                 <div class="px-4 py-4 text-2xl">Social</div>
                 <div class="menu flex flex-row gap-6 pl-6">
@@ -112,6 +98,45 @@
 // Reactive boolean
 // Toggle for open/close drawer
 const toggleDrawer = ref(false);
+
+const menus = [
+    {
+        path: '/',
+        hash: '#',
+        title: 'Home',
+        icon: resolveComponent('LucideHome')
+    },
+    {
+        path: '/',
+        hash: '#about',
+        title: 'About',
+        icon: resolveComponent('LucideUserRound')
+    },
+    {
+        path: '/',
+        hash: '#resume',
+        title: 'Resume',
+        icon: resolveComponent('LucideLayoutPanelLeft')
+    },
+    {
+        path: '/',
+        hash: '#project',
+        title: 'Project',
+        icon: resolveComponent('LucideBriefcase')
+    },
+    {
+        path: '/',
+        hash: '#testimonial',
+        title: 'Testimonial',
+        icon: resolveComponent('LucideUserRound')
+    },
+    {
+        path: '/',
+        hash: '#content',
+        title: 'Content',
+        icon: resolveComponent('LucideMail')
+    }
+]
 </script>
 
 <style>
