@@ -41,7 +41,7 @@
 
     <!-- MOBILE MENU DRAWER -->
     <div data-theme="forest" class="drawer drawer-end">
-        <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
+        <input v-model="toggleDrawer" id="my-drawer-4" type="checkbox" class="drawer-toggle" />
         <div class="drawer-side overflow-hidden">
             <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
             <div class="menu p-14 w-80 min-h-full bg-base-200 text-base-content">
@@ -49,37 +49,43 @@
                 <ul class="menu">
                     <!-- Sidebar content here -->
                     <li>
-                        <NuxtLink :to="{ path: '/', hash: '#home' }" class="flex gap items-start">
+                        <NuxtLink :to="{ path: '/', hash: '#home' }" @click="toggleDrawer = !toggleDrawer"
+                            class="flex gap items-start">
                             <LucideHome :size="16" class="text-secondary" />
                             <div>Home</div>
                         </NuxtLink>
                     </li>
                     <li>
-                        <NuxtLink :to="{ path: '/', hash: '#about' }" class="flex gap items-start">
+                        <NuxtLink :to="{ path: '/', hash: '#about' }" @click="toggleDrawer = !toggleDrawer"
+                            class="flex gap items-start">
                             <LucideUserRound :size="16" class="text-secondary" />
                             <div>About</div>
                         </NuxtLink>
                     </li>
                     <li>
-                        <NuxtLink :to="{ path: '/', hash: '#resume' }" class="flex gap items-start">
+                        <NuxtLink :to="{ path: '/', hash: '#resume' }" @click="toggleDrawer = !toggleDrawer"
+                            class="flex gap items-start">
                             <LucideLayoutPanelLeft :size="16" class="text-secondary" />
                             <div>Resume</div>
                         </NuxtLink>
                     </li>
                     <li>
-                        <NuxtLink :to="{ path: '/', hash: '#project' }" class="flex gap items-start">
+                        <NuxtLink :to="{ path: '/', hash: '#project' }" @click="toggleDrawer = !toggleDrawer"
+                            class="flex gap items-start">
                             <LucideBriefcase :size="16" class="text-secondary" />
                             <div>Project</div>
                         </NuxtLink>
                     </li>
                     <li>
-                        <NuxtLink :to="{ path: '/', hash: '#testimonial' }" class="flex gap items-start">
+                        <NuxtLink :to="{ path: '/', hash: '#testimonial' }" @click="toggleDrawer = !toggleDrawer"
+                            class="flex gap items-start">
                             <LucideUserRound :size="16" class="text-secondary" />
                             <div>Testimonial</div>
                         </NuxtLink>
                     </li>
                     <li>
-                        <NuxtLink :to="{ path: '/', hash: '#content' }" class="flex gap items-start">
+                        <NuxtLink :to="{ path: '/', hash: '#content' }" @click="toggleDrawer = !toggleDrawer"
+                            class="flex gap items-start">
                             <LucideMail :size="16" class="text-secondary" />
                             <div>Content</div>
                         </NuxtLink>
@@ -101,6 +107,12 @@
         </div>
     </div>
 </template>
+
+<script setup>
+// Reactive boolean
+// Toggle for open/close drawer
+const toggleDrawer = ref(false);
+</script>
 
 <style>
 html {
