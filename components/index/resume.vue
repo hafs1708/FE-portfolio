@@ -15,7 +15,7 @@
                     </div>
                     <div class="mb-10">
                         <div>2020 - Present</div>
-                        <div class="flex flex-col gap-4">
+                        <div class="flex flex-col">
                             <div class="text-3xl font-semibold mt-5">Framer Desinger & Developer</div>
                             <div class="font-light">Brunodee Agency</div>
                         </div>

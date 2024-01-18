@@ -80,7 +80,7 @@ const menus = [
         path: '/',
         hash: '#blog',
         title: 'Blog',
-        icon: resolveComponent('LucideNewsPaper')
+        icon: resolveComponent('LucideNewspaper')
     },
     {
         path: '/',
