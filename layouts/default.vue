@@ -78,9 +78,21 @@ const menus = [
     },
     {
         path: '/',
+        hash: '#blog',
+        title: 'Blog',
+        icon: resolveComponent('LucideNewsPaper')
+    },
+    {
+        path: '/',
         hash: '#resume',
         title: 'Resume',
         icon: resolveComponent('LucideLayoutPanelLeft')
+    },
+    {
+        path: '/',
+        hash: '#education',
+        title: 'Education',
+        icon: resolveComponent('LucideGraduationCap')
     },
     {
         path: '/',
@@ -90,8 +102,8 @@ const menus = [
     },
     {
         path: '/',
-        hash: '#testimonial',
-        title: 'Testimonial',
+        hash: '#skill',
+        title: 'Skill',
         icon: resolveComponent('LucideUserRound')
     },
     {
