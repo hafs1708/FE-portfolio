@@ -1,7 +1,7 @@
 <template>
     <div data-theme="forest" class="min-h-screen flex text-default">
         <!-- MAIN CONTENT -->
-        <div class="min-h-screen grow grid grid-cols-10">
+        <div class="min-h-screen grow">
             <slot></slot>
         </div>
         <!-- SIDE MENU -->
