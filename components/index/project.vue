@@ -1,14 +1,29 @@
 <template>
-    <div class="min-h-screen" id="project">
-        <div>Project</div>
-        <div>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Exercitationem dolorum quod culpa mollitia
-            perspiciatis veritatis corrupti maxime? Eum expedita voluptatum ex temporibus consectetur velit
-            reprehenderit aspernatur tempora est. Dolor reprehenderit assumenda fugiat voluptates quia sed repudiandae
-            tenetur, sunt incidunt suscipit perspiciatis. Provident quaerat praesentium natus accusantium sint incidunt
-            ipsam omnis quae officiis perferendis minus ea rerum officia pariatur voluptatibus, consectetur saepe modi.
-            Illum fugit numquam animi eius unde dolorem eligendi magni non obcaecati! Et quisquam minus, velit, deleniti
-            iusto odit fuga enim tempora ipsam libero dolorem natus maiores quis, sed itaque architecto incidunt iure
-            animi? Dolor aut quaerat saepe ipsam.</div>
+    <div class="min-h-screen py-12" id="project">
+        <div class="rounded-2xl border border-neutral w-fit px-4 py-1 flex items-center gap-2">
+            <LucideUserRound :size="16" />
+            <div class="uppercase text-sm font-light">project</div>
+        </div>
+        <div class="mt-10">
+            <div class="text-4xl font-semibold">Latest Project</div>
+            <!-- LIST PROJECT -->
+            <div class="grid grid-cols-2 gap-6 mt-8">
+                <!-- PROJECT ITEM -->
+                <div class="col-span-2 md:col-span-1" v-for="j in 4" :key="j">
+                    <div class="flex justify-between items-end">
+                        <div class="font-semibold text-xl text-accent">Judul Project</div>
+                        <div>20 Jan 2020 - Present</div>
+                    </div>
+                    <!-- IMAGE -->
+                    <div class="aspect-video bg-neutral rounded-xl"></div>
+                    <!-- SKILL -->
+                    <div class="flex flex-nowrap overflow-hidden gap-2 mt-2">
+                        <div v-for="m in 10" :key="m" class="border border-neutral rounded-xl px-3 text-nowrap">Skill {{ m
+                        }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
