@@ -15,13 +15,17 @@
                     </div>
                     <div class="mb-10">
                         <div class="group-hover:text-accent">2020 - Present</div>
-                        <div class="flex flex-col">
-                            <div class="text-3xl font-semibold mt-5">Framer Desinger & Developer</div>
-                            <div class="font-light">Brunodee Agency</div>
-                        </div>
-                        <div>
-                            <div class="text-3xl font-semibold">Front-End WordPress Developer</div>
-                            <div class="font-light">Envato Market</div>
+                        <div class="flex flex-col gap-4">
+                            <div>
+                                <div class="text-xl md:text-3xl xl:text-4xl font-semibold mt-5">Framer Desinger & Developer
+                                </div>
+                                <div class="font-light">Brunodee Agency</div>
+                            </div>
+                            <div>
+                                <div class="text-xl md:text-3xl xl:text-4xl font-semibold">Front-End WordPress Developer
+                                </div>
+                                <div class="font-light">Envato Market</div>
+                            </div>
                         </div>
                     </div>
                 </div>
