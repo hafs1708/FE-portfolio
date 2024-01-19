@@ -12,7 +12,7 @@
             <!-- List of skills with category -->
             <div v-for="m in 4" :key="m" class="mb-6">
                 <div class="uppercase font-semibold text-accent">SKILL CATEGORY</div>
-                <div class="flex gap-6">
+                <div class="flex flex-wrap gap-6">
                     <div v-for="n in 10" :key="n" class="group">
                         <div
                             class="aspect-square bg-neutral w-16 rounded-md flex items-center justify-center group-hover:scale-110 duration-300">
