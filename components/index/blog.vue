@@ -7,7 +7,7 @@
         <div class="flex flex-col gap-6 mt-10">
             <div class="text-4xl font-semibold">Latest Blog</div>
             <!-- LIST BLOG -->
-            <div class="grid grid-cols-10 gap-3 group hover:bg-accent p-2 rounded-xl" v-for="m in 4" :key="m">
+            <div class="grid grid-cols-10 gap-3 group hover:bg-cyan-950 p-2 rounded-xl" v-for="m in 4" :key="m">
                 <!-- IMAGE -->
                 <div class="aspect-video bg-neutral col-span-4 xl:col-span-3 rounded-lg group-hover:scale-105 duration-300">
                 </div>

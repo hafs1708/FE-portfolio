@@ -13,11 +13,13 @@
             <div v-for="m in 4" :key="m" class="mb-6">
                 <div class="uppercase font-semibold text-accent">SKILL CATEGORY</div>
                 <div class="flex gap-6">
-                    <div v-for="n in 10" :key="n">
-                        <div class="aspect-square bg-neutral w-16 rounded-md flex items-center justify-center">
+                    <div v-for="n in 10" :key="n" class="group">
+                        <div
+                            class="aspect-square bg-neutral w-16 rounded-md flex items-center justify-center group-hover:scale-110 duration-300">
                             <LucideWrench :size="28" />
                         </div>
-                        <div class="text-center">skill {{ n }}</div>
+                        <div class="text-center text-sm
+                         group-hover:text-accent text-nowrap">Skill test {{ n }}</div>
                     </div>
                 </div>
             </div>
