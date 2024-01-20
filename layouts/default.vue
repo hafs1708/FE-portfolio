@@ -6,14 +6,14 @@
         </div>
         <!-- SIDE MENU -->
         <DefaultLayoutSideMenu :menus="menus" />
-    </div>
 
-    <!-- SIDE MENU TOGGLE BUTTON -->
-    <div class="z-10 md:hidden drawer-content fixed right-8">
-        <!-- Page content here -->
-        <label @click="toggleDrawer = !toggleDrawer" class="btn btn-outline border-neutral btn-circle mt-8">
-            <lucideMenu :size="22" class="text-accent" />
-        </label>
+        <!-- SIDE MENU TOGGLE BUTTON -->
+        <div class="z-10 md:hidden drawer-content fixed right-8">
+            <!-- Page content here -->
+            <label @click="toggleDrawer = !toggleDrawer" class="btn btn-outline border-neutral btn-circle mt-8">
+                <lucideMenu :size="22" class="text-accent" />
+            </label>
+        </div>
     </div>
 
     <!-- MOBILE MENU DRAWER -->
