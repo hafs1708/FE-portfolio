@@ -7,7 +7,10 @@
                 <div class="text-right text-nowrap">{{ profile.job }}</div>
             </div>
             <!-- IMAGE / FOTO -->
-            <div class="aspect-square bg-neutral rounded-2xl"></div>
+            <div v-if="profile.avatar" class="aspect-square bg-neutral rounded-2xl">
+                <img :src="apiUri + profile.avatar" alt="">
+            </div>
+            <!-- <div class="aspect-square bg-neutral rounded-2xl"></div> -->
             <!-- EMAIL, LOKASI -->
             <div class="text-2xl font-semibold text-center">
                 <div>{{ profile.email }}</div>
@@ -45,6 +48,9 @@
 defineProps({
     profile: Object
 });
+
+const config = useRuntimeConfig()
+const apiUri = config.public.apiUri;
 
 const year = new Date().getFullYear();
 
