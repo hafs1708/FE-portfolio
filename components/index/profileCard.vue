@@ -7,8 +7,8 @@
                 <div class="text-right text-nowrap">{{ profile.job }}</div>
             </div>
             <!-- IMAGE / FOTO -->
-            <div v-if="profile.avatar" class="aspect-square bg-neutral rounded-2xl">
-                <img :src="apiUri + profile.avatar" alt="">
+            <div v-if="profile.avatar" class="aspect-square bg-neutral rounded-2xl overflow-hidden">
+                <img :src="apiUri + profile.avatar" alt="" class="object-cover min-h-full min-w-full">
             </div>
             <!-- <div class="aspect-square bg-neutral rounded-2xl"></div> -->
             <!-- EMAIL, LOKASI -->
@@ -20,19 +20,39 @@
             <div class="text-center font-thin text-white/50">&copy; {{ year }} {{ profile.lastname }}, All Rights Reserved
             </div>
             <!-- SOCIAL BUTTON -->
-            <div class="flex justify-between">
-                <div class="btn btn-outline btn-circle border-neutral hover:bg-transparent hover:border-accent">
+            <div class="flex flex-wrap justify-center gap-4">
+                <a v-if="profile.instagram" :href="profile.instagram" target="__blank"
+                    class="btn btn-outline btn-circle border-neutral hover:bg-transparent hover:border-accent">
                     <LucideInstagram :size="20" class="text-accent" />
-                </div>
-                <div class="btn btn-outline btn-circle border-neutral hover:bg-transparent hover:border-accent">
+                </a>
+                <a v-if="profile.twitter" :href="profile.twitter" target="__blank"
+                    class="btn btn-outline btn-circle border-neutral hover:bg-transparent hover:border-accent">
                     <LucideTwitter :size="20" class="text-accent" />
-                </div>
-                <div class="btn btn-outline btn-circle border-neutral hover:bg-transparent hover:border-accent">
+                </a>
+                <a v-if="profile.github" :href="profile.github" target="__blank"
+                    class="btn btn-outline btn-circle border-neutral hover:bg-transparent hover:border-accent">
                     <LucideGithub :size="20" class="text-accent" />
-                </div>
-                <div class="btn btn-outline btn-circle border-neutral hover:bg-transparent hover:border-accent">
+                </a>
+                <a v-if="profile.gitlab" :href="profile.gitlab" target="__blank"
+                    class="btn btn-outline btn-circle border-neutral hover:bg-transparent hover:border-accent">
+                    <LucideGitlab :size="20" class="text-accent" />
+                </a>
+                <a v-if="profile.facebook" :href="profile.facebook" target="__blank"
+                    class="btn btn-outline btn-circle border-neutral hover:bg-transparent hover:border-accent">
+                    <LucideFacebook :size="20" class="text-accent" />
+                </a>
+                <a v-if="profile.linkedin" :href="profile.linkedin" target="__blank"
+                    class="btn btn-outline btn-circle border-neutral hover:bg-transparent hover:border-accent">
+                    <LucideLinkedin :size="20" class="text-accent" />
+                </a>
+                <a v-if="profile.website" :href="profile.website" target="__blank"
+                    class="btn btn-outline btn-circle border-neutral hover:bg-transparent hover:border-accent">
                     <LucideGlobe :size="20" class="text-accent" />
-                </div>
+                </a>
+                <a v-if="profile.discord" :href="profile.discord" target="__blank"
+                    class="btn btn-outline btn-circle border-neutral hover:bg-transparent hover:border-accent">
+                    <IconsDiscord :size="20" class="w-6 stroke-accent fill-accent" />
+                </a>
             </div>
 
             <!-- HIRE ME BUTTON -->
@@ -45,9 +65,10 @@
 </template>
 
 <script setup>
-defineProps({
+const props = defineProps({
     profile: Object
 });
+console.log(props.profile);
 
 const config = useRuntimeConfig()
 const apiUri = config.public.apiUri;
