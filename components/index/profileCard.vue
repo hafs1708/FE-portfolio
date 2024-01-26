@@ -10,6 +10,7 @@
             <div v-if="profile.avatar" class="aspect-square bg-neutral rounded-2xl overflow-hidden">
                 <img :src="apiUri + profile.avatar" alt="" class="object-cover min-h-full min-w-full">
             </div>
+            <div v-else class="aspect-square bg-neutral rounded-2xl"></div>
             <!-- <div class="aspect-square bg-neutral rounded-2xl"></div> -->
             <!-- EMAIL, LOKASI -->
             <div class="text-2xl font-semibold text-center">
