@@ -3,7 +3,7 @@
         <div class="border rounded-3xl p-12 w-full flex flex-col gap-6">
             <!-- NAME & TITLE -->
             <div class="flex justify-between items-end">
-                <div class="text-3xl font-bold">{{ profile.firstname }} {{ profile.lastname }}</div>
+                <div class="text-3xl font-bold">{{ fullName }}</div>
                 <div class="text-right text-nowrap">{{ profile.job }}</div>
             </div>
             <!-- IMAGE / FOTO -->
@@ -65,13 +65,19 @@
 </template>
 
 <script setup>
+const config = useRuntimeConfig()
+const apiUri = config.public.apiUri;
+
 const props = defineProps({
     profile: Object
 });
-console.log(props.profile);
 
-const config = useRuntimeConfig()
-const apiUri = config.public.apiUri;
+// computing fullName
+const fullName = computed(() => {
+    return `${props.profile.firstname} ${props.profile.lastname}`;
+    // return props.profile.firstname + ' ' + props.profile.lastname;
+})
+
 
 const year = new Date().getFullYear();
 
