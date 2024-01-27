@@ -11,13 +11,19 @@
             <div class="font-light">{{ profile.bio }}</div>
             <div class="flex items-end gap-20 grow pb-20">
                 <!-- TODO pr-->
-                <div>
-                    <div class="text-4xl text-accent font-bold">10+</div>
+                <div v-if="profile.year_of_experience != 0">
+                    <!-- based of year -->
+                    <div class="text-4xl text-accent font-bold">{{ profile.year_of_experience }}</div>
                     <div>YEARS OF <br> EXPERIENCE</div>
+                </div>
+                <div v-else>
+                    <!-- based of month -->
+                    <div class="text-4xl text-accent font-bold">{{ profile.month_of_experience }}</div>
+                    <div>MONTH OF <br> EXPERIENCE</div>
                 </div>
                 <!-- TODO pr-->
                 <div>
-                    <div class="text-4xl text-accent font-bold">10+</div>
+                    <div class="text-4xl text-accent font-bold">{{ profile.count_project }} +</div>
                     <div>PROJECT <br> COMPLETED</div>
                 </div>
             </div>

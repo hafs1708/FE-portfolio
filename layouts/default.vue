@@ -68,12 +68,6 @@ const menus = [
         title: 'Skill',
         icon: resolveComponent('LucideWrench')
     },
-    {
-        path: '/',
-        hash: '#content',
-        title: 'Content',
-        icon: resolveComponent('LucideMail')
-    }
 ]
 </script>
 

@@ -14,9 +14,7 @@
                 <div class="col-span-6 xl:col-span-7 flex flex-col">
                     <div class="text-2xl font-semibold group-hover:text-accent">{{ blog.title }}</div>
                     <div class="grow font-light line-clamp-2 xl:line-clamp-3">{{ blog.content }}</div>
-
-                    <!--TODO generate readable date-->
-                    <div class="text-xs font-semibold">{{ blog.craetedAt }}</div>
+                    <div class="grow font-light">{{ blog.shortDateTime }}</div>
                 </div>
             </div>
         </div>
