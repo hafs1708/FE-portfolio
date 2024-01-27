@@ -10,9 +10,9 @@
             <IndexBlog :blogs="blogs" />
             <IndexExperience :experiences="experiences" />
             <IndexEducation :educations="educations" />
-            <!-- <IndexProject /> -->
-            <!-- <IndexSkill /> -->
-            <!-- <IndexContent /> -->
+            <IndexProject :projects="projects" />
+            <IndexSkill />
+            <IndexContent />
         </div>
     </div>
 </template>
@@ -26,22 +26,22 @@ const { data } = await $fetch('http://localhost:5000/portfolio');
 console.log(data);
 
 const profile = data.profile;
-// const projects = data.projects;
+const projects = data.projects;
 const educations = data.educations;
 const experiences = data.experiences;
-// const skills = data.skills;
+const skills = data.skills;
 const blogs = data.blogs;
 
-// console.log('Profile');
-// console.log(profile);
-// console.log('projects');
-// console.log(projects);
-// console.log('educations');
-// console.log(educations);
-// console.log('experiences');
-// console.log(experiences);
-// console.log('skills');
-// console.log(skills);
-// console.log('blogs');
-// console.log(blogs);
+console.log('Profile');
+console.log(profile);
+console.log('projects');
+console.log(projects);
+console.log('educations');
+console.log(educations);
+console.log('experiences');
+console.log(experiences);
+console.log('skills');
+console.log(skills);
+console.log('blogs');
+console.log(blogs);
 </script>
