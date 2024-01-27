@@ -8,23 +8,22 @@
             <div class="text-4xl font-semibold">Education</div>
             <div>
                 <!-- list experience -->
-                <div class="flex gap-6 md:gap-12 group" v-for="m in 2" :key="m">
+                <div class="flex gap-6 md:gap-12 group" v-for="(edc, i) in educations" :key="i">
                     <div class="flex flex-col items-center">
                         <LucideCircle :size="12" class="fill-neutral stroke-none group-hover:fill-accent" />
                         <div class="grow w-px bg-neutral"></div>
                     </div>
                     <div class="mb-10">
-                        <div class="group-hover:text-accent">2020 - Present</div>
+                        <div class="group-hover:text-accent">{{ edc.startYear }} - {{ edc.endYear ? edc.endYear : 'Present'
+                        }}</div>
                         <div class="flex flex-col gap-4">
                             <div>
-                                <div class="text-xl md:text-3xl xl:text-4xl font-semibold mt-5">Framer Desinger & Developer
+                                <div class="text-xl md:text-2xl xl:text-4xl font-semibold mt-5">{{ edc.institutionName }}
                                 </div>
-                                <div class="font-light">Brunodee Agency</div>
-                            </div>
-                            <div>
-                                <div class="text-xl md:text-3xl xl:text-4xl font-semibold">Front-End WordPress Developer
+                                <div v-if="edc.major || edc.degree" class="font-light">
+                                    <span v-if="edc.major">{{ edc.major }}</span> :
+                                    <span v-if="edc.degree">{{ edc.degree }}</span>
                                 </div>
-                                <div class="font-light">Envato Market</div>
                             </div>
                         </div>
                     </div>
@@ -34,12 +33,8 @@
     </div>
 </template>
 
-<script>
-export default {
-    setup() {
-
-
-        return {}
-    }
-}
+<script setup>
+defineProps({
+    educations: Array
+});
 </script>

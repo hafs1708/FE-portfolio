@@ -16,7 +16,7 @@
                     <div class="grow font-light line-clamp-2 xl:line-clamp-3">{{ blog.content }}</div>
 
                     <!--TODO generate readable date-->
-                    <div class="text-xs text-white/50">{{ blog.createdAT }}</div>
+                    <div class="text-xs font-semibold">{{ blog.craetedAt }}</div>
                 </div>
             </div>
         </div>
@@ -24,7 +24,8 @@
 </template>
 
 <script setup>
-defineProps({
+const props = defineProps({
     blogs: Array
 });
+console.log(props);
 </script>
