@@ -11,8 +11,7 @@
             <IndexExperience :experiences="experiences" />
             <IndexEducation :educations="educations" />
             <IndexProject :projects="projects" />
-            <IndexSkill />
-            <IndexContent />
+            <IndexSkill :skills="skills" />
         </div>
     </div>
 </template>
