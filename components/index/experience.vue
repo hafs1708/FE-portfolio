@@ -14,19 +14,13 @@
                         <div class="grow w-px bg-neutral"></div>
                     </div>
                     <div class="mb-10">
-                        <div class="group-hover:text-accent">{{ exp.startDate }} - {{ exp.endDate ? exp.endDate : 'Present'
-                        }}</div>
+                        <div class="group-hover:text-accent">{{ exp.readStartDate }} - {{ exp.readEndDate }}</div>
                         <div class="flex flex-col gap-4">
                             <div>
                                 <div class="text-xl md:text-3xl xl:text-4xl font-semibold mt-2">{{ exp.title }}</div>
                                 <div class="font-semibold">{{ exp.company }}</div>
                                 <div class="font-light mt-4">{{ exp.description }}</div>
                             </div>
-                            <!-- <div>
-                                <div class="text-xl md:text-3xl xl:text-4xl font-semibold">Front-End WordPress Developer
-                                </div>
-                                <div class="font-light">Envato Market</div>
-                            </div> -->
                         </div>
                     </div>
                 </div>

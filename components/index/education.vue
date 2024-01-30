@@ -14,8 +14,7 @@
                         <div class="grow w-px bg-neutral"></div>
                     </div>
                     <div class="mb-10">
-                        <div class="group-hover:text-accent">{{ edc.startYear }} - {{ edc.endYear ? edc.endYear : 'Present'
-                        }}</div>
+                        <div class="group-hover:text-accent">{{ edc.readStartYear }} - {{ edc.readEndYear }}</div>
                         <div class="flex flex-col gap-4">
                             <div>
                                 <div class="text-xl md:text-2xl xl:text-4xl font-semibold mt-5">{{ edc.institutionName }}
