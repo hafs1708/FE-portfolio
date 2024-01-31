@@ -20,9 +20,8 @@
 // ngambil data dari back end
 // const data_useFetch = await useFetch('http://localhost:5000/portfolio');
 
-// EXTRACT OBJECT
-const { data } = await $fetch('http://localhost:5000/portfolio');
-console.log(data);
+// METODE EXTRACT 
+const { data } = await $fetch('/api/portfolio');
 
 const profile = data.profile;
 const projects = data.projects;
