@@ -30,17 +30,4 @@ const educations = data.educations;
 const experiences = data.experiences;
 const skills = data.skills;
 const blogs = data.blogs;
-
-console.log('Profile');
-console.log(profile);
-console.log('projects');
-console.log(projects);
-console.log('educations');
-console.log(educations);
-console.log('experiences');
-console.log(experiences);
-console.log('skills');
-console.log(skills);
-console.log('blogs');
-console.log(blogs);
 </script>
