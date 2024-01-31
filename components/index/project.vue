@@ -28,7 +28,7 @@
                     <!-- SKILL -->
                     <div class="flex flex-nowrap overflow-hidden gap-2 mt-2">
                         <div v-for="skill in project.skills" :key="skill"
-                            class="border border-neutral rounded-xl px-3 text-nowrap">{{ skill.Skill.title }}</div>
+                            class="border border-neutral rounded-xl px-3 text-nowrap">{{ skill.title }}</div>
                     </div>
                 </div>
             </div>
