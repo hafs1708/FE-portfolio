@@ -8,7 +8,7 @@
             <div class="text-4xl font-semibold">Latest Blog</div>
 
             <!-- LIST BLOG -->
-            <a :href="'/blog/' + blog.id" class="grid grid-cols-10 gap-3 group hover:bg-cyan-950 p-2 rounded-xl"
+            <NuxtLink :to="'/blog/' + blog.id" class="grid grid-cols-10 gap-3 group hover:bg-cyan-950 p-2 rounded-xl"
                 v-for="(blog, i) in blogs" :key="i">
                 <!-- IMAGE -->
                 <div class="col-span-4 xl:col-span-3 rounded-lg">
@@ -26,7 +26,7 @@
                     <div class="grow font-light line-clamp-2 xl:line-clamp-3">{{ blog.content }}</div>
                     <div class="grow font-light">{{ blog.shortDateTime }}</div>
                 </div>
-            </a>
+            </NuxtLink>
         </div>
     </div>
 </template>
