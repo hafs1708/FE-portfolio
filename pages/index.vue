@@ -20,13 +20,15 @@
 // ngambil data dari back end
 // const data_useFetch = await useFetch('http://localhost:5000/portfolio');
 
-// METODE EXTRACT 
-const { data } = await $fetch('/api/portfolio');
+// CSR fect, dirubah ke SSR (panggil api lewat server nuxt)
+// METODE EXTRACT
+const getPortfolio = async () => {
+    try {
+        return await $fetch('/api/portfolio');
+    } catch (error) {
+        throw createError(error);
+    }
+}
+const { profile, blogs, experiences, educations, projects, skills } = await getPortfolio();
 
-const profile = data.profile;
-const projects = data.projects;
-const educations = data.educations;
-const experiences = data.experiences;
-const skills = data.skills;
-const blogs = data.blogs;
 </script>
