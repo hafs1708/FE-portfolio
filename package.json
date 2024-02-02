@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "nuxt-lucide-icons": "^1.0.3"
+    "nuxt-lucide-icons": "^1.0.3",
+    "vue3-carousel": "^0.3.1"
   }
 }
