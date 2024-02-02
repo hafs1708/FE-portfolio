@@ -1,7 +1,10 @@
 <template>
-    <div class="max-w-7xl mx-auto">
-        <!--TITLE-->
-        <div class="text-4xl font-semibold my-4">{{ blog.title }}</div>
+    <div class="max-w-7xl mx-auto px-4">
+        <!--HEADER-->
+        <div class="flex justify-between items-end my-4 border-b border-b-neutral pt-6 max-md:pt-20 pb-3">
+            <div class="text-4xl font-bold">fullName</div>
+            <div>blog</div>
+        </div>
 
         <!--PHOTOS-->
         <div>
@@ -21,8 +24,12 @@
             </Carousel>
         </div>
 
+        <!--TITLE-->
+        <div class="text-4xl font-semibold my-4 text-accent">{{ blog.title }}</div>
+        <div class="font-light text-sm">{{ blog.shortDateTime }}</div>
+
         <!--CONTENT-->
-        <div class="my-4">{{ blog.content }}</div>
+        <div class="my-4 text-justify">{{ blog.content }}</div>
     </div>
 </template>
 
