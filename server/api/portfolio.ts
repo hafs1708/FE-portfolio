@@ -1,7 +1,9 @@
 export default defineEventHandler(async (event) => {
+    const config = useRuntimeConfig();
+    const apiUri = config.apiUri;
     try {
         // Menghandle SSR
-        return await $fetch('http://localhost:5000/portfolio');
+        return await $fetch(apiUri + '/portfolio');
     } catch (error) {
         throw error;
     }
