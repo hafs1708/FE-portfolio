@@ -20,19 +20,9 @@
 
             <!--LOOPS DATA BLOGS-->
             <div class="grid grid-cols-3 gap-6">
-                <NuxtLink :to="'project/' + project.id" v-for="project in projects.data" :key="project"
-                    class="w-full group">
-                    <div class="text-accent text-xl font-bold">{{ project.title }}</div>
-                    <div class="text-sm font-light">{{ project.shortDateTime }}</div>
-                    <div class="group-hover:scale-105 duration-300 mt-1">
-                        <!--image data-->
-                        <img v-if="project.photos.length" :src="apiUri + project.photos[0].path" alt=""
-                            class="w-full aspect-video rounded-xl">
-                        <!--image dummy-->
-                        <div v-else class="w-full aspect-video bg-neutral rounded-xl"></div>
-                        <div class="lime-clamp-2 font-light">{{ project.description }}</div>
-                    </div>
-                </NuxtLink>
+                <template v-for="project in projects.data" :key="project">
+                    <ProjectThumbnail :project="project" class="w-full" />
+                </template>
             </div>
 
             <!--PAGINATION BUTTON-->
