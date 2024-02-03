@@ -26,10 +26,15 @@
 
         <!--TITLE-->
         <div class="text-4xl font-semibold my-4 text-accent">{{ project.title }}</div>
-        <div class="font-light text-sm">{{ project.shortDateTime }}</div>
+        <div class="flex justify-between">
+            <div class="font-light text-sm">{{ project.readStartDate }} - {{ project.endDate }}</div>
+            <div>{{ status }}</div>
+        </div>
 
-        <!--CONTENT-->
-        <div class="my-4 text-justify">{{ project.description }}</div>
+        <!--DESCRIPTION-->
+        <div class="">
+            <div></div>
+        </div>
     </div>
 </template>
 
@@ -44,4 +49,10 @@ const config = useRuntimeConfig()
 const apiUri = config.public.apiUri;
 
 const project = await $fetch('/api/project/' + projectID);
+
+// modify status string
+const status = computed(() => {
+    return project.status.replaceAll('_', ' ')
+});
+
 </script>
