@@ -6,10 +6,12 @@
         </div>
         <div class="mt-10">
             <div class="text-4xl font-semibold">Latest Project</div>
+
             <!-- LIST PROJECT -->
             <div class="grid grid-cols-2 gap-6 mt-8">
                 <!-- PROJECT ITEM -->
-                <div class="col-span-2 md:col-span-1 group" v-for="(project, i) in projects" :key="i">
+                <NuxtLink :to="'/project/' + project.id" class="col-span-2 md:col-span-1 group"
+                    v-for="(project, i) in projects" :key="i">
                     <div class="flex flex-col">
                         <div class="font-semibold text-xl text-accent group-hover:text-accent truncate">{{ project.title }}
                         </div>
@@ -30,7 +32,9 @@
                         <div v-for="skill in project.skills" :key="skill"
                             class="border border-neutral rounded-xl px-3 text-nowrap">{{ skill.title }}</div>
                     </div>
-                </div>
+                </NuxtLink>
+
+                <NuxtLink to="/project" class="btn btn-accent w-min truncate px-8 mx-auto">See All Projects</NuxtLink>
             </div>
         </div>
     </div>
@@ -41,11 +45,11 @@ const props = defineProps({
     projects: Array
 });
 
-console.log(props);
-
 const config = useRuntimeConfig()
 const apiUri = config.public.apiUri;
 console.log(apiUri);
 
+console.log("props.projects");
+console.log(props.projects);
 
 </script>

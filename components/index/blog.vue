@@ -27,6 +27,8 @@
                     <div class="grow font-light">{{ blog.shortDateTime }}</div>
                 </div>
             </NuxtLink>
+
+            <NuxtLink to="/blog" class="btn btn-accent w-min truncate px-8 mx-auto">See All Blogs</NuxtLink>
         </div>
     </div>
 </template>
