@@ -8,7 +8,7 @@
 
         <!--PHOTOS-->
         <div>
-            <Carousel :items-to-show="1.5" :wrapAround="true" :autoplay="1000">
+            <Carousel :items-to-show="1.5" :wrapAround="true" :autoplay="3000">
                 <Slide v-for="photo in blog.photos" :key="photo.id">
                     <div class="asppect-video w-full">
                         <div class="w-full h-full flex justify-center bg-contain">
