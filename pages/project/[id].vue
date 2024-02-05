@@ -2,7 +2,7 @@
     <div class="max-w-7xl mx-auto px-4">
         <!--HEADER-->
         <div class="flex justify-between items-end my-4 border-b border-b-neutral pt-6 max-md:pt-20 pb-3">
-            <div class="text-4xl font-bold">fullName</div>
+            <div class="text-4xl font-bold">{{ fullName }}</div>
             <NuxtLink to="/project" class="text-xl">Project</NuxtLink>
         </div>
 
@@ -34,26 +34,31 @@
             <!--Sisi Kanan-->
             <div class="col-span-full md:col-span-3">
                 <!--Date Detail-->
-                <div class="font-light text-sm"><span class="font-semibold">DATE:</span>{{ project.readStartDate }} - {{
-                    project.endDate }}</div>
-                <div><span class="font-semibold">STATUS:</span>{{ status }}</div>
+                <div class="font-light text-sm"><span class="font-semibold">DATE:</span> {{ project.readStartDate }} - {{
+                    project.readEndDate }}</div>
+                <div><span class="font-semibold">STATUS:</span> {{ status }}</div>
+
                 <!--Company Detail-->
                 <div v-if="project.company">
                     <span class="font-semibold">Company:</span> {{ project.company }}
                 </div>
+
                 <!--Url Detail-->
                 <div v-if="project.url">
                     <span class="font-semibold">Url:</span> <a :href="project.url" target="__blank">{{ project.url }}</a>
                 </div>
+
                 <!-- Skills -->
-                <div class="font-semibold">TECHNOLOGIES:</div>
-                <div class="flex flex-wrap gap-4">
-                    <div v-for="skill in project.skills" :key="skill"
-                        class="badge badge-lg badge-outline badge-accent text-nowrap px-4">
-                        <div v-html="skill.svg" class="w-5 mr-2 bg-neutral-100 rounded"></div>
-                        {{ skill.title }}
+                <template v-if="project.skills.length">
+                    <div class="font-semibold mt-4">TECHNOLOGIES:</div>
+                    <div class="flex flex-wrap gap-4">
+                        <div v-for="skill in project.skills" :key="skill"
+                            class="badge badge-lg badge-outline badge-accent text-nowrap px-4">
+                            <div v-html="skill.svg" class="w-5 mr-2 bg-neutral-100 rounded"></div>
+                            {{ skill.title }}
+                        </div>
                     </div>
-                </div>
+                </template>
 
                 <!--DESCRIPTION-->
                 <div class="mt-2 md:hidden">
@@ -65,6 +70,10 @@
 </template>
 
 <script setup>
+definePageMeta({
+    middleware: ['profile']
+});
+
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
 
@@ -81,4 +90,10 @@ const status = computed(() => {
     return project.status.replaceAll('_', ' ')
 });
 
+// fetch profile with nuxt state
+const useProfile = useState('profile');
+const profile = useProfile.value;
+const fullName = computed(() => {
+    return `${profile.firstname} ${profile.lastname}`;
+});
 </script>

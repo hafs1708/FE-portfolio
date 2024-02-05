@@ -2,7 +2,7 @@
     <div class="max-w-7xl mx-auto px-4 pb-16">
         <!--HEADER-->
         <div class="flex justify-between items-end my-4 border-b border-b-neutral pt-6 max-md:pt-20 pb-3">
-            <div class="text-4xl font-bold">Fullname</div>
+            <div class="text-4xl font-bold">{{ fullName }}</div>
             <div class="text-xl">Projects</div>
         </div>
 
@@ -38,6 +38,10 @@
 </template>
 
 <script setup>
+definePageMeta({
+    middleware: ['profile']
+});
+
 const config = useRuntimeConfig()
 const apiUri = config.public.apiUri;
 
@@ -59,5 +63,12 @@ onBeforeMount(async () => {
 // watch effect
 watchEffect(async () => {
     await fetchData();
+});
+
+// fetch profile with nuxt state
+const useProfile = useState('profile');
+const profile = useProfile.value;
+const fullName = computed(() => {
+    return `${profile.firstname} ${profile.lastname}`;
 });
 </script>

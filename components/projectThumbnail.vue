@@ -1,5 +1,5 @@
 <template>
-    <NuxtLink to="'/project/' + project.id" class="group">
+    <NuxtLink :to="'project/' + project.id" class="group">
         <div class="flex flex-col">
             <div class="font-semibold text-xl text-accent group-hover:text-accent truncate">{{ project.title }}
             </div>
