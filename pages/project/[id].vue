@@ -6,42 +6,60 @@
             <NuxtLink to="/project" class="text-xl">Project</NuxtLink>
         </div>
 
-        <!--PHOTOS-->
-        <div>
-            <Carousel :items-to-show="1.5" :wrapAround="true" :autoplay="3000">
-                <Slide v-for="photo in project.photos" :key="photo.id">
-                    <div class="asppect-video w-full">
-                        <div class="w-full h-full flex justify-center bg-contain">
-                            <img :src="apiUri + photo.path" :alt="project.title" class="h-full">
-                        </div>
+        <!--Content Project-->
+        <div class="grid grid-cols-10 gap-6">
+            <!-- Sisi Kiri -->
+            <div class="col-span-full md:col-span-7">
+                <!--PHOTOS-->
+                <div v-if="project.photos.length" class="">
+                    <Carousel :items-to-show="1.5" :wrapAround="true" :autoplay="3000">
+                        <Slide v-for="photo in project.photos" :key="photo.id">
+                            <div class="asppect-video w-full">
+                                <div class="w-full h-full flex justify-center bg-contain">
+                                    <img :src="apiUri + photo.path" :alt="project.title" class="h-full">
+                                </div>
+                            </div>
+                        </Slide>
+
+                        <template #addons>
+                            <Navigation />
+                            <Pagination />
+                        </template>
+                    </Carousel>
+                </div>
+                <!-- Dummy Photo -->
+                <div v-else class="aspect-video bg-neutral rounded-xl"></div>
+            </div>
+
+            <!--Sisi Kanan-->
+            <div class="col-span-full md:col-span-3">
+                <!--Date Detail-->
+                <div class="font-light text-sm"><span class="font-semibold">DATE:</span>{{ project.readStartDate }} - {{
+                    project.endDate }}</div>
+                <div><span class="font-semibold">STATUS:</span>{{ status }}</div>
+                <!--Company Detail-->
+                <div v-if="project.company">
+                    <span class="font-semibold">Company:</span> {{ project.company }}
+                </div>
+                <!--Url Detail-->
+                <div v-if="project.url">
+                    <span class="font-semibold">Url:</span> <a :href="project.url" target="__blank">{{ project.url }}</a>
+                </div>
+                <!-- Skills -->
+                <div class="font-semibold">TECHNOLOGIES:</div>
+                <div class="flex flex-wrap gap-4">
+                    <div v-for="skill in project.skills" :key="skill"
+                        class="badge badge-lg badge-outline badge-accent text-nowrap px-4">
+                        <div v-html="skill.svg" class="w-5 mr-2 bg-neutral-100 rounded"></div>
+                        {{ skill.title }}
                     </div>
-                </Slide>
+                </div>
 
-                <template #addons>
-                    <Navigation />
-                    <Pagination />
-                </template>
-            </Carousel>
-        </div>
-
-        <!--TITLE-->
-        <div class="border-b border-b-neutral">
-            <div class="text-4xl font-semibold my-4 text-accent">{{ project.title }}</div>
-            <div class="flex justify-between">
-                <div class="font-light text-sm">{{ project.readStartDate }} - {{ project.endDate }}</div>
-                <div>{{ status }}</div>
+                <!--DESCRIPTION-->
+                <div class="mt-2 md:hidden">
+                    <div class="my-4 text-justify">{{ project.description }}</div>
+                </div>
             </div>
-        </div>
-
-        <!--DESCRIPTION-->
-        <div class="mt-2">
-            <div v-if="project.company">
-                <span class="font-semibold">Company:</span> {{ project.company }}
-            </div>
-            <div v-if="project.url">
-                <span class="font-semibold">Url:</span> <a :href="project.url" target="__blank">{{ project.url }}</a>
-            </div>
-            <div class="my-4 text-justify">{{ project.description }}</div>
         </div>
     </div>
 </template>
