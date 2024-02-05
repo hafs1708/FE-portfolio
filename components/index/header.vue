@@ -10,7 +10,14 @@
 defineProps({
     title: String,
     url: String
-})
+});
+
+// fetch profile with nuxt state
+const useProfile = useState('profile');
+const profile = useProfile.value;
+const fullName = computed(() => {
+    return `${profile.firstname} ${profile.lastname}`;
+});
 </script>
 
 <style lang="scss" scoped></style>
