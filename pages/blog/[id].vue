@@ -1,10 +1,6 @@
 <template>
     <div class="max-w-7xl mx-auto px-4">
-        <!--HEADER-->
-        <div class="flex justify-between items-end my-4 border-b border-b-neutral pt-6 max-md:pt-20 pb-3">
-            <div class="text-4xl font-bold">{{ fullName }}</div>
-            <NuxtLink to="/blog" class="text-xl">Blog</NuxtLink>
-        </div>
+        <IndexHeader :title="'Blogs'" :url="'/blog'" />
 
         <!--PHOTOS-->
         <div>
@@ -48,11 +44,4 @@ const config = useRuntimeConfig()
 const apiUri = config.public.apiUri;
 
 const blog = await $fetch('/api/blog/' + blogID);
-
-/// fetch profile with nuxt state
-const useProfile = useState('profile');
-const profile = useProfile.value;
-const fullName = computed(() => {
-    return `${profile.firstname} ${profile.lastname}`;
-});
 </script>

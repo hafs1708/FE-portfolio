@@ -1,10 +1,7 @@
 <template>
     <div class="max-w-7xl mx-auto px-4 pb-16">
         <!--HEADER-->
-        <div class="flex justify-between items-end my-4 border-b border-b-neutral pt-6 max-md:pt-20 pb-3">
-            <div class="text-4xl font-bold">{{ fullName }}</div>
-            <div class="text-xl">Projects</div>
-        </div>
+        <IndexHeader :title="'Projects'" :url="'/project'" />
 
         <template v-if="projects">
             <!--PAGINATION BUTTON-->
@@ -63,12 +60,5 @@ onBeforeMount(async () => {
 // watch effect
 watchEffect(async () => {
     await fetchData();
-});
-
-// fetch profile with nuxt state
-const useProfile = useState('profile');
-const profile = useProfile.value;
-const fullName = computed(() => {
-    return `${profile.firstname} ${profile.lastname}`;
 });
 </script>
