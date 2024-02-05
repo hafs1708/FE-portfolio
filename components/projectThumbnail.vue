@@ -23,7 +23,7 @@
     </NuxtLink>
 </template>
 
-<script>
+<script setup>
 defineProps({
     project: Object
 });

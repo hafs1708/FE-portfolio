@@ -25,15 +25,23 @@
         </div>
 
         <!--TITLE-->
-        <div class="text-4xl font-semibold my-4 text-accent">{{ project.title }}</div>
-        <div class="flex justify-between">
-            <div class="font-light text-sm">{{ project.readStartDate }} - {{ project.endDate }}</div>
-            <div>{{ status }}</div>
+        <div class="border-b border-b-neutral">
+            <div class="text-4xl font-semibold my-4 text-accent">{{ project.title }}</div>
+            <div class="flex justify-between">
+                <div class="font-light text-sm">{{ project.readStartDate }} - {{ project.endDate }}</div>
+                <div>{{ status }}</div>
+            </div>
         </div>
 
         <!--DESCRIPTION-->
-        <div class="">
-            <div></div>
+        <div class="mt-2">
+            <div v-if="project.company">
+                <span class="font-semibold">Company:</span> {{ project.company }}
+            </div>
+            <div v-if="project.url">
+                <span class="font-semibold">Url:</span> <a :href="project.url" target="__blank">{{ project.url }}</a>
+            </div>
+            <div class="my-4 text-justify">{{ project.description }}</div>
         </div>
     </div>
 </template>
