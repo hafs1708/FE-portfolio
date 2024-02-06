@@ -24,10 +24,16 @@ definePageMeta({
 // SEO and META
 const { value: useProfile } = useState('profile');
 const fullname = `${useProfile.firstname} ${useProfile.lastname}`;
+const config = useRuntimeConfig();
+const apiUri = config.public.apiUri;
 
 useSeoMeta({
     title: fullname + ' Portfolio',
-    description: useProfile.bio
+    description: useProfile.bio,
+    ogTitle: fullname + ' Portfolio',
+    ogDescription: useProfile.bio,
+    ogImage: apiUri + useProfile.avatar,
+    twitterCard: 'summary_large_image'
 });
 
 // END: SEO and META
