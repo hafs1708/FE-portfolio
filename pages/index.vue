@@ -17,8 +17,20 @@
 </template>
 
 <script setup>
-// ngambil data dari back end
-// const data_useFetch = await useFetch('http://localhost:5000/portfolio');
+definePageMeta({
+    middleware: ['profile']
+});
+
+// SEO and META
+const { value: useProfile } = useState('profile');
+const fullname = `${useProfile.firstname} ${useProfile.lastname}`;
+
+useSeoMeta({
+    title: fullname + ' Portfolio',
+    description: useProfile.bio
+});
+
+// END: SEO and META
 
 // CSR fect, dirubah ke SSR (panggil api lewat server nuxt)
 // METODE EXTRACT
