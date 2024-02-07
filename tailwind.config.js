@@ -9,7 +9,11 @@ export default {
     "./error.vue"
   ],
   theme: {
-    extend: {},
+    fontFamily: {
+      'bungee-shade': ['Bungee Shade', 'Helvetica', 'Arial', 'sans-serif'],
+      'arc-daughter': ['Architects Daughter', 'Helevatica', 'Arial', 'sans-serif'],
+      'baloo-bhai': ['Baloo-Bhai', 'Helevatica', 'Arial', 'sans-serif']
+    },
   },
   plugins: [
     require("daisyui"),
