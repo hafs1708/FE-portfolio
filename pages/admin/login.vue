@@ -55,7 +55,8 @@ const doLogin = async () => {
         body: jsonData,
         headers: {
             'Content-Type': 'application/json'
-        }
+        },
+        credentials: 'include'
     });
     console.log(response)
 
