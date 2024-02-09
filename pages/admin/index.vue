@@ -77,13 +77,56 @@
                         content
                     </div>
                 </div>
-                <div class="drawer-side lg:bg-primary rounded-l-2xl lg:rounded-l-3xl">
+                <div class="drawer-side !inline-table lg:bg-primary rounded-l-2xl lg:rounded-l-3xl">
                     <label for="menu-toggle" aria-label="close sidebar" class="drawer-overlay"></label>
-                    <div class="lg:w-full h-full lg:z-[10]">
-                        <!-- NAVIGATION -->
-                        <ul class="menu bg-primary p-4 w-[250px] min-h-full text-white">
-                            <li><a>Sidebar Item 1</a></li>
-                            <li><a>Sidebar Item 2</a></li>
+                    <div class="lg:w-full h-full lg:z-[1]">
+                        <!--NAVIGATION-->
+                        <div></div>
+                        <ul class="menu bg-primary w-56 rounded-box">
+                            <li>
+                                <NuxtLink to="/admin">
+                                    <LucideApple :size="20" /> Home
+                                </NuxtLink>
+                            </li>
+                            <li>
+                                <details open>
+                                    <summary>
+                                        Parent
+                                        <LucideAnchor :size="20" />
+                                    </summary>
+                                    <ul>
+                                        <li>
+                                            <NuxtLink to="/admin/login">
+                                                <LucideAperture :size="20" />
+                                                Login
+                                            </NuxtLink>
+                                        </li>
+                                        <li><a>
+                                                <LucideBinary :size="20" />
+                                                Submenu 2
+                                            </a></li>
+                                        <li>
+                                            <details open>
+                                                <summary>
+                                                    <LucideAnvil :size="20" />
+                                                    Parent
+                                                </summary>
+                                                <ul>
+                                                    <li><a>
+                                                            <LucideActivitySquare :size="20" />
+                                                            Submenu 1
+                                                        </a></li>
+                                                    <li><a>
+                                                            <LucideAlertTriangle :size="20" />
+                                                            Submenu 2
+                                                        </a></li>
+                                                </ul>
+                                            </details>
+                                        </li>
+                                    </ul>
+                                </details>
+                            </li>
+                            <li><a>Item 3</a></li>
                         </ul>
                     </div>
                 </div>
@@ -121,7 +164,73 @@ definePageMeta({
 
 @keyframes intro-wrapper-animation {
     100% {
-        @apply opacity-100;
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+.menu a,
+.menu summary {
+    position: relative;
+    margin-bottom: 0.25rem;
+    display: flex;
+    height: 50px;
+    align-items: center;
+    border-radius: 0.5rem;
+    padding-left: 1.25rem;
+    /* --tw-text-opacity: 1;
+    background-color: rgb(255 255 255 / 0.2); */
+}
+
+/* .menu a.router-link-exact-active {} */
+
+.menu a.router-link-exact-active::before,
+.menu details[open]>summary::before {
+    content: "";
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    z-index: -1;
+    display: block;
+    border-radius: 0.5rem;
+    background-color: rgb(var(--color-primary) / 0.6);
+}
+
+.menu a.router-link-exact-active::after {
+    content: "";
+    width: 20px;
+    height: 80px;
+    margin-right: -37px;
+    /* -webkit-animation: 0.3s active-side-menu-chevron-animation ease-in-out 0.33333s; */
+    /* animation: 0.3s active-side-menu-chevron-animation ease-in-out 0.33333s; */
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-animation-delay: 1s;
+    animation-delay: 1s;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='80' viewBox='0 0 20 122.1'%3E%3Cpath data-name='Union 1' d='M16.038 122H16v-2.213a95.805 95.805 0 00-2.886-20.735 94.894 94.894 0 00-7.783-20.434A39.039 39.039 0 010 61.051a39.035 39.035 0 015.331-17.567 94.9 94.9 0 007.783-20.435A95.746 95.746 0 0016 2.314V0h4v122h-3.961v.1l-.001-.1z' fill='%23f1f5f8'/%3E%3C/svg%3E");
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    margin-top: auto;
+    margin-bottom: auto;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 1;
+}
+
+@keyframes active-side-menu-chevron-animation {
+    100% {
+        margin-right: -27px;
+        opacity: 1;
+    }
+}
+
+@keyframes intro-wrapper-animation {
+    100% {
+        opacity: 1;
         transform: translateX(0px);
     }
 }
