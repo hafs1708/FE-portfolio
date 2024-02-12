@@ -53,10 +53,10 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a>
+                                    <button @click="logout">
                                         <LucideLogOut :size="16" />
                                         Logout
-                                    </a>
+                                    </button>
                                 </li>
                             </ul>
                         </div>
@@ -141,9 +141,21 @@
 </template>
 
 <script setup>
-definePageMeta({
-    layout: false
-});
+const config = useRuntimeConfig();
+console.log(config)
+const apiUri = config.public.apiUri;
+const logout = async () => {
+    await $fetch(apiUri + '/logout', {
+        method: 'Delete',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+    });
+
+    //redirect ke home halaman login
+    navigateTo('/admin/login');
+}
 </script>
 
 <style scoped>

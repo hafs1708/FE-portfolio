@@ -45,6 +45,7 @@ const formData = ref({
 
 const config = useRuntimeConfig();
 const apiUri = config.public.apiUri;
+console.log(config);
 
 const doLogin = async () => {
     // convert data to json
@@ -61,6 +62,6 @@ const doLogin = async () => {
     console.log(response)
 
     // sementara redirect ke halaman homepage
-    navigateTo('/');
+    navigateTo('/admin');
 };
 </script>
