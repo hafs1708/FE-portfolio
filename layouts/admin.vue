@@ -80,59 +80,7 @@
                     <label for="menu-toggle" aria-label="close sidebar" class="drawer-overlay"></label>
                     <div class="lg:w-full min-h-full lg:z-[1]">
                         <!-- NAVIGATION -->
-                        <ul
-                            class="menu bg-neutral lg:rounded-box p-4 w-[250px] max-lg:min-h-screen lg:min-h-full text-white">
-                            <li class="my-2 font-light">MAIN MENU</li>
-                            <li>
-                                <NuxtLink to="/admin">
-                                    <LucideApple :size="20" />Home
-                                </NuxtLink>
-                            </li>
-                            <li>
-                                <details open>
-                                    <summary>
-                                        <LucideAnvil :size="20" />Authentication
-                                    </summary>
-                                    <ul>
-                                        <li>
-                                            <NuxtLink to="/admin/project">
-                                                <LucideAnchor :size="20" />
-                                                Project
-                                            </NuxtLink>
-                                        </li>
-                                        <li>
-                                            <NuxtLink to="/admin/register">
-                                                <LucideBinary :size="20" />
-                                                Register
-                                            </NuxtLink>
-                                        </li>
-                                        <li>
-                                            <details>
-                                                <summary>
-                                                    <LucideAperture :size="20" />
-                                                    Parent
-                                                </summary>
-                                                <ul>
-                                                    <li><a>
-                                                            <LucideActivitySquare :size="20" />
-                                                            Submenu 1
-                                                        </a></li>
-                                                    <li><a>
-                                                            <LucideAlertTriangle :size="20" />
-                                                            Submenu 2
-                                                        </a></li>
-                                                </ul>
-                                            </details>
-                                        </li>
-                                    </ul>
-                                </details>
-                            </li>
-                            <li><a>
-                                    <LucideBeef :size="20" />
-                                    Item 3
-                                </a>
-                            </li>
-                        </ul>
+                        <AdminLayoutNavigation />
                     </div>
                 </div>
             </div>
