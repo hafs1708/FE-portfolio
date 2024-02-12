@@ -11,30 +11,19 @@
 
 const menus = [
     {
-        title: "Dashbord 1",
+        title: "Dashbord",
         to: "/admin",
         icon: resolveComponent("LucideLayoutDashboard")
     },
     {
-        title: "Dashbord 2",
-        to: "/admin",
+        title: "Profile",
+        to: "/admin/profile",
         icon: resolveComponent("LucideLayoutDashboard")
     },
     {
-        title: "Menu 3",
+        title: "Project",
+        to: "/admin/project",
         icon: resolveComponent("LucideLayoutDashboard"),
-        children: [
-            {
-                title: "Children 1",
-                to: "/admin",
-                icon: resolveComponent("LucideLayoutDashboard")
-            },
-            {
-                title: "Children 2",
-                to: "/admin",
-                icon: resolveComponent("LucideLayoutDashboard"),
-            }
-        ]
     }
 ];
 

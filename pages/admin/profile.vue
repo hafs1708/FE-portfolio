@@ -1,6 +1,6 @@
 <template>
     <div>
-        Halaman Register
+        Halaman Profile
     </div>
 </template>
 
