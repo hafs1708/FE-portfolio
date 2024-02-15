@@ -1,5 +1,5 @@
 <template>
-    <div data-theme="light" class="w-screen h-screen max-w-screen min-h-scren overflow-x-hidden">
+    <div data-theme="forest" class="w-screen h-screen max-w-screen min-h-scren overflow-x-hidden">
         <!-- MOBILE HEADER -->
         <div class="lg:hidden h-[70px] relative border-b border-gray/20 px-3">
             <div class="h-full flex justify-between items-center">

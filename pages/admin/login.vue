@@ -20,7 +20,7 @@
                     <input v-model="formData.password" type="password" placeholder="Password"
                         class="input w-full bg-[#bfc5c5]">
                 </div>
-                <button @click="doLogin"
+                <button @click="AuthStore.login(formData)"
                     class="font-baloo-bhai text-black btn border-0 text-xl md:text-2xl bg-[#bfc5c5] p-10 md:px-20 lg:px-32 py-0 md:py-2 h-min text-nowrap">
                     LOGIN NOW
                 </button>
@@ -43,25 +43,6 @@ const formData = ref({
     password: ''
 });
 
-const config = useRuntimeConfig();
-const apiUri = config.public.apiUri;
-console.log(config);
-
-const doLogin = async () => {
-    // convert data to json
-    const jsonData = JSON.stringify(formData.value);
-
-    const response = await $fetch(apiUri + '/login', {
-        method: 'POST',
-        body: jsonData,
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        credentials: 'include'
-    });
-    console.log(response)
-
-    // sementara redirect ke halaman homepage
-    navigateTo('/admin');
-};
+// Auth state / pinia
+const AuthStore = useAuthStore();
 </script>
