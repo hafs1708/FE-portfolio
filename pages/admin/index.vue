@@ -9,6 +9,13 @@
             <button class="btn btn-primary " @click="CounterStore.decrement">Dec Count</button>
         </div>
     </div>
+
+    <div>
+        Name {{ AuthStore.user.name }}
+    </div>
+    <div>
+        Email {{ AuthStore.user.email }}
+    </div>
 </template>
 
 <script setup>
@@ -17,4 +24,5 @@ definePageMeta({
 });
 
 const CounterStore = useCounterStore();
+const AuthStore = useAuthStore();
 </script>
