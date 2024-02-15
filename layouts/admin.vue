@@ -53,7 +53,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <button @click="logout">
+                                    <button @click="AuthStore.logout">
                                         <LucideLogOut :size="16" />
                                         Logout
                                     </button>
@@ -89,21 +89,8 @@
 </template>
 
 <script setup>
-const config = useRuntimeConfig();
-console.log(config)
-const apiUri = config.public.apiUri;
-const logout = async () => {
-    await $fetch(apiUri + '/logout', {
-        method: 'Delete',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        credentials: 'include'
-    });
-
-    //redirect ke home halaman login
-    navigateTo('/admin/login');
-}
+// Auth state / pinia
+const AuthStore = useAuthStore();
 </script>
 
 <style scoped>

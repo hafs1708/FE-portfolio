@@ -25,9 +25,21 @@ export const useAuthStore = defineStore('auth', {
             // redirect ke halaman homepage
             navigateTo('/admin');
         },
-        logout() {
-            // handle logout
-            console.log('handle logout')
+        async logout() {
+            // get api uri
+            const config = useRuntimeConfig();
+            const apiUri = config.public.apiUri;
+
+            await $fetch(apiUri + '/logout', {
+                method: 'Delete',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include'
+            });
+
+            //redirect ke home halaman login
+            navigateTo('/admin/login');
         }
     }
 });
