@@ -46,23 +46,29 @@ export const useAuthStore = defineStore('auth', {
         },
         async getUser() {
             // get api uri
-            const config = useRuntimeConfig();
-            const apiUri = config.public.apiUri;
+            const Api = useApiStore();
+            const user = await Api.get('/user');
 
-            try {
-                const user = await $fetch(apiUri + '/user', {
-                    method: 'GET',
-                    // headers: {
-                    //     'Content-Type': 'application/json'
-                    // },
-                    credentials: 'include'
-                });
-                console.log(user)
-                this.user = user
-            } catch (error) {
-                console.log('error get user')
-                console.log(error)
-            }
+            this.user = user
+
+            // get api uri
+            // const config = useRuntimeConfig();
+            // const apiUri = config.public.apiUri;
+
+            // try {
+            //     const user = await $fetch(apiUri + '/user', {
+            //         method: 'GET',
+            //         headers: {
+            //             'Content-Type': 'application/json'
+            //         },
+            //         credentials: 'include'
+            //     });
+            //     console.log(user)
+            //     this.user = user
+            // } catch (error) {
+            //     console.log('error get user')
+            //     console.log(error)
+            // }
         }
     }
 });

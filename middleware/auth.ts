@@ -7,6 +7,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
 
     if (to.path != '/admin/login') {
         // bukan halalman login
+
         // check token
         if (!token.value) {
             return navigateTo('/admin/login');
@@ -20,6 +21,9 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
             // kalo error, atau data tetap null, balik ke halalman login
 
             if (!AuthStore.user) {
+                // clear cookies, prevent infinite loading
+                token.value = '';
+
                 return navigateTo('/admin/login')
             }
         }
