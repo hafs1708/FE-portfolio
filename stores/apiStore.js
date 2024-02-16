@@ -9,14 +9,16 @@ export const useApiStore = defineStore('api', {
             const apiUri = config.public.apiUri;
 
             try {
-                const user = await $fetch(apiUri + path, {
+                const data = await $fetch(apiUri + path, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     credentials: 'include'
                 });
-                return user
+
+                // RETURN DATA
+                return data
             } catch (error) {
                 console.log(error)
             }
