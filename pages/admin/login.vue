@@ -13,23 +13,29 @@
                 <div class="w-full font-arc-daughter text-xl md:text-2xl">
                     <label>Email</label>
                     <input v-model="formData.email" type="text" placeholder="Email" class="input w-full bg-[#bfc5c5]">
+                    <div class="text-error text-sm text-right mr-2" v-if="errorMessage.email">{{ errorMessage.email }}</div>
                 </div>
                 <!--input Password-->
                 <div class="w-full font-arc-daughter text-xl md:text-2xl">
                     <label>Password</label>
                     <input v-model="formData.password" type="password" placeholder="Password"
                         class="input w-full bg-[#bfc5c5]">
+                    <div class="text-error text-sm text-right mr-2" v-if="errorMessage.password">{{ errorMessage.password }}
+                    </div>
                 </div>
-                <button @click="AuthStore.login(formData)"
+                <button @click="handleLogin"
                     class="font-baloo-bhai text-black btn border-0 text-xl md:text-2xl bg-[#bfc5c5] p-10 md:px-20 lg:px-32 py-0 md:py-2 h-min text-nowrap">
                     LOGIN NOW
                 </button>
+                <div class="text-error text-sm text-right mr-2">{{ fetchError }}</div>
             </div>
         </div>
     </div>
 </template> 
  
 <script setup>
+import Joi from 'joi';
+
 definePageMeta({
     layout: false,
     middleware: ['profile', 'auth']
@@ -45,4 +51,34 @@ const formData = ref({
 
 // Auth state / pinia
 const AuthStore = useAuthStore();
+
+const errorMessage = ref({});
+const fetchError = ref('');
+const handleLogin = async () => {
+    // reset error messages
+    errorMessage.value = {};
+    fetchError.value = '';
+
+    try {
+        // copy dari backend
+        const loginValidation = Joi.object({
+            email: Joi.string().email({ tlds: { allow: false } }).required().label("email"),
+            password: Joi.string().min(6).max(100).required().label("Password")
+        });
+
+        // throw jika error
+        const data = Validate(loginValidation, formData.value);
+
+        // fetch login
+        await AuthStore.login(data);
+
+    } catch (error) {
+        if (error instanceof Joi.ValidationError) {
+            errorMessage.value = joiError(error);
+        } else {
+            fetchError.value = error.data.message;
+        }
+
+    }
+}
 </script>

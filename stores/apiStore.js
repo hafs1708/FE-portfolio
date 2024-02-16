@@ -44,7 +44,7 @@ export const useApiStore = defineStore('api', {
                 // return data
                 return data
             } catch (error) {
-                console.log(error)
+                throw error
             }
         },
         // put

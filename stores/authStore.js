@@ -6,14 +6,18 @@ export const useAuthStore = defineStore('auth', {
     }),
     actions: {
         async login(data) {
-            // get api uri
-            const Api = useApiStore();
+            try {
+                // get api uri
+                const Api = useApiStore();
 
-            // isi state user
-            this.user = await Api.post('/login');
+                // isi state user
+                this.user = await Api.post('/login', data);
 
-            // redirect ke halaman homepage
-            navigateTo('/admin');
+                // redirect ke halaman homepage
+                navigateTo('/admin');
+            } catch (error) {
+                throw error
+            }
         },
         async logout() {
             const Api = useApiStore();
