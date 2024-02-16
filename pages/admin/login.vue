@@ -26,6 +26,7 @@
                 <button @click="handleLogin"
                     class="font-baloo-bhai text-black btn border-0 text-xl md:text-2xl bg-[#bfc5c5] p-10 md:px-20 lg:px-32 py-0 md:py-2 h-min text-nowrap">
                     LOGIN NOW
+                    <ImagesLoading class="w-12" v-if="isLoading" />
                 </button>
                 <div class="text-error text-sm text-right mr-2">{{ fetchError }}</div>
             </div>
@@ -54,11 +55,13 @@ const AuthStore = useAuthStore();
 
 const errorMessage = ref({});
 const fetchError = ref('');
+const isLoading = ref(false);
 const handleLogin = async () => {
     // reset error messages
     errorMessage.value = {};
     fetchError.value = '';
 
+    isLoading.value = true;
     try {
         // copy dari backend
         const loginValidation = Joi.object({
@@ -72,12 +75,15 @@ const handleLogin = async () => {
         // fetch login
         await AuthStore.login(data);
 
+        // berhasil login
     } catch (error) {
         if (error instanceof Joi.ValidationError) {
             errorMessage.value = joiError(error);
         } else {
             fetchError.value = error.data.message;
         }
+
+        isLoading.value = false;
 
     }
 }
