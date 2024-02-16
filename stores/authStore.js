@@ -5,43 +5,21 @@ export const useAuthStore = defineStore('auth', {
         user: null
     }),
     actions: {
-        async login(formData) {
+        async login(data) {
             // get api uri
-            const config = useRuntimeConfig();
-            const apiUri = config.public.apiUri;
-
-            // convert to json
-            const jsonData = JSON.stringify(formData);
-
-            const user = await $fetch(apiUri + '/login', {
-                method: 'POST',
-                body: jsonData,
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include'
-            });
+            const Api = useApiStore();
 
             // isi state user
-            this.user = user;
+            this.user = await Api.post('/login');
 
             // redirect ke halaman homepage
             navigateTo('/admin');
         },
         async logout() {
-            // get api uri
-            const config = useRuntimeConfig();
-            const apiUri = config.public.apiUri;
+            const Api = useApiStore();
+            await Api.delete('/logout')
 
-            await $fetch(apiUri + '/logout', {
-                method: 'Delete',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include'
-            });
-
-            //redirect ke home halaman login
+            // //redirect ke home halaman login
             navigateTo('/admin/login');
         },
         async getUser() {
