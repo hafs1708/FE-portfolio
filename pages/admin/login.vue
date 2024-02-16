@@ -57,6 +57,9 @@ const errorMessage = ref({});
 const fetchError = ref('');
 const isLoading = ref(false);
 const handleLogin = async () => {
+    // halangi jika sedang login
+    if (isLoading.value) return;
+
     // reset error messages
     errorMessage.value = {};
     fetchError.value = '';
