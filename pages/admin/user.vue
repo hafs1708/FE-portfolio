@@ -35,7 +35,30 @@
                 </div>
             </label>
         </div>
-        <button class="btn btn-neutral my-5" @click="handleUpdate">Update</button>
+
+        <label class="btn btn-neutral my-5" for="confirm">Update</label>
+
+        <!-- Put this part before </body> tag -->
+        <input type="checkbox" id="confirm" class="modal-toggle" />
+        <div class="modal" role="dialog">
+            <div class="modal-box">
+                <!-- x Corner button -->
+                <form method="dialog">
+                    <label for="confirm" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</label>
+                </form>
+
+                <h3 class="font-bold text-lg">Hello!</h3>
+                <p class="py-4">Are you sure ?</p>
+                <div class="modal-action">
+                    <label for="confirm" class="btn">Close!</label>
+                    <label for="confirm" class="btn btn-neutral">Update</label>
+                </div>
+            </div>
+            <!-- Click Outside -->
+            <form method="dialog" class="modal-backdrop">
+                <label for="confirm">close</label>
+            </form>
+        </div>
     </div>
 </template>
 
