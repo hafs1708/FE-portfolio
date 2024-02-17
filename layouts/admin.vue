@@ -43,8 +43,8 @@
                         </div>
                         <div class="dropdown-content z-[2] menu bg-base-100 shadow rounded w-52">
                             <div class="p-2 border-b">
-                                <div class="font-semibold">Hafshoh Najah</div>
-                                <div class="text-xs">Administrator</div>
+                                <div class="font-semibold">{{ AuthStore.user.name }}</div> <!-- State user name -->
+                                <div class="text-xs">{{ AuthStore.user.email }}</div> <!-- State user email -->
                             </div>
                             <ul tabindex="0" class="p-2">
                                 <li>
