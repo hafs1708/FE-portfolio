@@ -26,4 +26,6 @@ definePageMeta({
 
 const CounterStore = useCounterStore();
 const AuthStore = useAuthStore();
+
+AuthStore.getUser();
 </script>
