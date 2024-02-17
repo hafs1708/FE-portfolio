@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { loginValidation } from '~/utils/authValidation';
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({
@@ -10,11 +11,15 @@ export const useAuthStore = defineStore('auth', {
                 // get api uri
                 const Api = useApiStore();
 
+                // throw jika error
+                data = Validate(loginValidation, data);
+
                 // isi state user
                 this.user = await Api.post('/login', data);
 
                 // redirect ke halaman homepage
                 navigateTo('/admin');
+
             } catch (error) {
                 throw error
             }

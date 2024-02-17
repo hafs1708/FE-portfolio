@@ -66,18 +66,8 @@ const handleLogin = async () => {
 
     isLoading.value = true;
     try {
-        // copy dari backend
-        const loginValidation = Joi.object({
-            email: Joi.string().email({ tlds: { allow: false } }).required().label("email"),
-            password: Joi.string().min(6).max(100).required().label("Password")
-        });
-
-        // throw jika error
-        const data = Validate(loginValidation, formData.value);
-
         // fetch login
-        await AuthStore.login(data);
-
+        await AuthStore.login(formData.value)
         // berhasil login
     } catch (error) {
         if (error instanceof Joi.ValidationError) {
