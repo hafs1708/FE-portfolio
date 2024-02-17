@@ -48,9 +48,9 @@
                             </div>
                             <ul tabindex="0" class="p-2">
                                 <li>
-                                    <a>
-                                        <LucideUser :size="16" /> User
-                                    </a>
+                                    <NuxtLink to="/admin/user">
+                                        <LucideUser :size="16" /> User Setting
+                                    </NuxtLink>
                                 </li>
                                 <li>
                                     <button @click="AuthStore.logout">
