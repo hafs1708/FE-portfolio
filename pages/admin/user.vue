@@ -73,25 +73,7 @@
         </div>
 
         <!-- MODAL SUCCESS -->
-        <!-- Put this part before </body> tag -->
-        <input v-model="success" type="checkbox" id="success" class="modal-toggle" />
-        <div class="modal" role="dialog">
-            <div class="modal-box">
-                <!-- x Corner button -->
-                <form method="dialog">
-                    <label for="success" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</label>
-                </form>
-
-                <h3 class="font-bold text-lg">SUCCESS!</h3>
-                <div class="modal-action">
-                    <label for="success" class="btn">Close!</label>
-                </div>
-            </div>
-            <!-- Click Outside -->
-            <form method="dialog" class="modal-backdrop">
-                <label for="success">close</label>
-            </form>
-        </div>
+        <AdminModalSuccess :show="success" @close="success = false" />
 
     </div>
 </template>
