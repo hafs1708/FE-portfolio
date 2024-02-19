@@ -56,6 +56,7 @@ const AuthStore = useAuthStore();
 const errorMessage = ref({});
 const fetchError = ref('');
 const isLoading = ref(false);
+
 const handleLogin = async () => {
     // halangi jika sedang login
     if (isLoading.value) return;
@@ -70,6 +71,7 @@ const handleLogin = async () => {
         await AuthStore.login(formData.value)
         // berhasil login
     } catch (error) {
+
         if (error instanceof Joi.ValidationError) {
             errorMessage.value = joiError(error);
         } else {

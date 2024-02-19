@@ -20,6 +20,14 @@
 
             <!-- PASSWORD -->
             <label class="form-control w-full max-w-xs">
+                <div class="label label-text">Current Password</div>
+                <input v-model="formData.current_password" type="password" placeholder="Current Password"
+                    class="input input-bordered w-full max-w-xs">
+                <div class="text-error text-right text-sm pr-2" v-if="errors.current_password">{{ errors.current_password }}
+                </div>
+            </label>
+
+            <label class="form-control w-full max-w-xs">
                 <div class="label label-text">Password</div>
                 <input v-model="formData.password" type="password" placeholder="Password"
                     class="input input-bordered w-full max-w-xs">
@@ -36,7 +44,10 @@
             </label>
         </div>
 
-        <label class="btn btn-neutral my-5" for="confirm">Update</label>
+        <div class="flex items-center gap-2">
+            <label class="btn btn-neutral my-5" for="confirm">Update</label>
+            <div class="text-error">{{ fetchError }}</div>
+        </div>
 
         <!-- Put this part before </body> tag -->
         <input type="checkbox" id="confirm" class="modal-toggle" />
@@ -51,7 +62,7 @@
                 <p class="py-4">Are you sure ?</p>
                 <div class="modal-action">
                     <label for="confirm" class="btn">Close!</label>
-                    <label for="confirm" class="btn btn-neutral">Update</label>
+                    <label for="confirm" class="btn btn-neutral" @click="handleUpdate">Update</label>
                 </div>
             </div>
             <!-- Click Outside -->
@@ -63,6 +74,8 @@
 </template>
 
 <script setup>
+// setup layout and middleware
+import Joi from "joi";
 definePageMeta({
     layout: 'admin',
     middleware: ['auth']
@@ -71,14 +84,35 @@ definePageMeta({
 const AuthStore = useAuthStore();
 
 const errors = ref({});
+const fetchError = ref('');
+
 const formData = ref({
-    name: AuthStore.name,
-    email: AuthStore.email,
+    name: AuthStore.user.name,
+    email: AuthStore.user.email,
+    current_password: '',
     password: '',
     confirm_password: ''
 });
 
-const handleUpdate = () => {
+const handleUpdate = async () => {
+    // reset errors
+    errors.value = {}
+    fetchError.value = '';
+
+    try {
+        await AuthStore.update(formData.value)
+        // fetch data update
+    } catch (error) {
+        console.log(error);
+        if (error instanceof Joi.ValidationError) {
+            // joi error 
+            errors.value = joiError(error);
+        } else {
+            // fetch error
+            fetchError.value = error.data.message;
+        }
+    }
+
     // confirm
     // validasi 
     // fetch data update

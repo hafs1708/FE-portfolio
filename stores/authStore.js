@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { loginValidation } from '~/utils/authValidation';
+import { loginValidation, updateUserValidation } from '~/utils/authValidation';
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({
@@ -38,6 +38,15 @@ export const useAuthStore = defineStore('auth', {
             // fetch data using Api method
             // return data, ditaro ke state
             this.user = await Api.get('/user');
+        },
+        async update(data) {
+            data = Validate(updateUserValidation, data);
+
+            // fetch 
+            const Api = useApiStore();
+
+            // fetch user update
+            this.user = await Api.put('/user', data);
         }
     }
 });
