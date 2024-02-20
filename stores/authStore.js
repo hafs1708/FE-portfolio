@@ -39,7 +39,7 @@ export const useAuthStore = defineStore('auth', {
             // return data, ditaro ke state
             this.user = await Api.get('/user');
         },
-        async update(data) {
+        async updateUser(data) {
             data = Validate(updateUserValidation, data);
 
             // fetch 
