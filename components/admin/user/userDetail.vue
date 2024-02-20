@@ -35,23 +35,20 @@ const fetchError = ref('');
 const formData = ref({
     name: AuthStore.user.name,
     email: AuthStore.user.email,
-    current_password: '',
-    password: '',
-    confirm_password: ''
 });
 
 const confirm = ref(false);
 const success = ref(false);
-const handleUpdate = async () => {
 
+const handleUpdate = async () => {
     errors.value = {}
     fetchError.value = '';
-    success.value = true;
 
     try {
         console.log('masuk handle update')
         await AuthStore.updateUser(formData.value);
         confirm.value = false;
+        success.value = true;
     } catch (error) {
         console.log('ada error')
         console.log(error)

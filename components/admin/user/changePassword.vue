@@ -47,8 +47,6 @@ const errors = ref({});
 const fetchError = ref('');
 
 const formData = ref({
-    name: AuthStore.user.name,
-    email: AuthStore.user.email,
     current_password: '',
     password: '',
     confirm_password: ''
@@ -59,14 +57,14 @@ const success = ref(false);
 
 const handleUpdate = async () => {
     // reset errors
-    errors.value = {}
+    errors.value = {};
     fetchError.value = '';
 
     try {
         await AuthStore.update(formData.value)
         // fetch data update
-        success.value = true;
         confirm.value = false;
+        success.value = true;
     } catch (error) {
         console.log(error);
         confirm.value = false;
