@@ -36,7 +36,7 @@
     </div>
 
     <!-- MODAL CONFIRM -->
-    <AdminModalConfirm :show="confirm" @close="confirm = false" @saved="handleUpdate" />
+    <AdminModalConfirm :show="confirm" text_confirm="Change Password" @close="confirm = false" @saved="handleUpdate" />
     <AdminModalSuccess :show="success" @close="success = false" />
 </template>
 

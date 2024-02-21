@@ -8,12 +8,12 @@
             <form method="dialog">
                 <label class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click="$emit('close')">✕</label>
             </form>
+            <!-- Slot -->
+            <slot />
 
-            <h3 class="font-bold text-lg">Confirm</h3>
-            <p class="py-4">Are you sure ?</p>
             <div class="modal-action">
                 <label class="btn" @click="$emit('close')">Close!</label>
-                <label class="btn btn-neutral" @click="$emit('saved')">Save</label>
+                <label class="btn btn-neutral" @click="$emit('saved')">{{ text_confirm || 'Update' }}</label>
             </div>
         </div>
         <!-- Click Outside -->
@@ -25,7 +25,8 @@
 
 <script setup>
 const props = defineProps({
-    show: Boolean
+    show: Boolean,
+    text_confirm: String
 });
 
 defineEmits(['close', 'saved']);

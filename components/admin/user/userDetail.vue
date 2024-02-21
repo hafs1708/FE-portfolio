@@ -23,7 +23,12 @@
     </div>
 
     <!-- MODAL CONFIRM -->
-    <AdminModalConfirm :show="confirm" @close="confirm = false" @saved="handleUpdate" />
+    <AdminModalConfirm :show="confirm" @close="confirm = false" @saved="handleUpdate">
+        <h3 class="font-bold text-lg">Confirm</h3>
+        <p class="py-4">Are you sure to update user detail ?</p>
+    </AdminModalConfirm>
+
+    <!-- MODAL SUCCESS -->
     <AdminModalSuccess :show="success" @close="success = false" />
 </template>
 
