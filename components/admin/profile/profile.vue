@@ -1,0 +1,156 @@
+<template>
+    <div class="grid grid-cols-1 md:grid-cols-2">
+        <div class="flex flex-col gap-4">
+            <!-- EMAIL -->
+            <label class="form-control w-full max-w-xs">
+                <div class="label label-text">Email</div>
+                <input v-model="formData.email" type="text" placeholder="Email"
+                    class="input input-bordered w-full max-w-xs">
+                <div class="text-error text-right text-sm pr-2" v-if="errors.email">{{ errors.email }}</div>
+            </label>
+
+            <!-- FIRST NAME -->
+            <label class="form-control w-full max-w-xs">
+                <div class="label label-text">First Name</div>
+                <input v-model="formData.firstname" type="text" placeholder="First Name"
+                    class="input input-bordered w-full max-w-xs">
+                <div class="text-error text-right text-sm" v-if="errors.firstname">{{ errors.firstname }}</div>
+            </label>
+
+            <!-- LAST NAME -->
+            <label class="form-control w-full max-w-xs">
+                <div class="label label-text">Last Name</div>
+                <input v-model="formData.lastname" type="text" placeholder="Last Name"
+                    class="input input-bordered w-full max-w-xs">
+                <div class="text-error text-right text-sm" v-if="errors.lastname">{{ errors.lastname }}</div>
+            </label>
+
+            <!-- DOB -->
+            <label class="form-control w-full max-w-xs">
+                <div class="label label-text">Date of Birth</div>
+
+                <DatePicker v-model="formData.dob" color="gray">
+                    <template #default="{ togglePopover }">
+                        <button @click="togglePopover" class="btn btn-outline border-neutral/25 font-normal">
+                            {{ dayjs(formData.dob).format('D MMMM YYYY') }}
+                        </button>
+                    </template>
+                </DatePicker>
+                <div class="text-error text-right text-sm" v-if="errors.dob">{{ errors.dob }}</div>
+            </label>
+
+            <!-- ADDRESS -->
+            <label class="form-control w-full max-w-xs">
+                <div class="label label-text">Address</div>
+                <input v-model="formData.address" type="text" placeholder="Address"
+                    class="input input-bordered w-full max-w-xs">
+                <div class="text-error text-right text-sm" v-if="errors.address">{{ errors.address }}</div>
+            </label>
+
+            <!-- CITY -->
+            <label class="form-control w-full max-w-xs">
+                <div class="label label-text">City</div>
+                <input v-model="formData.city" type="text" placeholder="City" class="input input-bordered w-full max-w-xs">
+                <div class="text-error text-right text-sm" v-if="errors.city">{{ errors.city }}</div>
+            </label>
+
+            <!-- COUNTRY -->
+            <label class="form-control w-full max-w-xs">
+                <div class="label label-text">Country</div>
+                <input v-model="formData.country" type="text" placeholder="Country"
+                    class="input input-bordered w-full max-w-xs">
+                <div class="text-error text-right text-sm" v-if="errors.country">{{ errors.country }}</div>
+            </label>
+
+            <!-- JOB -->
+            <label class="form-control w-full max-w-xs">
+                <div class="label label-text">Job</div>
+                <input v-model="formData.job" type="text" placeholder="Job" class="input input-bordered w-full max-w-xs">
+                <div class="text-error text-right text-sm" v-if="errors.job">{{ errors.job }}</div>
+            </label>
+
+            <!-- PHONE -->
+            <label class="form-control w-full max-w-xs">
+                <div class="label label-text">Phone</div>
+                <input v-model="formData.phone" type="text" placeholder="Phone"
+                    class="input input-bordered w-full max-w-xs">
+                <div class="text-error text-right text-sm" v-if="errors.phone">{{ errors.phone }}</div>
+            </label>
+
+            <!-- Website -->
+            <label class="form-control w-full max-w-xs">
+                <div class="label label-text">Website</div>
+                <input v-model="formData.website" type="text" placeholder="Website"
+                    class="input input-bordered w-full max-w-xs">
+                <div class="text-error text-right text-sm" v-if="errors.website">{{ errors.website }}</div>
+            </label>
+        </div>
+
+        <div>
+            <div>
+                Avatar
+                <div class="w-60 aspect-square bg-neutral/30 md:mx-auto rounded-xl overflow-hidden">
+                    <div v-if="!ProfileStore.profile.avatar" class="w-full h-full"></div>
+                    <img v-else :src="apiUri + ProfileStore.profile.avatar" class="object-cover min-h-full min-w-full">
+                </div>
+            </div>
+            <!-- BIO -->
+            <label class="form-control w-full">
+                <div class="label label-text">Bio</div>
+                <textarea v-model="formData.bio" placeholder="Bio" rows="10" class="textarea textarea-bordered"></textarea>
+                <div class="text-error text-right text-sm pr-2" v-if="errors.name">{{ errors.bio }}</div>
+            </label>
+        </div>
+        <div class="flex items-center gap-2 mt-5">
+            <button @click="handleUpdate" class="btn btn-neutral float-right">Update</button>
+            <div class="text-error text-sm text-right">{{ fetchError }}</div>
+        </div>
+    </div>
+</template>
+
+
+<script setup>
+import { DatePicker } from 'v-calendar';
+import dayjs from 'dayjs';
+import Joi from 'joi';
+
+const config = useRuntimeConfig();
+const apiUri = config.public.apiUri;
+const ProfileStore = useProfileStore();
+
+const formData = ref({
+    email: ProfileStore.profile.email,
+    firstname: ProfileStore.profile.firstname,
+    lastname: ProfileStore.profile.lastname,
+    dob: ProfileStore.profile.dob,
+    address: ProfileStore.profile.address,
+    city: ProfileStore.profile.city,
+    country: ProfileStore.profile.country,
+    job: ProfileStore.profile.job,
+    phone: ProfileStore.profile.phone,
+    bio: ProfileStore.profile.bio,
+    website: ProfileStore.profile.website
+});
+
+// Handle Update 
+const errors = ref({});
+const fetchError = ref('');
+const handleUpdate = async () => {
+    // reser error
+    errors.value = {};
+    fetchError.value = '';
+
+    try {
+        await ProfileStore.update(formData.value);
+    } catch (error) {
+        if (error instanceof Joi.ValidationError) {
+            // Joi error
+            errors.value = error.data
+        } else {
+            // fetch error
+            fetchError.value = error.data.message;
+        }
+        console.log(error);
+    }
+}
+</script>

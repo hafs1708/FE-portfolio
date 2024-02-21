@@ -89,6 +89,8 @@
 </template>
 
 <script setup>
+import 'v-calendar/style.css';
+
 // Auth state / pinia
 const AuthStore = useAuthStore();
 </script>
