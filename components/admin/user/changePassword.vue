@@ -28,7 +28,10 @@
         </label>
     </div>
     <div class="flex items-center gap-2">
-        <label class="btn btn-neutral my-5" @click="confirm = true">Update</label>
+        <label class="btn btn-neutral w-[320px] mt-7 gap-4" @click="confirm = true">
+            U P D A T E
+            <span v-show="isLoading" class="loading loading-bars loading-md"></span>
+        </label>
         <div class="text-error">{{ fetchError }}</div>
     </div>
 

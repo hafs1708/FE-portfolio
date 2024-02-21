@@ -15,7 +15,10 @@
         </label>
     </div>
     <div class="flex items-center gap-2">
-        <label class="btn btn-neutral my-5" @click="confirm = true">Update</label>
+        <label class="btn btn-neutral w-[320px] mt-7 gap-4" @click="confirm = true">
+            U P D A T E
+            <span v-show="isLoading" class="loading loading-bars loading-md"></span>
+        </label>
         <div class="text-error">{{ fetchError }}</div>
     </div>
 
@@ -39,16 +42,21 @@ const formData = ref({
 
 const confirm = ref(false);
 const success = ref(false);
+const isLoading = ref(false);
 
 const handleUpdate = async () => {
     errors.value = {}
     fetchError.value = '';
+    isLoading.value = true;
+
 
     try {
         console.log('masuk handle update')
         await AuthStore.updateUser(formData.value);
         confirm.value = false;
         success.value = true;
+        isLoading.value = false;
+
     } catch (error) {
         console.log('ada error')
         console.log(error)
