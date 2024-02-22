@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia';
 import { useApiStore } from './apiStore';
-import { Validate } from 'joi';
 
 export const useProfileStore = defineStore('profile', {
     state: () => ({
@@ -22,7 +21,7 @@ export const useProfileStore = defineStore('profile', {
             console.log('data after validation');
             console.log(data);
 
-            // this.profile = await Api.put('/profile', data);
+            this.profile = await Api.put('/profile', data);
         }
     }
 });
