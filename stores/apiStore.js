@@ -32,7 +32,7 @@ export const useApiStore = defineStore('api', {
             const jsonData = JSON.stringify(data);
 
             try {
-                const data = await $fetch(apiUri + path, {
+                const response = await $fetch(apiUri + path, {
                     method: 'POST',
                     body: jsonData,
                     headers: {
@@ -42,7 +42,7 @@ export const useApiStore = defineStore('api', {
                 });
 
                 // RETURN DATA
-                return data
+                return response
             } catch (error) {
                 this.handleError(error);
             }
@@ -56,7 +56,7 @@ export const useApiStore = defineStore('api', {
             const jsonData = JSON.stringify(data);
 
             try {
-                const data = await $fetch(apiUri + path, {
+                const response = await $fetch(apiUri + path, {
                     method: 'PUT',
                     body: jsonData,
                     headers: {
@@ -66,7 +66,7 @@ export const useApiStore = defineStore('api', {
                 });
 
                 // RETURN DATA
-                return data
+                return response
             } catch (error) {
                 this.handleError(error);
             }
@@ -80,7 +80,7 @@ export const useApiStore = defineStore('api', {
             const jsonData = JSON.stringify(data);
 
             try {
-                const data = await $fetch(apiUri + path, {
+                const response = await $fetch(apiUri + path, {
                     method: 'PATCH',
                     body: jsonData,
                     headers: {
@@ -90,7 +90,7 @@ export const useApiStore = defineStore('api', {
                 });
 
                 // RETURN DATA
-                return data
+                return response
             } catch (error) {
                 this.handleError(error);
             }
@@ -102,7 +102,7 @@ export const useApiStore = defineStore('api', {
             const apiUri = config.public.apiUri;
 
             try {
-                const data = await $fetch(apiUri + path, {
+                const response = await $fetch(apiUri + path, {
                     method: 'Delete',
                     headers: {
                         'Content-Type': 'application/json'
@@ -111,7 +111,7 @@ export const useApiStore = defineStore('api', {
                 });
 
                 // RETURN DATA
-                return data
+                return response
             } catch (error) {
                 this.handleError(error);
             }
