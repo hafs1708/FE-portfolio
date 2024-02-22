@@ -53,15 +53,18 @@ export const useApiStore = defineStore('api', {
             const config = useRuntimeConfig();
             const apiUri = config.public.apiUri;
 
-            const jsonData = JSON.stringify(data);
+            if (!(data instanceof FormData)) {
+                // jika data bukan form data ubah ke json
+                data = JSON.stringify(data);
+            }
 
             try {
                 const response = await $fetch(apiUri + path, {
                     method: 'PUT',
-                    body: jsonData,
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    body: data,
+                    // headers: {
+                    //     'Content-Type': 'application/json'
+                    // },
                     credentials: 'include'
                 });
 

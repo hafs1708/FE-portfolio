@@ -90,8 +90,12 @@
             <div>
                 Avatar
                 <div class="w-60 aspect-square bg-neutral/30 md:mx-auto rounded-xl overflow-hidden">
-                    <div v-if="!ProfileStore.profile.avatar" class="w-full h-full"></div>
-                    <img v-else :src="apiUri + ProfileStore.profile.avatar" class="object-cover min-h-full min-w-full">
+                    <div v-if="!avatar" class="w-full h-full"></div>
+                    <img v-else :src="avatar" class="object-cover min-h-full min-w-full">
+                </div>
+                <div class="flex md:justify-center mt-4">
+                    <input @change="handleFile" type="file" accept="image/*"
+                        class="file-input file-input-bordered w-full max-w-xs" />
                 </div>
             </div>
             <!-- BIO -->
@@ -144,6 +148,31 @@ const formData = ref({
     website: ProfileStore.profile.website
 });
 
+// AVATAR
+// if else shortcut
+// valuenya = apiuri + avatar || null
+const avatar = ref(
+    ProfileStore.profile.avatar
+        ? apiUri + ProfileStore.profile.avatar
+        : null
+);
+
+let file_avatar = null;
+const handleFile = (e) => {
+    if (e.target.files.length) {
+        const file = e.target.files[0];
+        file_avatar = file;
+
+        // convert file to dataurl
+        // data yang bisa dibaca di tag <img src= />
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+            avatar.value = reader.result;
+        }
+    }
+}
+
 // Confirmation
 const confirm = ref(false);
 const success = ref(false);
@@ -167,7 +196,7 @@ const handleUpdate = async () => {
     fetchError.value = '';
 
     try {
-        await ProfileStore.update(formData.value);
+        await ProfileStore.update(formData.value, file_avatar);
         success.value = true;
         isLoading.value = false;
     } catch (error) {
@@ -178,8 +207,12 @@ const handleUpdate = async () => {
             // Joi error
             errors.value = joiError(error);
         } else {
-            // fetch error
-            fetchError.value = error.data.message;
+            if (error.data) {
+                // fetch error
+                fetchError.value = error.data.message;
+            } else {
+                console.error(error);
+            }
         }
         console.log(error);
     }

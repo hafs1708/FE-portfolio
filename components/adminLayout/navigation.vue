@@ -24,6 +24,11 @@ const menus = [
         title: "Project",
         to: "/admin/project",
         icon: resolveComponent("LucideLayoutDashboard"),
+    },
+    {
+        title: "Education",
+        to: "/admin/education",
+        icon: resolveComponent("LucideLayoutDashboard"),
     }
 ];
 
