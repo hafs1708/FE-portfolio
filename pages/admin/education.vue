@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="font-semibold text-xl mb-4 border-b border-b-neutral/25">Education</div>
+        <div class="font-semibold mb-6 border-b border-b-neutral">E D U C A T I O N</div>
 
         <input v-model="filter" type="text" placeholder="Search"
             class="input input-sm input-bordered input-primary w-full max-w-xs" />

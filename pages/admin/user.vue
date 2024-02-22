@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="font-semibold mb-6 border-b-neutral/25">USER SETTING</div>
+        <div class="font-semibold mb-6 border-b border-b-neutral">U S E R _ S E T T I N G</div>
 
         <div role="tablist" class="tabs tabs-bordered">
             <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="User Detail" checked />

@@ -18,17 +18,17 @@ const menus = [
     {
         title: "Profile",
         to: "/admin/profile",
-        icon: resolveComponent("LucideLayoutDashboard")
+        icon: resolveComponent("LucideUserRound")
     },
     {
         title: "Project",
         to: "/admin/project",
-        icon: resolveComponent("LucideLayoutDashboard"),
+        icon: resolveComponent("LucideBriefcase"),
     },
     {
         title: "Education",
         to: "/admin/education",
-        icon: resolveComponent("LucideLayoutDashboard"),
+        icon: resolveComponent("LucideGraduationCap"),
     }
 ];
 

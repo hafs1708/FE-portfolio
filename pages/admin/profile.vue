@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="font-semibold mb-6 border-b-neutral/25">P R O F I L E</div>
+        <div class="font-semibold mb-6 border-b border-b-neutral">P R O F I L E</div>
 
         <div role="tablist" class="tabs tabs-bordered">
             <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="Profile" checked />

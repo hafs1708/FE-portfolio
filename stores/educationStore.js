@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia';
 import { useApiStore } from './apiStore';
 
-export const useEducationStore = defineStore('education', {
+export const useEducationStore = defineStore('educations', {
     state: () => ({
-        education: null
+        educations: null
     }),
     actions: {
         async get() {
