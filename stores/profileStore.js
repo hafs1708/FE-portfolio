@@ -20,11 +20,11 @@ export const useProfileStore = defineStore('profile', {
             // cara pertama
             const formData = new FormData();
             for (let [key, value] of Object.entries(data)) {
-                console.log('key -> ' + key);
-                console.log('value -> ' + value);
+                // console.log('key -> ' + key);
+                // console.log('value -> ' + value);
 
                 // append to formData
-                // tidak boleh taruh data selalu string
+                // tidak boleh taruh data selain string
                 if (value == null) {
                     value = '';
                 }

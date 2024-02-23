@@ -124,7 +124,7 @@ const handleUpdate = async () => {
             // fetch error
             fetchError.value = error.data.message;
         }
-        console.log(error);
+        // console.log(error);
     }
 }
 </script>

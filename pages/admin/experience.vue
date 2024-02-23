@@ -61,7 +61,7 @@ definePageMeta({
 const ExpStore = useExperienceStore();
 onBeforeMount(async () => {
     await ExpStore.get();
-    console.log(ExpStore.experiences);
+    // console.log(ExpStore.experiences);
 });
 
 

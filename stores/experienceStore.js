@@ -12,7 +12,7 @@ export const useExperienceStore = defineStore('experiences', {
             this.experiences = await Api.get('/experiences');
         },
         async delete(id) {
-            console.log(id);
+            // console.log(id);
             const Api = useApiStore();
 
             await Api.delete('/experience/' + id);

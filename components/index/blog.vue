@@ -40,7 +40,7 @@ const props = defineProps({
 
 const config = useRuntimeConfig()
 const apiUri = config.public.apiUri;
-console.log(apiUri);
+// console.log(apiUri);
 
-console.log(props);
+// console.log(props);
 </script>

@@ -1,11 +1,4 @@
-
-import type Joi from 'joi';
-
-import type { end } from '@popperjs/core';
-
-import type { ImagesLoading } from '#build/components';
 <template>
-    <!-- MODAL SECCESS -->
     <input v-model="show_modal" type="checkbox" class="modal-toggle" />
     <div class="modal" role="dialog">
         <div class="modal-box">
@@ -82,7 +75,6 @@ const isLoading = ref(false);
 const formData = ref({});
 const fetchError = ref('');
 const errors = ref({});
-const FormData = ref({});
 
 watchEffect(() => {
     show_modal.value = props.show;
@@ -101,6 +93,7 @@ watchEffect(() => {
 const EduStore = useEducationStore();
 const save = async () => {
     // reset error 
+    // console.log(formData.value)
     errors.value = {};
     fetchError.value = '';
 
@@ -110,8 +103,10 @@ const save = async () => {
 
         // ubah data endYear jika kosong menjadi null
         if (!formData.value.endYear) formData.value.endYear = null;
+        // console.log(formData.value.endYear)
 
         await EduStore.create(formData.value);
+        // console.log(EduStore.educations)
 
         // hide loading indicator
         isLoading.value = false;

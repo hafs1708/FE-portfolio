@@ -214,7 +214,7 @@ const handleUpdate = async () => {
                 console.error(error);
             }
         }
-        console.log(error);
+        // console.log(error);
     }
 }
 </script>

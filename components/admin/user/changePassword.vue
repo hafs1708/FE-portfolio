@@ -43,7 +43,7 @@
 <script setup>
 // setup layout and middleware
 import Joi from "joi";
-
+const isLoading = ref(false)
 const AuthStore = useAuthStore();
 
 const errors = ref({});
@@ -69,7 +69,7 @@ const handleUpdate = async () => {
         confirm.value = false;
         success.value = true;
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         confirm.value = false;
         if (error instanceof Joi.ValidationError) {
             // joi error 

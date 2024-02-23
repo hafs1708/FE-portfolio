@@ -27,9 +27,9 @@ const props = defineProps({
 
 const config = useRuntimeConfig()
 const apiUri = config.public.apiUri;
-console.log(apiUri);
+// console.log(apiUri);
 
-console.log("props.projects");
-console.log(props.projects);
+// console.log("props.projects");
+// console.log(props.projects);
 
 </script>
