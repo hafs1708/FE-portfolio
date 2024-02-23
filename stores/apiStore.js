@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia';
 
 export const useApiStore = defineStore('api', {
-    state: () => ({}),
     actions: {
         // get
         async get(path) {
