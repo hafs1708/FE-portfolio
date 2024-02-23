@@ -49,7 +49,7 @@
         </AdminModalConfirm>
 
         <!-- Modal success alert -->
-        <AdminModalSuccess :show="success" @close="false" />
+        <AdminModalSuccess :show="showsuccessModal" @close="showsuccessModal = false" />
     </div>
 </template>
 
@@ -85,17 +85,17 @@ const dataTable = computed(() => {
 // REMOVE
 const removeData = ref(null); // isi dengan data education
 const showRemoveModal = ref(false);
-const success = ref(false);
+const showsuccessModal = ref(false);
 
 const handleRemove = async () => {
     try {
         const id = removeData.value.id;
 
         // process delete
-        await EduStore.remove(id);
+        await EduStore.delete(id);
 
-        // TODO success modal
-        success.value = true;
+        // success modal
+        showsuccessModal.value = true;
 
         // hide modal
         showRemoveModal.value = false;
