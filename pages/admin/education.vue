@@ -15,20 +15,41 @@
                         <th class="text-center">Periode</th>
                         <th class="text-center">Major</th>
                         <th class="text-center">Degree</th>
+                        <th class="text-center">Remove</th>
                     </tr>
                 </thead>
                 <tbody>
                     <!-- row 1 -->
                     <tr v-for="edu in dataTable" :key="edu.id">
                         <th>{{ edu.id }}</th>
-                        <th>{{ edu.institutionName }}</th>
-                        <th class="text-center">{{ edu.startYear }} - {{ edu.endYear }}</th>
-                        <th class="text-center">{{ edu.major }}</th>
-                        <th class="text-center">{{ edu.degree }}</th>
+                        <td>{{ edu.institutionName }}</td>
+                        <td class="text-center">{{ edu.startYear }} - {{ edu.endYear }}</td>
+                        <td class="text-center">{{ edu.major }}</td>
+                        <td class="text-center">{{ edu.degree }}</td>
+                        <td>
+                            <div class="flex gap-2 justify-center">
+                                <button class="btn btn-neutral">
+                                    <LucidePencilLine :size="16" />
+                                </button>
+                                <button class="btn btn-error" @click="showRemoveModal = true; removeData = edu">
+                                    <LucideTrash2 :size="16" />
+                                </button>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
+
+        <!-- Modal confirmation -->
+        <AdminModalConfirm :show="showRemoveModal" text_confirm="remove" @close="showRemoveModal = false"
+            @saved="handleRemove">
+            Are you sure to remove ?
+            <div v-if="removeData" class="font-bold">{{ removeData.institutionName }}</div>
+        </AdminModalConfirm>
+
+        <!-- Modal success alert -->
+        <AdminModalSuccess :show="success" @close="false" />
     </div>
 </template>
 
@@ -43,6 +64,7 @@ onBeforeMount(async () => {
     await EduStore.get();
     console.log(EduStore.educations);
 });
+
 
 const filter = ref('');
 const dataTable = computed(() => {
@@ -60,4 +82,28 @@ const dataTable = computed(() => {
     }
 });
 
+// REMOVE
+const removeData = ref(null); // isi dengan data education
+const showRemoveModal = ref(false);
+const success = ref(false);
+
+const handleRemove = async () => {
+    try {
+        const id = removeData.value.id;
+
+        // process delete
+        await EduStore.remove(id);
+
+        // TODO success modal
+        success.value = true;
+
+        // hide modal
+        showRemoveModal.value = false;
+
+        // refresh data
+        await EduStore.get();
+    } catch (error) {
+        console.log(error);
+    }
+} 
 </script>

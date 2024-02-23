@@ -13,10 +13,7 @@
 
             <div class="modal-action">
                 <label class="btn" @click="$emit('close')">Close!</label>
-                <label class="btn btn-neutral" @click="isLoading = true; $emit('saved')">
-                    {{ text_confirm || 'Update' }}
-                    <span v-show="isLoading" class="loading loading-bars loading-md"></span>
-                </label>
+                <label class="btn btn-neutral" @click="$emit('delete')">Delete/label>
             </div>
         </div>
         <!-- Click Outside -->
@@ -29,18 +26,18 @@
 <script setup>
 const props = defineProps({
     show: Boolean,
-    text_confirm: String
+    data: Object
 });
 
-defineEmits(['close', 'saved']);
+defineEmits(['close', 'delete']);
 
-const isLoading = ref(false);
-const show_modal = ref(true);
+const show_modal = ref(false);
 
 watchEffect(() => {
     show_modal.value = props.show;
-    if (props.show) {
-        isLoading.value = false;
-    }
 });
+
+const handleRemove = () => {
+    console.log('delete');
+} 
 </script>
