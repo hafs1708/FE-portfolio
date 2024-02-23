@@ -29,6 +29,11 @@ const menus = [
         title: "Education",
         to: "/admin/education",
         icon: resolveComponent("LucideGraduationCap"),
+    },
+    {
+        title: "Experience",
+        to: "/admin/experience",
+        icon: resolveComponent("LucideLayoutPanelLeft"),
     }
 ];
 
