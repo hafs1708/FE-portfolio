@@ -69,7 +69,7 @@ import type { ImagesLoading } from '#build/components';
 
 <script setup>
 import Joi from "joi";
-const emits = defineEmits(['close', 'saved']);
+const emit = defineEmits(['close', 'saved']);
 
 const props = defineProps({
     show: Boolean,
@@ -79,20 +79,23 @@ const props = defineProps({
 const show_modal = ref(false);
 const isLoading = ref(false);
 
-watchEffect(() => {
-    show_modal.value = props.show;
-});
-
-const FormData = ref({
-    institutionName: '',
-    startYear: '',
-    endYear: '',
-    major: '',
-    degree: ''
-});
 const formData = ref({});
 const fetchError = ref('');
 const errors = ref({});
+const FormData = ref({});
+
+watchEffect(() => {
+    show_modal.value = props.show;
+
+    // reset form
+    formData.value = {
+        institutionName: '',
+        startYear: '',
+        endYear: '',
+        major: '',
+        degree: ''
+    }
+});
 
 // handle save 
 const EduStore = useEducationStore();
@@ -114,7 +117,7 @@ const save = async () => {
         isLoading.value = false;
 
         // emit saved
-        emits('saved');
+        emit('saved');
     } catch (error) {
         // reset loading indicator
         isLoading.value = false;
