@@ -1,6 +1,13 @@
 <template>
     <div>
-        <div class="font-semibold mb-6 border-b border-b-neutral">E D U C A T I O N</div>
+        <div class="font-semibold mb-6 pb-2 border-b border-b-neutral flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <LucideGraduationCap :size="26" /> E D U C A T I O N
+            </div>
+            <button class="btn btn-neutral" @click="showForm = true">
+                <LucidePlus :size="16" /> Add Education
+            </button>
+        </div>
 
         <input v-model="filter" type="text" placeholder="Search"
             class="input input-sm input-bordered input-primary w-full max-w-xs" />
@@ -50,6 +57,9 @@
 
         <!-- Modal success alert -->
         <AdminModalSuccess :show="showsuccessModal" @close="showsuccessModal = false" />
+
+        <!-- FORM MODAL -->
+        <AdminEducationForm :show="showForm" text_confirm="saved" @close="showForm = false" @saved="saved" />
     </div>
 </template>
 
@@ -62,7 +72,6 @@ definePageMeta({
 const EduStore = useEducationStore();
 onBeforeMount(async () => {
     await EduStore.get();
-    console.log(EduStore.educations);
 });
 
 
@@ -105,5 +114,21 @@ const handleRemove = async () => {
     } catch (error) {
         console.log(error);
     }
-} 
+}
+
+// CREATE
+const showForm = ref(false);
+
+// berhasil create eduaction
+const saved = async () => {
+    // tutup form
+    showForm.value = false;
+
+    // buka form success
+    showsuccessModal.value = true;
+
+    // fetch ulang data education
+    await EduStore.get();
+}
+
 </script>

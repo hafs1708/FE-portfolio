@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { useApiStore } from './apiStore';
+import { isEducation } from '~/utils/educationValidation.js';
 
 export const useEducationStore = defineStore('educations', {
     state: () => ({
@@ -8,14 +9,19 @@ export const useEducationStore = defineStore('educations', {
     actions: {
         async get() {
             const Api = useApiStore();
-
             this.educations = await Api.get('/educations');
         },
         async delete(id) {
-            console.log(id);
+            const Api = useApiStore();
+            await Api.delete('/education/' + id);
+        },
+        async create(data) {
             const Api = useApiStore();
 
-            await Api.delete('/education/' + id);
+            // validasi 
+            data = Validate(isEducation, data);
+
+            await Api.post('/education', data);
         }
     }
 });
