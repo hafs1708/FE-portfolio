@@ -17,19 +17,21 @@ export const useExperienceStore = defineStore('experiences', {
         },
         async create(data) {
             const Api = useApiStore();
-
+            
             // validasi 
             data = Validate(isExperience, data);
-
+            
             await Api.post('/experience', data);
         },
         async update(id, data) {
             const Api = useApiStore();
-
+            
             // validasi 
             data = Validate(isExperience, data);
 
-            await Api.put(`/experience/${id}`, data);
+            return await Api.put(`/experience/${id}`, data);
+            // console.log('masuk update')
+            // return;
         },
     }
 });

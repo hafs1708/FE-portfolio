@@ -88,6 +88,7 @@ watchEffect(() => {
 // handle save 
 const ExpStore = useExperienceStore();
 const save = async () => {
+    console.log(formData.value)
     // reset error 
     errors.value = {};
     fetchError.value = '';
