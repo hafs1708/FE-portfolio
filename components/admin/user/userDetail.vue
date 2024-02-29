@@ -54,7 +54,6 @@ const handleUpdate = async () => {
     fetchError.value = '';
     isLoading.value = true;
 
-
     try {
         // console.log('masuk handle update')
         await AuthStore.updateUser(formData.value);
@@ -63,8 +62,6 @@ const handleUpdate = async () => {
         isLoading.value = false;
 
     } catch (error) {
-        // console.log('ada error')
-        // console.log(error)
         confirm.value = false;
 
         if (error instanceof Joi.ValidationError) {
