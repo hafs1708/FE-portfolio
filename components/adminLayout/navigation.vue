@@ -1,6 +1,6 @@
 <template>
     <ul class="side-menu menu bg-neutral lg:rounded-box p-4 w-[250px] max-lg:min-h-screen lg:min-h-full text-white">
-        <li class="my-2 font-light">MAIN MENU</li>
+        <li class="my-2 font-semibold">M A I N _ M E N U</li>
         <template v-for="(menu, i) in menus" :key="i">
             <AdminLayoutNavigationItem :menu="menu" />
         </template>
@@ -33,7 +33,7 @@ const menus = [
     {
         title: "Experience",
         to: "/admin/experience",
-        icon: resolveComponent("LucideLayoutPanelLeft"),
+        icon: resolveComponent("LucideAward"),
     },
     {
         title: "Skill",

@@ -2,7 +2,7 @@
     <div>
         <div class="font-semibold mb-6 pb-2 border-b border-b-neutral flex items-center justify-between">
             <div class="flex items-center gap-2">
-                <LucideLayoutPanelLeft :size="26" /> E X P E R I E N C E
+                <LucideAward :size="26" /> E X P E R I E N C E
             </div>
             <button class="btn btn-neutral" @click="editData = null; showForm = true">
                 <LucidePlus :size="16" /> Add Experience
@@ -34,7 +34,7 @@
                         <td class="text-center">{{ exp.raedStarDate }} - {{ exp.readEndDate }}</td>
                         <td>
                             <div class="flex gap-2 justify-center">
-                                <button class="btn btn-neutral">
+                                <button @click="editData = exp; showForm = true" class="btn btn-neutral">
                                     <LucidePencilLine :size="16" />
                                 </button>
                                 <button class="btn btn-error" @click="showRemoveModal = true; removeData = exp">
@@ -60,7 +60,6 @@
         <!-- FORM MODAL -->
         <AdminExperienceFormExperience :data="editData" :show="showForm" text_confirm="saved" @close="showForm = false"
             @saved="saved" />
-
     </div>
 </template>
 
@@ -73,9 +72,7 @@ definePageMeta({
 const ExpStore = useExperienceStore();
 onBeforeMount(async () => {
     await ExpStore.get();
-    // console.log(ExpStore.experiences);
 });
-
 
 const filter = ref('');
 const dataTable = computed(() => {
@@ -94,7 +91,7 @@ const dataTable = computed(() => {
 });
 
 // REMOVE
-const removeData = ref(null); // isi dengan data education
+const removeData = ref(null); // isi dengan data experience
 const showRemoveModal = ref(false);
 const showsuccessModal = ref(false);
 
@@ -118,12 +115,22 @@ const handleRemove = async () => {
     }
 }
 
-// EDIT
+// CREATE
 const showForm = ref(false);
-const editData = ref(false);
 
-const saved = () => {
-    console.log('saved');
+// berhasil create experience
+const saved = async () => {
+    // tutup form
+    showForm.value = false;
+
+    // buka form success
+    showsuccessModal.value = true;
+
+    // fetch ulang data experience
+    await ExpStore.get();
 }
+
+// EDIT
+const editData = ref(false);
 
 </script>

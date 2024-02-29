@@ -7,7 +7,39 @@
                 <label class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click="$emit('close')">✕</label>
             </form>
 
-            <h3 class="font-bold text-lg"> {{ data ? `UPDATE: ${data.institutionName}` : `CREATE EDUCATION` }}</h3>
+            <h3 class="font-bold text-lg"> {{ data ? `UPDATE: ${data.company}` : `CREATE EXPERIENCE` }}</h3>
+
+            <!-- COMPANY -->
+            <label class="form-control w-full max-w-xs">
+                <div class="label label-text">Company</div>
+                <input v-model="formData.company" type="text" placeholder="Company"
+                    class="input input-bordered w-full max-w-xs">
+                <div class="text-error text-right text-sm" v-if="errors.company">{{ errors.company }}</div>
+            </label>
+
+            <!-- TITLE -->
+            <label class="form-control w-full max-w-xs">
+                <div class="label label-text">Title</div>
+                <input v-model="formData.title" type="text" placeholder="Title"
+                    class="input input-bordered w-full max-w-xs">
+                <div class="text-error text-right text-sm" v-if="errors.title">{{ errors.title }}</div>
+            </label>
+
+            <!-- LOCATION -->
+            <label class="form-control w-full max-w-xs">
+                <div class="label label-text">Location</div>
+                <input v-model="formData.location" type="text" placeholder="Location"
+                    class="input input-bordered w-full max-w-xs">
+                <div class="text-error text-right text-sm" v-if="errors.location">{{ errors.location }}</div>
+            </label>
+
+            <!-- DESCRIPTION -->
+            <label class="form-control w-full max-w-xs">
+                <div class="label label-text">Description</div>
+                <textarea v-model="formData.description" rows="5" class="textarea textarea-primary"
+                    placeholder="Description"></textarea>
+                <div class="text-error text-right text-sm" v-if="errors.description">{{ errors.description }}</div>
+            </label>
 
             <div class="modal-action">
                 <label class="btn" @click="$emit('close')">Close!</label>
@@ -45,11 +77,16 @@ watchEffect(() => {
     show_modal.value = props.show;
 
     // reset form
-    formData.value = {};
+    formData.value = {
+        company: props.data ? props.data.company : '',
+        title: props.data ? props.data.title : '',
+        location: props.data ? props.data.location : '',
+        description: props.data ? props.data.description : ''
+    };
 });
 
 // handle save 
-const EduStore = useEducationStore();
+const ExpStore = useExperienceStore();
 const save = async () => {
     // reset error 
     errors.value = {};
@@ -58,6 +95,17 @@ const save = async () => {
     try {
         // show loading indicator
         isLoading.value = true;
+
+        // ubah data endYear jika kosong menjadi null
+        if (!formData.value.endYear) formData.value.endYear = null;
+
+        if (!props.data) {
+            // jika tidak ada -> create
+            await ExpStore.create(formData.value);
+        } else {
+            // jika ada -> update
+            await ExpStore.update(props.data.id, formData.value);
+        }
 
         // hide loading indicator
         isLoading.value = false;
