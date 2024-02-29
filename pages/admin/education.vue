@@ -30,7 +30,7 @@
                     <tr v-for="edu in dataTable" :key="edu.id">
                         <th>{{ edu.id }}</th>
                         <td>{{ edu.institutionName }}</td>
-                        <td class="text-center">{{ edu.startYear }} - {{ edu.endYear }}</td>
+                        <td class="text-center">{{ edu.startYear }} - {{ edu.endYear || 'Present' }}</td>
                         <td class="text-center">{{ edu.major }}</td>
                         <td class="text-center">{{ edu.degree }}</td>
                         <td>
