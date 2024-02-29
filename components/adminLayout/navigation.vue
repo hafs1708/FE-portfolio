@@ -34,6 +34,11 @@ const menus = [
         title: "Experience",
         to: "/admin/experience",
         icon: resolveComponent("LucideLayoutPanelLeft"),
+    },
+    {
+        title: "Skill",
+        to: "/admin/skill",
+        icon: resolveComponent("LucideWrench"),
     }
 ];
 

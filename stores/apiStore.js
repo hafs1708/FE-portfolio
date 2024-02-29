@@ -62,9 +62,9 @@ export const useApiStore = defineStore('api', {
                 const response = await $fetch(apiUri + path, {
                     method: 'PUT',
                     body: data,
-                    // headers: {
-                    //     'Content-Type': 'application/json'
-                    // },
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
                     credentials: 'include'
                 });
 

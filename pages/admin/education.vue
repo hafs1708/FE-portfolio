@@ -4,7 +4,7 @@
             <div class="flex items-center gap-2">
                 <LucideGraduationCap :size="26" /> E D U C A T I O N
             </div>
-            <button class="btn btn-neutral" @click="showForm = true">
+            <button class="btn btn-neutral" @click="editData = null; showForm = true">
                 <LucidePlus :size="16" /> Add Education
             </button>
         </div>
@@ -35,7 +35,7 @@
                         <td class="text-center">{{ edu.degree }}</td>
                         <td>
                             <div class="flex gap-2 justify-center">
-                                <button class="btn btn-neutral">
+                                <button @click="editData = edu; showForm = true" class="btn btn-neutral">
                                     <LucidePencilLine :size="16" />
                                 </button>
                                 <button class="btn btn-error" @click="showRemoveModal = true; removeData = edu">
@@ -59,7 +59,8 @@
         <AdminModalSuccess :show="showsuccessModal" @close="showsuccessModal = false" />
 
         <!-- FORM MODAL -->
-        <AdminEducationForm :show="showForm" text_confirm="saved" @close="showForm = false" @saved="saved" />
+        <AdminEducationForm :data="editData" :show="showForm" text_confirm="saved" @close="showForm = false"
+            @saved="saved" />
     </div>
 </template>
 
@@ -131,4 +132,6 @@ const saved = async () => {
     await EduStore.get();
 }
 
+// EDIT
+const editData = ref(null);
 </script>

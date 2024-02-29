@@ -22,6 +22,14 @@ export const useEducationStore = defineStore('educations', {
             data = Validate(isEducation, data);
 
             await Api.post('/education', data);
+        },
+        async update(id, data) {
+            const Api = useApiStore();
+
+            // validasi 
+            data = Validate(isEducation, data);
+
+            await Api.put(`/education/${id}`, data);
         }
     }
 });

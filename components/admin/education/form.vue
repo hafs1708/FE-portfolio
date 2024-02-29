@@ -7,7 +7,7 @@
                 <label class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click="$emit('close')">✕</label>
             </form>
 
-            <h3 class="font-bold text-lg">CREATE EDUCATION</h3>
+            <h3 class="font-bold text-lg"> {{ data ? `UPDATE: ${data.institutionName}` : `CREATE EDUCATION` }}</h3>
 
             <!-- INSTITUTION NAME -->
             <label class="form-control w-full max-w-xs">
@@ -48,7 +48,7 @@
             <div class="modal-action">
                 <label class="btn" @click="$emit('close')">Close!</label>
                 <label @click="save" class="btn btn-neutral">
-                    {{ text_confirm || 'Save' }}
+                    {{ data ? 'Update' : 'Save' }}
                     <span v-show="isLoading" class="loading loading-bars loading-md"></span>
                 </label>
             </div>
@@ -65,6 +65,7 @@ import Joi from "joi";
 const emit = defineEmits(['close', 'saved']);
 
 const props = defineProps({
+    data: Object,
     show: Boolean,
     text_confirm: String
 });
@@ -81,19 +82,21 @@ watchEffect(() => {
 
     // reset form
     formData.value = {
-        institutionName: '',
-        startYear: '',
-        endYear: '',
-        major: '',
-        degree: ''
+        institutionName: props.data ? props.data.institutionName : '',
+        startYear: props.data ? props.data.startYear : '',
+        endYear: props.data ? props.data.endYear : '',
+        major: props.data ? props.data.major : '',
+        degree: props.data ? props.data.degree : ''
     }
+
+    console.log('Props data')
+    console.log(props.data)
 });
 
 // handle save 
 const EduStore = useEducationStore();
 const save = async () => {
     // reset error 
-    // console.log(formData.value)
     errors.value = {};
     fetchError.value = '';
 
@@ -103,10 +106,14 @@ const save = async () => {
 
         // ubah data endYear jika kosong menjadi null
         if (!formData.value.endYear) formData.value.endYear = null;
-        // console.log(formData.value.endYear)
 
-        await EduStore.create(formData.value);
-        // console.log(EduStore.educations)
+        if (!props.data) {
+            // jika tidak ada -> create
+            await EduStore.create(formData.value);
+        } else {
+            // jika ada -> update
+            await EduStore.update(props.data.id, formData.value);
+        }
 
         // hide loading indicator
         isLoading.value = false;
