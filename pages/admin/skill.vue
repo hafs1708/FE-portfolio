@@ -2,31 +2,34 @@
     <div>
         <div class="font-semibold mb-6 pb-2 border-b border-b-neutral flex items-center justify-between">
             <div class="flex items-center gap-2">
-                <LucideWrench :size="26" /> S K I L L
+                <LucideWrench :size="26" /> S K I L L S
             </div>
             <button class="btn btn-neutral" @click="showForm = true">
                 <LucidePlus :size="16" /> Add Skill
             </button>
         </div>
 
-        <div class="flex 0 gap-4">
+        <input v-model="filter" type="text" placeholder="Search"
+            class="input input-sm input-bordered input-primary w-full max-w-xs" />
+
+        <!-- <div class="flex 0 gap-4">
             <select name="" id="" class="w-60">
-                <option value="">All Categories</option>
-                <!-- draw categories -->
-            </select>
+                <option value="">All Categories</option> -->
+        <!-- draw categories -->
+        <!-- </select>
             <div class="w-full">
                 <input v-model="filter" type="text" placeholder="Search"
                     class="grow input input-sm input-bordered w-full" />
             </div>
-        </div>
+        </div> -->
 
         <div class="overflow-x-auto">
             <table class="table table-zebra">
                 <!-- head -->
                 <thead>
                     <tr>
-                        <th class="text-center">SVG</th>
-                        <th class="text-center">Title</th>
+                        <th>SVG</th>
+                        <th>Title</th>
                         <th class="text-center">Category</th>
                         <th class="text-center">Projects</th>
                         <th class="text-center">Action</th>
@@ -34,19 +37,23 @@
                 </thead>
                 <tbody>
                     <!-- row 1 -->
-                    <tr v-for="skill in dataTable" :key="skill.id">
+                    <tr v-for="skill in SkillStore.skills" :key="skill.id">
                         <th>
                             <div v-html="skill.svg" class="w-8 overflow-hidden"></div>
                         </th>
-                        <td>{{ skill.title }}</td>
-                        <td class="text-center">{{ skill.category.title }}</td>
-                        <td class="text-center">{{ skill.projects }}</td>
+                        <td class="font-semibold">{{ skill.title }}</td>
+                        <td class="text-center text-xs">
+                            <span class="badge badge-sm badge-outline border-neutral/25 text-center font-semibold pb-px">
+                                {{ skill.category.title }}
+                            </span>
+                        </td>
+                        <td class="text-center">{{ skill._count.projects }}</td>
                         <td>
                             <div class="flex gap-2 justify-center">
                                 <button class="btn btn-neutral">
                                     <LucidePencilLine :size="16" />
                                 </button>
-                                <button class="btn btn-error" @click="showRemoveModal = true; removeData = exp">
+                                <button v-if="skill._count.projects == 0" class="btn btn-error">
                                     <LucideTrash2 :size="16" />
                                 </button>
                             </div>
@@ -65,7 +72,7 @@
 
         <!-- Modal success alert -->
         <AdminModalSuccess :show="showsuccessModal" @close="showsuccessModal = false" />
-        <LazyAdminSkillFormSkill :show="showForm" text_confirm="save" @close="showForm = false" @saved="saved" />
+        <!-- <LazyAdminSkillFormSkill :show="showForm" text_confirm="save" @close="showForm = false" @saved="saved" /> -->
     </div>
 </template>
 
