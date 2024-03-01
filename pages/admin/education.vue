@@ -54,8 +54,8 @@
                 <div class="card-body max-sm:p-4">
                     <div class="flex justify-between">
                         <div>
-                            <div class="font-semibold">Periode: {{ edu.institutionName }}</div>
-                            <td class="text-sm">{{ edu.startYear }} - {{ edu.endYear || 'Present' }}</td>
+                            <div class="font-semibold">{{ edu.institutionName }}</div>
+                            <td class="text-sm">Periode: {{ edu.startYear }} - {{ edu.endYear || 'Present' }}</td>
                         </div>
 
                         <div class="dropdown dropdown-end">
@@ -64,7 +64,7 @@
                             </div>
                             <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
                                 <li>
-                                    <button @click="editData = edu; showForm = true" class="btn btn-sm my-1">
+                                    <button @click="editData = edu; showForm = true" class="btn btn-sm my-1 btn-success">
                                         <LucidePencilLine :size="16" />
                                         Edit
                                     </button>
