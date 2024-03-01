@@ -115,15 +115,25 @@ watchEffect(() => {
 
     // reset form
     formData.value = {
-        company: '',
-        title: '',
-        location: '',
-        description: '',
-        startDate: new Date(),
-        endDate: new Date()
+        company: props.data ? props.data.company : '',
+        title: props.data ? props.data.title : '',
+        location: props.data ? props.data.location : '',
+        description: props.data ? props.data.description : '',
+        startDate: props.data ? new Date(props.data.startDate) : new Date(),
+        endDate: props.data
+            ? props.data.endDate != null ? new Date(props.data.endDate) : new Date()
+            : new Date()
+        // kondisi 1: props.data = null
+        // kondisi 2: props.data.endDate = null
     };
 
-    isPresent.value = props.data ? props.data.endDate == null : false;
+    // set isPresent
+    if (props.data) {
+        // tergantung kondisi endData
+        isPresent.value = props.data.endDate == null;
+    } else {
+        isPresent.value = false;
+    }
 });
 
 // handle present
@@ -149,8 +159,14 @@ const save = async () => {
             formData.value.endDate = null
         }
 
-        // jika tidak ada -> create
-        await ExpStore.create(formData.value);
+        if (props.data) {
+            // jika tidak ada -> create
+            await ExpStore.create(formData.value);
+        } else {
+            // update
+            const id = props.data.id;
+            await ExpStore.update(id, formData.value);
+        }
 
         // hide loading indicator
         isLoading.value = false;

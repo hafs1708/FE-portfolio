@@ -23,13 +23,13 @@ export const useExperienceStore = defineStore('experiences', {
 
             await Api.post('/experience', data);
         },
-        // async update(id, data) {
-        //     const Api = useApiStore();
+        async update(id, data) {
+            const Api = useApiStore();
             
-        //     // validasi 
-        //     data = Validate(isExperience, data);
+            // validasi 
+            data = Validate(isExperience, data);
 
-        //     return await Api.put(`/experience/${id}`, data);
-        // },
+            return await Api.put(`/experience/${id}`, data);
+        }
     }
 });

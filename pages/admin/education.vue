@@ -12,7 +12,7 @@
         <input v-model="filter" type="text" placeholder="Search"
             class="input input-sm input-bordered input-primary w-full max-w-xs" />
 
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto max-lg:hidden">
             <table class="table table-zebra">
                 <!-- head -->
                 <thead>
@@ -46,6 +46,24 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+        <div class="lg:hidden flex flex-col gap-2 sm:gap-4">
+            <div v-for="edu in dataTable" :key="edu.id" class="card bg-base-100 shadow-xl">
+                <div class="card-body max-sm:p-4">
+                    <div class="font-semibold">Periode: {{ edu.institutionName }}</div>
+                    <td class="text-sm">{{ edu.startYear }} - {{ edu.endYear || 'Present' }}</td>
+                    <div class="grid grid-cols-10 gap-3">
+                        <button class="col-span-6 btn btn-neutral flex justify-between">
+                            <div>Major:</div>
+                            <div class="font-normal">{{ edu.major }}</div>
+                        </button>
+                        <button class="col-span-4 btn btn-neutral flex justify-between">
+                            <div>Degree:</div>
+                            <div class="font-normal">{{ edu.degree }}</div>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Modal confirmation -->
