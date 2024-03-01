@@ -47,11 +47,39 @@
                 </tbody>
             </table>
         </div>
+
+        <!-- MOBILE -->
         <div class="lg:hidden flex flex-col gap-2 sm:gap-4">
             <div v-for="edu in dataTable" :key="edu.id" class="card bg-base-100 shadow-xl">
                 <div class="card-body max-sm:p-4">
-                    <div class="font-semibold">Periode: {{ edu.institutionName }}</div>
-                    <td class="text-sm">{{ edu.startYear }} - {{ edu.endYear || 'Present' }}</td>
+                    <div class="flex justify-between">
+                        <div>
+                            <div class="font-semibold">Periode: {{ edu.institutionName }}</div>
+                            <td class="text-sm">{{ edu.startYear }} - {{ edu.endYear || 'Present' }}</td>
+                        </div>
+
+                        <div class="dropdown dropdown-end">
+                            <div tabindex="0" role="button" class="btn m-1">
+                                <LucideMoreVertical :size="16" />
+                            </div>
+                            <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                                <li>
+                                    <button @click="editData = edu; showForm = true" class="btn btn-sm my-1">
+                                        <LucidePencilLine :size="16" />
+                                        Edit
+                                    </button>
+                                </li>
+                                <li>
+                                    <button @click="showRemoveModal = true; removeData = edu"
+                                        class="btn btn-sm btn-error my-1">
+                                        <LucideTrash2 :size="16" />
+                                        Remove
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
                     <div class="grid grid-cols-10 gap-3">
                         <button class="col-span-6 btn btn-neutral flex justify-between">
                             <div>Major:</div>
