@@ -31,7 +31,7 @@
                         <td>{{ exp.company }}</td>
                         <td class="text-center">{{ exp.location }}</td>
                         <td class="text-center">{{ exp.title }}</td>
-                        <td class="text-center">{{ exp.raedStarDate }} - {{ exp.readEndDate }}</td>
+                        <td class="text-center">{{ exp.readStartDate }} - {{ exp.readEndDate }}</td>
                         <td>
                             <div class="flex gap-2 justify-center">
                                 <button @click="editData = exp; showForm = true" class="btn btn-neutral">
@@ -60,7 +60,6 @@
         <!-- FORM MODAL -->
         <AdminExperienceFormExperience :data="editData" :show="showForm" text_confirm="saved" @close="showForm = false"
             @saved="saved" />
-        <!-- coba tes source kode ya neng -->
     </div>
 </template>
 
@@ -124,14 +123,11 @@ const saved = async () => {
     // tutup form
     showForm.value = false;
 
-    // buka form success
-    showsuccessModal.value = true;
-
     // fetch ulang data experience
     await ExpStore.get();
 }
 
 // EDIT
-const editData = ref(false);
+const editData = ref(null);
 
 </script>

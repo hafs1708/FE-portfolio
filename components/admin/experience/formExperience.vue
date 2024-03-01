@@ -36,9 +36,43 @@
             <!-- DESCRIPTION -->
             <label class="form-control w-full max-w-xs">
                 <div class="label label-text">Description</div>
-                <textarea v-model="formData.description" rows="5" class="textarea textarea-primary"
+                <textarea v-model="formData.description" rows="2" class="textarea textarea-primary"
                     placeholder="Description"></textarea>
                 <div class="text-error text-right text-sm" v-if="errors.description">{{ errors.description }}</div>
+            </label>
+
+            <!-- Start Date -->
+            <label class="form-control w-full">
+                <div class="label label-text">Start Date</div>
+
+                <DatePicker v-model="formData.startDate" color="gray">
+                    <template #default="{ togglePopover }">
+                        <button @click="togglePopover" class="btn btn-outline border-neutral/25 font-normal w-40">
+                            {{ dayjs(formData.startDate).format('D MMMM YYYY') }}
+                        </button>
+                    </template>
+                </DatePicker>
+
+                <div class="text-error text-right text-sm" v-if="errors.startDate">{{ errors.startDate }}</div>
+            </label>
+
+            <!-- End Date -->
+            <label class="form-control w-full">
+                <div class="label label-text">End Date</div>
+
+                <div class="flex items-center gap-3">
+                    <DatePicker v-model="formData.endDate" color="gray">
+                        <template #default="{ togglePopover }">
+                            <button @click="togglePopover" class="btn btn-outline border-neutral/25 font-normal w-40"
+                                :disabled="isPresent">
+                                {{ isPresent ? '' : dayjs(formData.endDate).format('D MMMM YYYY') }}
+                            </button>
+                        </template>
+                    </DatePicker>
+                    <input type="checkbox" v-model="isPresent" class="checkbox" @change="handlePresent" /> PRESENT
+                </div>
+
+                <div class="text-error text-right text-sm" v-if="errors.endDate">{{ errors.endDate }}</div>
             </label>
 
             <div class="modal-action">
@@ -57,7 +91,9 @@
 </template>
 
 <script setup>
+import { DatePicker } from 'v-calendar';
 import Joi from "joi";
+import dayjs from 'dayjs';
 const emit = defineEmits(['close', 'saved']);
 
 const props = defineProps({
@@ -72,23 +108,33 @@ const isLoading = ref(false);
 const formData = ref({});
 const fetchError = ref('');
 const errors = ref({});
+const isPresent = ref(false);
 
 watchEffect(() => {
     show_modal.value = props.show;
 
     // reset form
     formData.value = {
-        company: props.data ? props.data.company : '',
-        title: props.data ? props.data.title : '',
-        location: props.data ? props.data.location : '',
-        description: props.data ? props.data.description : ''
+        company: '',
+        title: '',
+        location: '',
+        description: '',
+        startDate: new Date(),
+        endDate: new Date()
     };
+
+    isPresent.value = props.data ? props.data.endDate == null : false;
 });
+
+// handle present
+const handlePresent = (e) => {
+    // ambil value, tercentang atau tidak
+    isPresent.value = e.target.checked;
+}
 
 // handle save 
 const ExpStore = useExperienceStore();
 const save = async () => {
-    console.log(formData.value)
     // reset error 
     errors.value = {};
     fetchError.value = '';
@@ -97,16 +143,14 @@ const save = async () => {
         // show loading indicator
         isLoading.value = true;
 
-        // ubah data endYear jika kosong menjadi null
-        if (!formData.value.endYear) formData.value.endYear = null;
-
-        if (!props.data) {
-            // jika tidak ada -> create
-            await ExpStore.create(formData.value);
-        } else {
-            // jika ada -> update
-            await ExpStore.update(props.data.id, formData.value);
+        // jika isPresent tercentang
+        if (isPresent.value) {
+            // ubah endDate menjadi null
+            formData.value.endDate = null
         }
+
+        // jika tidak ada -> create
+        await ExpStore.create(formData.value);
 
         // hide loading indicator
         isLoading.value = false;
