@@ -9,7 +9,7 @@
 
             <h3 class="font-bold text-lg">CREATE SKILL</h3>
 
-            <div>
+            <!-- <div>
                 Avatar
                 <div class="w-60 aspect-square bg-neutral/30 md:mx-auto rounded-xl">
                     <div v-if="!avatar" class="w-full h-full"></div>
@@ -19,7 +19,7 @@
                     <input @change="handleFile" accept="image/*" type="file"
                         class="file-input file-input-bordered w-full max-w-xs" />
                 </div>
-            </div>
+            </div> -->
             <label class="form-control w-full max-w-xs">
                 <div class="label label-text">Title</div>
                 <input v-model="formData.title" type="text" placeholder="Type Here"
@@ -57,12 +57,12 @@
 <script setup>
 import Joi from "joi";
 
+const emits = defineEmits(['close', 'saved']);
 const props = defineProps({
     show: Boolean,
     text_confirm: String
 });
 
-const emits = defineEmits(['close', 'saved']);
 const show_modal = ref(false);
 const isLoading = ref(false);
 const formData = ref({});

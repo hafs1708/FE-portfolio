@@ -9,19 +9,16 @@
             </button>
         </div>
 
-        <input v-model="filter" type="text" placeholder="Search"
-            class="input input-sm input-bordered input-primary w-full max-w-xs" />
+        <div class="flex gap-3">
+            <input v-model="filter" type="text" placeholder="Search"
+                class="input input-sm input-bordered input-primary w-full max-w-xs" />
 
-        <!-- <div class="flex 0 gap-4">
-            <select name="" id="" class="w-60">
-                <option value="">All Categories</option> -->
-        <!-- draw categories -->
-        <!-- </select>
-            <div class="w-full">
-                <input v-model="filter" type="text" placeholder="Search"
-                    class="grow input input-sm input-bordered w-full" />
-            </div>
-        </div> -->
+            <!-- Category Selector -->
+            <select class="select select-bordered select-sm w-full max-w-xs">
+                <option value="all">All</option>
+                <option v-for="cat in SkillStore.categories" :key="cat.id" :value="cat.id">{{ cat.title }}</option>
+            </select>
+        </div>
 
         <div class="overflow-x-auto">
             <table class="table table-zebra">
@@ -43,7 +40,8 @@
                         </th>
                         <td class="font-semibold">{{ skill.title }}</td>
                         <td class="text-center text-xs">
-                            <span class="badge badge-sm badge-outline border-neutral/25 text-center font-semibold pb-px">
+                            <span
+                                class="badge badge-sm badge-outline border-neutral/25 text-center font-semibold pb-px">
                                 {{ skill.category.title }}
                             </span>
                         </td>
@@ -72,7 +70,9 @@
 
         <!-- Modal success alert -->
         <AdminModalSuccess :show="showsuccessModal" @close="showsuccessModal = false" />
-        <!-- <LazyAdminSkillFormSkill :show="showForm" text_confirm="save" @close="showForm = false" @saved="saved" /> -->
+
+        <!-- SKILL FORM -->
+        <AdminSkillFormSkill :show="showForm" :data="updateData" @close="showForm = false" @saved="saved" />
     </div>
 </template>
 
@@ -83,31 +83,18 @@ definePageMeta({
 });
 
 // REMOVE
-const SkillStore = useSkillStore();
-const removeData = ref(null); // isi dengan data education
-const showRemoveModal = ref(false);
-const showsuccessModal = ref(false);
 const filter = ref('');
-
+const SkillStore = useSkillStore();
 onBeforeMount(async () => {
-    await SkillStore.get();
+    await Promise.all([
+        SkillStore.getCategories(),
+        SkillStore.get()
+    ]);
 });
 
-// const dataTable = computed(() => {
-//     // pastikan huruf lower
-//     const search = filter.value.toLowerCase();
-
-//     if (search != '') {
-//         return SkillStore.skills.filter(skill => {
-//             const company = skill.company.toLowerCase();
-//             return company.includes(search)
-//         });
-//     } else {
-//         // return semua data
-//         return SkillStore.skills;
-//     }
-// });
-
+const removeData = ref(null);
+const showRemoveModal = ref(false);
+const showsuccessModal = ref(false);
 
 const handleRemove = async () => {
     try {
@@ -129,8 +116,9 @@ const handleRemove = async () => {
     }
 }
 
-// CREATE
+// CREATE FORM
 const showForm = ref(false);
+const updateData = ref(null);
 
 // berhasil create eduaction
 const saved = async () => {
