@@ -7,7 +7,7 @@
                 <label class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click="$emit('close')">✕</label>
             </form>
 
-            <h3 class="font-bold text-lg">CREATE SKILL</h3>
+            <h3 class="font-bold text-lg">{{ data ? 'Update ' + data.title : 'Create Skill' }}</h3>
 
             <!-- TITLE -->
             <label class="form-control w-full max-w-xs">
@@ -20,7 +20,7 @@
             <!-- CATEGORY -->
             <label class="form-control w-full max-w-xs gap-2">
                 <div class="label label-text">Category</div>
-                <input v-model="formData.category" type="text" placeholder="Search"
+                <input v-model="formData.category" type="text" placeholder="Category"
                     class="input input-bordered w-full max-w-xs uppercase" />
                 <div class="text-error text-right text-sm" v-if="errors.category">{{ errors.category }}</div>
 
@@ -31,13 +31,6 @@
                     <option v-for="cat in SkillStore.categories" :key="cat.id" :value="cat.title">{{ cat.title }}
                     </option>
                 </select>
-
-                <!-- <div class="flex flex-wrap gap-2 mt-2">
-                    <button v-for="cat in SkillStore.categories" :key="cat" @click="formData.category"
-                        class="btn btn-xs w-min text-nowrap">
-                        {{ cat.title }}
-                    </button>
-                </div> -->
             </label>
 
             <!-- SVG -->
@@ -52,9 +45,10 @@
             </label>
 
             <div class="modal-action">
-                <div class="text-xs text-error" v-if="fetchError">{{ fetchError }}</div>
+                <!-- <div class="text-xs text-error" v-if="fetchError">{{ fetchError }}</div> -->
                 <label @click="$emit('close')" class="btn btn-outline btn-error">Cancel</label>
-                <label @click="handleSave" class="btn btn-primary">{{ text_confirm || 'Create' }}
+                <label @click="handleSave" class="btn btn-primary">
+                    {{ data ? 'Update' : 'Create' }}
                     <span v-show="isLoading" class="loading loading-spinner loading-md"></span>
                 </label>
                 <label class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click="$emit('close')">×</label>
@@ -88,9 +82,9 @@ watchEffect(() => {
 
     // reset form
     formData.value = {
-        title: '',
-        category: '',
-        svg: ''
+        title: props.data ? props.data.title : '',
+        category: props.data ? props.data.category.title : '',
+        svg: props.data ? props.data.svg : ''
     }
 });
 
@@ -105,7 +99,14 @@ const handleSave = async () => {
         // show loading indicator
         isLoading.value = true;
 
-        await SkillStore.create(formData.value);
+        if (!props.data) {
+            // jika tidak ada -> create
+            await SkillStore.create(formData.value);
+        } else {
+            // update
+            const id = props.data.id;
+            await SkillStore.update(id, formData.value);
+        }
 
         // hide loading indicator
         isLoading.value = false;

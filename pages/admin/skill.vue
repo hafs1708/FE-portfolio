@@ -4,7 +4,7 @@
             <div class="flex items-center gap-2">
                 <LucideWrench :size="26" /> S K I L L S
             </div>
-            <button class="btn btn-neutral" @click="showForm = true">
+            <button class="btn btn-neutral" @click="showForm = true; updateData = null">
                 <LucidePlus :size="16" /> Add Skill
             </button>
         </div>
@@ -21,7 +21,7 @@
             </select>
         </div>
 
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto max-lg:hidden">
             <table class="table table-zebra">
                 <!-- head -->
                 <thead>
@@ -49,10 +49,11 @@
                         <td class="text-center">{{ skill._count.projects }}</td>
                         <td>
                             <div class="flex gap-2 justify-center">
-                                <button class="btn btn-neutral">
+                                <button @click="updateData = skill; showForm = true" class="btn btn-neutral">
                                     <LucidePencilLine :size="16" />
                                 </button>
-                                <button v-if="skill._count.projects == 0" class="btn btn-error">
+                                <button v-if="skill._count.projects == 0"
+                                    @click="showRemoveModal = true; removeData = skill" class="btn btn-error">
                                     <LucideTrash2 :size="16" />
                                 </button>
                             </div>
@@ -60,6 +61,52 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+
+        <!-- MOBILE -->
+        <div class="lg:hidden flex flex-col gap-3 sm:gap-4 pt-5">
+            <div v-for="skill in dataTable" :key="skill.id" class="card bg-base-300 shadow-xl">
+                <div class="card-body max-sm:p-4">
+                    <div class="flex justify-between">
+                        <div class="flex gap-4 items-center">
+                            <div v-html="skill.svg" class="w-10 overflow-hidden"></div>
+                            <div>
+                                <td class="font-semibold">{{ skill.title }}</td>
+                                <div class="text-sm">{{ skill.category.title }}</div>
+                            </div>
+                        </div>
+
+                        <div class="dropdown dropdown-end">
+                            <div tabindex="0" role="button" class="btn m-1">
+                                <LucideMoreVertical :size="16" />
+                            </div>
+                            <ul tabindex="0"
+                                class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                                <li>
+                                    <button @click="updateData = skill; showForm = true"
+                                        class="btn btn-sm my-1 btn-success">
+                                        <LucidePencilLine :size="16" />
+                                        Edit
+                                    </button>
+                                </li>
+                                <li>
+                                    <button @click="showRemoveModal = true; removeData = skill"
+                                        class="btn btn-sm btn-error my-1">
+                                        <LucideTrash2 :size="16" />
+                                        Remove
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <button
+                        class="col-span-4 btn btn-neutral flex justify-between bg-base-300 shadow-lg shadow-green-500/50">
+                        <div>Projects:</div>
+                        <div class="font-normal">{{ skill._count.projects }}</div>
+                    </button>
+                </div>
+            </div>
         </div>
 
         <!-- Modal confirmation -->
@@ -73,7 +120,8 @@
         <AdminModalSuccess :show="showsuccessModal" @close="showsuccessModal = false" />
 
         <!-- SKILL FORM -->
-        <AdminSkillFormSkill :show="showForm" :data="updateData" @close="showForm = false" @saved="saved" />
+        <AdminSkillFormSkill :data="updateData" :show="showForm" text_confirm="saved" @close="showForm = false"
+            @saved="saved" />
     </div>
 </template>
 

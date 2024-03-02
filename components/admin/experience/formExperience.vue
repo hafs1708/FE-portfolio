@@ -62,6 +62,7 @@
 
                 <div class="flex items-center gap-3">
                     <DatePicker v-model="formData.endDate" color="gray">
+
                         <template #default="{ togglePopover }">
                             <button @click="togglePopover" class="btn btn-outline border-neutral/25 font-normal w-40"
                                 :disabled="isPresent">
@@ -94,8 +95,8 @@
 import { DatePicker } from 'v-calendar';
 import Joi from "joi";
 import dayjs from 'dayjs';
-const emit = defineEmits(['close', 'saved']);
 
+const emit = defineEmits(['close', 'saved']);
 const props = defineProps({
     data: Object,
     show: Boolean,
@@ -104,7 +105,6 @@ const props = defineProps({
 
 const show_modal = ref(false);
 const isLoading = ref(false);
-
 const formData = ref({});
 const fetchError = ref('');
 const errors = ref({});
