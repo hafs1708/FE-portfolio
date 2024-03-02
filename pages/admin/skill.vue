@@ -14,7 +14,8 @@
                 class="input input-sm input-bordered input-primary w-full max-w-xs" />
 
             <!-- Category Selector -->
-            <select class="select select-bordered select-sm w-full max-w-xs">
+            <select v-model="selectedCategory" @change="filter = ''"
+                class="select select-bordered select-sm w-full max-w-xs">
                 <option value="all">All</option>
                 <option v-for="cat in SkillStore.categories" :key="cat.id" :value="cat.id">{{ cat.title }}</option>
             </select>
@@ -34,7 +35,7 @@
                 </thead>
                 <tbody>
                     <!-- row 1 -->
-                    <tr v-for="skill in SkillStore.skills" :key="skill.id">
+                    <tr v-for="skill in dataTable" :key="skill.id">
                         <th>
                             <div v-html="skill.svg" class="w-8 overflow-hidden"></div>
                         </th>
@@ -83,7 +84,6 @@ definePageMeta({
 });
 
 // REMOVE
-const filter = ref('');
 const SkillStore = useSkillStore();
 onBeforeMount(async () => {
     await Promise.all([
@@ -131,4 +131,37 @@ const saved = async () => {
     // fetch ulang data education
     await EduStore.get();
 }
+
+// FILTER SELECTOR
+const filter = ref('');
+const selectedCategory = ref('all');
+
+const dataTable = computed(() => {
+    // pastikan huruf lower
+    const search = filter.value.toLowerCase();
+    const selectedCatID = selectedCategory.value;
+
+    if (search != '') {
+        return SkillStore.skills.filter(skill => {
+            // pastikan huruf lower
+            const title = skill.title.toLowerCase();
+
+            if (selectedCatID == 'all') {
+                return title.includes(search)
+            } else {
+                return title.includes(search) && skill.skillCategoryId == selectedCatID;
+            }
+        });
+    } else {
+        if (selectedCatID == 'all') {
+            // return semua data
+            return SkillStore.skills;
+        } else {
+            // return berdasarkan category id
+            return SkillStore.skills.filter(skill => {
+                return skill.skillCategoryId == selectedCatID;
+            })
+        }
+    }
+})
 </script>
