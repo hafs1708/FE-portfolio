@@ -49,7 +49,7 @@
         </div>
 
         <!-- MOBILE -->
-        <div class="lg:hidden flex flex-col gap-2 sm:gap-4">
+        <div class="lg:hidden flex flex-col gap-2 sm:gap-4 pt-5">
             <div v-for="edu in dataTable" :key="edu.id" class="card bg-base-100 shadow-xl">
                 <div class="card-body max-sm:p-4">
                     <div class="flex justify-between">
@@ -62,9 +62,11 @@
                             <div tabindex="0" role="button" class="btn m-1">
                                 <LucideMoreVertical :size="16" />
                             </div>
-                            <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                            <ul tabindex="0"
+                                class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
                                 <li>
-                                    <button @click="editData = edu; showForm = true" class="btn btn-sm my-1 btn-success">
+                                    <button @click="editData = edu; showForm = true"
+                                        class="btn btn-sm my-1 btn-success">
                                         <LucidePencilLine :size="16" />
                                         Edit
                                     </button>
@@ -81,11 +83,13 @@
                     </div>
 
                     <div class="grid grid-cols-10 gap-3">
-                        <button class="col-span-6 btn btn-neutral flex justify-between">
+                        <button
+                            class="col-span-6 btn btn-neutral flex justify-between bg-base-300 shadow-lg shadow-green-500/50">
                             <div>Major:</div>
                             <div class="font-normal">{{ edu.major }}</div>
                         </button>
-                        <button class="col-span-4 btn btn-neutral flex justify-between">
+                        <button
+                            class="col-span-4 btn btn-neutral flex justify-between bg-base-300 shadow-lg shadow-green-500/50">
                             <div>Degree:</div>
                             <div class="font-normal">{{ edu.degree }}</div>
                         </button>

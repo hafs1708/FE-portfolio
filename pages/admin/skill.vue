@@ -93,20 +93,20 @@ onBeforeMount(async () => {
     await SkillStore.get();
 });
 
-const dataTable = computed(() => {
-    // pastikan huruf lower
-    const search = filter.value.toLowerCase();
+// const dataTable = computed(() => {
+//     // pastikan huruf lower
+//     const search = filter.value.toLowerCase();
 
-    if (search != '') {
-        return SkillStore.skills.filter(skill => {
-            const company = skill.company.toLowerCase();
-            return company.includes(search)
-        });
-    } else {
-        // return semua data
-        return SkillStore.skills;
-    }
-});
+//     if (search != '') {
+//         return SkillStore.skills.filter(skill => {
+//             const company = skill.company.toLowerCase();
+//             return company.includes(search)
+//         });
+//     } else {
+//         // return semua data
+//         return SkillStore.skills;
+//     }
+// });
 
 
 const handleRemove = async () => {

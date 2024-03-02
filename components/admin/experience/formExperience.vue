@@ -159,7 +159,7 @@ const save = async () => {
             formData.value.endDate = null
         }
 
-        if (props.data) {
+        if (!props.data) {
             // jika tidak ada -> create
             await ExpStore.create(formData.value);
         } else {
