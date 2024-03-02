@@ -9,39 +9,52 @@
 
             <h3 class="font-bold text-lg">CREATE SKILL</h3>
 
-            <!-- <div>
-                Avatar
-                <div class="w-60 aspect-square bg-neutral/30 md:mx-auto rounded-xl">
-                    <div v-if="!avatar" class="w-full h-full"></div>
-                    <img v-else :src="avatar" class="object-cover min-h-full min-w-full">
-                </div>
-                <div class="flex md:justify-center mt-2">
-                    <input @change="handleFile" accept="image/*" type="file"
-                        class="file-input file-input-bordered w-full max-w-xs" />
-                </div>
-            </div> -->
+            <!-- TITLE -->
             <label class="form-control w-full max-w-xs">
                 <div class="label label-text">Title</div>
                 <input v-model="formData.title" type="text" placeholder="Type Here"
                     class="input input-bordered w-full max-w-xs" />
                 <div class="text-error text-right text-sm" v-if="errors.title">{{ errors.title }}</div>
             </label>
-            <label class="form-control w-full max-w-xs">
+
+            <!-- CATEGORY -->
+            <label class="form-control w-full max-w-xs gap-2">
                 <div class="label label-text">Category</div>
-                <input v-model="formData.category" type="text" placeholder="Type Here"
-                    class="input input-bordered w-full max-w-xs" />
+                <input v-model="formData.category" type="text" placeholder="Search"
+                    class="input input-bordered w-full max-w-xs uppercase" />
                 <div class="text-error text-right text-sm" v-if="errors.category">{{ errors.category }}</div>
+
+                <!-- Category Selector -->
+                <label class="mt-2 text-sm">Select Category</label>
+                <select @change="(e) => formData.category = e.target.value"
+                    class="select select-bordered select-sm w-full max-w-xs">
+                    <option v-for="cat in SkillStore.categories" :key="cat.id" :value="cat.title">{{ cat.title }}
+                    </option>
+                </select>
+
+                <!-- <div class="flex flex-wrap gap-2 mt-2">
+                    <button v-for="cat in SkillStore.categories" :key="cat" @click="formData.category"
+                        class="btn btn-xs w-min text-nowrap">
+                        {{ cat.title }}
+                    </button>
+                </div> -->
             </label>
+
+            <!-- SVG -->
             <label class="form-control w-full max-w-xs">
-                <div class="label label-text">Projects</div>
-                <input v-model="formData.projects" type="text" placeholder="Type Here"
-                    class="input input-bordered w-full max-w-xs" />
-                <div class="text-error text-right text-sm" v-if="errors.projects">{{ errors.projects }}</div>
+                <div class="label label-text">SVG</div>
+
+                <div v-html="formData.svg" class="w-20 h-20 bg-neutral/10 rounded-full p-6 mb-2 mx-auto"></div>
+
+                <textarea v-model="formData.svg" rows="2" class="textarea textarea-primary"
+                    placeholder="SVG"></textarea>
+                <div class="text-error text-right text-sm" v-if="errors.svg">{{ errors.svg }}</div>
             </label>
+
             <div class="modal-action">
                 <div class="text-xs text-error" v-if="fetchError">{{ fetchError }}</div>
                 <label @click="$emit('close')" class="btn btn-outline btn-error">Cancel</label>
-                <label @click="save" class="btn btn-primary">{{ text_confirm || 'Create' }}
+                <label @click="handleSave" class="btn btn-primary">{{ text_confirm || 'Create' }}
                     <span v-show="isLoading" class="loading loading-spinner loading-md"></span>
                 </label>
                 <label class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click="$emit('close')">×</label>
@@ -59,6 +72,7 @@ import Joi from "joi";
 
 const emits = defineEmits(['close', 'saved']);
 const props = defineProps({
+    data: Object,
     show: Boolean,
     text_confirm: String
 });
@@ -74,16 +88,15 @@ watchEffect(() => {
 
     // reset form
     formData.value = {
-        svg: '',
         title: '',
         category: '',
-        projects: ''
+        svg: ''
     }
 });
 
 // handle save 
 const SkillStore = useSkillStore();
-const save = async () => {
+const handleSave = async () => {
     // reset error 
     errors.value = {};
     fetchError.value = '';

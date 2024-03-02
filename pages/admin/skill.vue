@@ -83,15 +83,19 @@ definePageMeta({
     middleware: ['auth']
 });
 
-// REMOVE
-const SkillStore = useSkillStore();
-onBeforeMount(async () => {
+const getData = async () => {
     await Promise.all([
         SkillStore.getCategories(),
         SkillStore.get()
     ]);
+}
+
+const SkillStore = useSkillStore();
+onBeforeMount(async () => {
+    await getData();
 });
 
+// REMOVE
 const removeData = ref(null);
 const showRemoveModal = ref(false);
 const showsuccessModal = ref(false);
@@ -125,11 +129,8 @@ const saved = async () => {
     // tutup form
     showForm.value = false;
 
-    // buka form success
-    showsuccessModal.value = true;
-
     // fetch ulang data education
-    await EduStore.get();
+    await getData();
 }
 
 // FILTER SELECTOR
@@ -163,5 +164,5 @@ const dataTable = computed(() => {
             })
         }
     }
-})
+});
 </script>

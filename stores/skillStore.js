@@ -21,5 +21,14 @@ export const useSkillStore = defineStore('skill', {
             
             // RETURN VOID
         },
+        async create(data) {
+            const Api = useApiStore();
+
+            // validasi
+            data = Validate(isSkill, data);
+
+            // fetch create
+            await Api.post('/skill', data);
+        }
     }
 });
