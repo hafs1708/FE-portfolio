@@ -9,12 +9,12 @@
     </div>
 
     <div class="flex justify-between">
-        <input v-model="filter" type="text" placeholder="Search"
+        <input @keyup.enter="page = 1; getData()" v-model="filter" type="text" placeholder="Search"
             class="input input-sm input-bordered input-primary w-full max-w-xs" />
         <!-- Pagination -->
         <div class="join">
             <button class="join-item btn btn-sm" @click="prevPage">«</button>
-            <button class="join-item btn btn-sm">Page {{ page }}</button>
+            <button class="join-item btn btn-sm">Page {{ page }} of {{ BlogStore.maxPage }}</button>
             <button class="join-item btn btn-sm" @click="nextPage">»</button>
         </div>
     </div>
@@ -34,12 +34,16 @@
             </div>
         </div>
     </div>
+    <div v-if="BlogStore.blogs.length == 0" class="flex flex-col items-center my-20">
+        <LucideShieldX :size="100" />
+        <span class="font-ssemibold mt-2">No Data</span>
+    </div>
 
-    <div class="flex justify-end">
+    <div class="flex justify-end pt-5">
         <!-- Pagination -->
         <div class="join">
             <button class="join-item btn btn-sm" @click="prevPage">«</button>
-            <button class="join-item btn btn-sm">Page {{ page }}</button>
+            <button class="join-item btn btn-sm">Page {{ page }} of {{ BlogStore.maxPage }}</button>
             <button class="join-item btn btn-sm" @click="nextPage">»</button>
         </div>
     </div>
@@ -59,9 +63,10 @@ onBeforeMount(async () => {
     await getData();
 });
 
+const filter = ref('');
 const page = ref(1);
 const getData = async () => {
-    await BlogStore.get(page.value);
+    await BlogStore.get(page.value, filter.value);
 };
 
 const prevPage = async () => {
@@ -83,10 +88,4 @@ const nextPage = async () => {
         await getData();
     }
 }
-
-watchEffect(() => {
-    console.log(page.value)
-})
-
-
 </script>
