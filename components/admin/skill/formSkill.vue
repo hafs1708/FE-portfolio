@@ -18,6 +18,7 @@
             </label>
 
             <!-- CATEGORY -->
+
             <label class="form-control w-full max-w-xs">
                 <div class="label label-text">Category</div>
                 <input v-model="formData.category" type="text" placeholder="category"
