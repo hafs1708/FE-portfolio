@@ -18,19 +18,26 @@
             </label>
 
             <!-- CATEGORY -->
-            <label class="form-control w-full max-w-xs gap-2">
+            <label class="form-control w-full max-w-xs">
                 <div class="label label-text">Category</div>
-                <input v-model="formData.category" type="text" placeholder="Category"
-                    class="input input-bordered w-full max-w-xs uppercase" />
-                <div class="text-error text-right text-sm" v-if="errors.category">{{ errors.category }}</div>
+                <input v-model="formData.category" type="text" placeholder="category"
+                    class="input input-bordered w-full max-w-xs" />
+                <div class="text-error text-right text-sm" v-if="errors.category">{{ errors.category
+                    }}
+                </div>
 
-                <!-- Category Selector -->
+                <!-- CATEGORY SELECTOR -->
                 <label class="mt-2 text-sm">Select Category</label>
-                <select @change="(e) => formData.category = e.target.value"
-                    class="select select-bordered select-sm w-full max-w-xs">
-                    <option v-for="cat in SkillStore.categories" :key="cat.id" :value="cat.title">{{ cat.title }}
-                    </option>
-                </select>
+                <!-- <select @change="(e) => formData.category = e.target.value"
+                        class="select select-sm select-bordered w-full max-w-xs">
+                        <option v-for="cat in SkillStore.categories" :key="cat.id" :value="cat.id">{{ cat.title }}</option>
+                    </select> -->
+
+                <div class="flex flex-wrap gap-2 mt-2">
+                    <button v-for="cat in SkillStore.categories" :key="cat.id" @click="formData.category = cat.title"
+                        class="btn btn-sm w-min text-nowrap">{{ cat.title }}
+                    </button>
+                </div>
             </label>
 
             <!-- SVG -->
