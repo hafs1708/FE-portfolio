@@ -14,6 +14,46 @@
             <div class="text-error text-right text-sm" v-if="errors.title">{{ errors.title }}</div>
         </label>
 
+        <!-- PHOTOS -->
+        <div class="my-4">
+            <div class="label label-text pb-0">Photos</div>
+
+            <div class="overflow-auto">
+                <!-- loop photo preview -->
+                <div class="flex flex-nowrap overflow-x-auto gap-2">
+                    <div v-for="(photo, i) in photoPreviews" :key="(photo, i)"
+                        class="min-w-60 max-w-60 aspect-video rounded-lg overflow-hidden bg-neutral/10 flex justify-center items-center relative">
+                        <img :src="photo" class="max-h-full max-w-full">
+
+                        <!-- action button -->
+                        <div class="dropdown dropdown-end absolute right-0 top-0">
+                            <div tabindex="0" role="button"
+                                class="btn btn-sm px-1 m-1 btn-opacity-70 rounded-md border-0">
+                                <LucideMoreVertical :size="16" />
+                            </div>
+                            <ul tabindex="0"
+                                class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                                <li>
+                                    <button @click="photoPreviews.splice(index, 1)" class="btn btn-sm btn-error my-1">
+                                        <LucideTrash2 :size="16" />
+                                        Remove
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- dummy -->
+                    <div v-if="!photoPreviews.length" class="h-32 lg:h-40 aspect-video rounded bg-neutral/20"></div>
+                </div>
+            </div>
+
+            <div class="pt-5">
+                <input @change="handleFile" type="file" multiple accept="image/*" :disabled="photoPreviews.length >= 10"
+                    class="file-input file-input-bordered w-full max-w-xs" />
+            </div>
+        </div>
+
         <!-- CONTENT -->
         <label class="form-control w-full max-w-xs">
             <div class="label label-text">Content</div>
@@ -22,8 +62,9 @@
             <div class="text-error text-right text-sm" v-if="errors.content">{{ errors.content }}</div>
         </label>
 
+
         <div class="flex justify-end gap-2 my-4">
-            <NuxltLink to="/admin/blogs" class="btn">Cancel</NuxltLink>
+            <NuxtLink to="/admin/blogs" class="btn">Cancel</NuxtLink>
             <button class="btn btn-neutral">Save</button>
         </div>
     </div>
@@ -45,4 +86,22 @@ const formData = ref({
     content: ''
 });
 
+const photoPreviews = ref([]);
+const handleFile = (e) => {
+    for (const file of e.target.files) {
+
+        // convert file to data url
+        // data yang bisa dibaca di tag <img src= />
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+            if (photoPreviews.value.length < 10) {
+                photoPreviews.value.push(reader.result);
+            }
+        }
+    }
+
+    // reset input file selected
+    e.target.value = ''
+}
 </script>

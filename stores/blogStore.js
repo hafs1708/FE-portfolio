@@ -21,6 +21,17 @@ export const useBlogStore = defineStore('blog', {
             const Api = useApiStore();
 
             await Api.delete('/blog/' + id)
+        },
+        async update(avatar) {
+            const Api = useApiStore();
+            const formData = new FormData();
+
+            if (avatar) {
+                // append avatar jika is null
+                formData.append('avatar', avatar)
+            }
+
+            this.blogs = await Api.put('/blog', formData);
         }
     }
 });
