@@ -19,8 +19,28 @@
         </div>
     </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 pt-5">
+    <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 pt-5">
         <div v-for="blog in BlogStore.blogs" :key="blog.id" class="card card-compact bg-base-100 shadow-xl">
+            <div class="xl:hidden dropdown dropdown-end absolute right-0 top-0">
+                <div tabindex="0" role="button" class="btn btn-sm px-1 m-1 btn-opacity-70 rounded-md border-0">
+                    <LucideMoreVertical :size="16" />
+                </div>
+                <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                    <li>
+                        <button class="btn btn-sm my-1 btn-success">
+                            <LucidePencilLine :size="16" />
+                            Edit
+                        </button>
+                    </li>
+                    <li>
+                        <button class="btn btn-sm btn-error my-1">
+                            <LucideTrash2 :size="16" />
+                            Remove
+                        </button>
+                    </li>
+                </ul>
+            </div>
+
             <figure>
                 <!-- kalau ada foto minimal 1 -->
                 <img v-if="blog.photos.length" :src="apiUri + blog.photos[0].path" />
@@ -31,12 +51,23 @@
             <div class="card-body">
                 <h2 class="card-title">{{ blog.title }}</h2>
                 <p class="line-clamp-2 xl:line-clamp-3">{{ blog.content }}</p>
+
+                <div class="max-lg:hidden flex gap-2 justify-end">
+                    <button class="btn btn-xs xl:btn-sm my-1 btn-success">
+                        <LucidePencilLine :size="16" />
+                        Edit
+                    </button>
+                    <button class="btn btn-xs xl:btn-sm btn-error my-1">
+                        <LucideTrash2 :size="16" />
+                        Remove
+                    </button>
+                </div>
             </div>
         </div>
     </div>
     <div v-if="BlogStore.blogs.length == 0" class="flex flex-col items-center my-20">
         <LucideShieldX :size="100" />
-        <span class="font-ssemibold mt-2">No Data</span>
+        <span class="font-semibold mt-2">No Data</span>
     </div>
 
     <div class="flex max-sm:flex-col max-sm:items-center sm:justify-between gap-2 pt-5">
