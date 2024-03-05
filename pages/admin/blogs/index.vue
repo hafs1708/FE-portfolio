@@ -8,9 +8,9 @@
         </button>
     </div>
 
-    <div class="flex justify-between">
+    <div class="flex max-sm:flex-col max-sm:items-center sm:justify-between gap-2">
         <input @keyup.enter="page = 1; getData()" v-model="filter" type="text" placeholder="Search"
-            class="input input-sm input-bordered input-primary w-full max-w-xs" />
+            class="input input-sm input-bordered input-primary w-full sm:max-w-xs" />
         <!-- Pagination -->
         <div class="join">
             <button class="join-item btn btn-sm" @click="prevPage">«</button>
@@ -39,7 +39,7 @@
         <span class="font-ssemibold mt-2">No Data</span>
     </div>
 
-    <div class="flex justify-end pt-5">
+    <div class="flex max-sm:flex-col max-sm:items-center sm:justify-between gap-2 pt-5">
         <!-- Pagination -->
         <div class="join">
             <button class="join-item btn btn-sm" @click="prevPage">«</button>
