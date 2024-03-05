@@ -20,7 +20,7 @@ export const useBlogStore = defineStore('blog', {
         async remove(id) {
             const Api = useApiStore();
 
-            await Api.delete('/blog' + id)
+            await Api.delete('/blog/' + id)
         }
     }
 });

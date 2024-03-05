@@ -3,9 +3,9 @@
         <div class="flex items-center gap-2">
             <LucideGraduationCap :size="26" /> B L O G S
         </div>
-        <button class="btn btn-neutral">
+        <NuxtLink to="/admin/blogs/new" class="btn btn-neutral">
             <LucidePlus :size="16" /> Add Blogs
-        </button>
+        </NuxtLink>
     </div>
 
     <div class="flex max-sm:flex-col max-sm:items-center sm:justify-between gap-2">
@@ -33,7 +33,7 @@
                         </button>
                     </li>
                     <li>
-                        <button @click="removeData = blog; showRemoveModal = true" class="btn btn-sm btn-error my-1">
+                        <button @click="removeData = blog; showRemoveModal = true;" class="btn btn-sm btn-error my-1">
                             <LucideTrash2 :size="16" />
                             Remove
                         </button>
@@ -57,7 +57,7 @@
                         <LucidePencilLine :size="16" />
                         Edit
                     </button>
-                    <button @click="removeData = blog; showRemoveModal = true"
+                    <button @click="removeData = blog; showRemoveModal = true;"
                         class="btn btn-xs xl:btn-sm btn-error my-1">
                         <LucideTrash2 :size="16" />
                         Remove
@@ -84,7 +84,7 @@
     <AdminModalConfirm :show="showRemoveModal" text_confirm="remove" @close="showRemoveModal = false"
         @saved="handleRemove">
         Are you sure to remove ?
-        <div v-if="removeData" class="font-bold">{{ removeData.institutionName }}</div>
+        <div v-if="removeData" class="font-bold">{{ removeData.title }}</div>
     </AdminModalConfirm>
 
     <!-- Modal success alert -->
@@ -93,7 +93,7 @@
 
 <script setup>
 definePageMeta({
-    layout: 'ad(min',
+    layout: 'admin',
     middleware: ['auth']
 });
 
@@ -141,7 +141,7 @@ const handleRemove = async () => {
 
     try {
         // process delete
-        await BlogStore.delete(removeData.value.id);
+        await BlogStore.remove(removeData.value.id);
 
         // success modal
         showsuccessModal.value = true;
