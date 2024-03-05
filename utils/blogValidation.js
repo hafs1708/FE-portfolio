@@ -1,14 +1,6 @@
 import Joi from "joi";
 
-export const isBlogTitle = Joi.string().trim().min(3).max(255).required().label("Title");
-
-const isBlog = Joi.object({
-    title: isBlogTitle,
+export const isCreateBlog = Joi.object({
+    title: Joi.string().trim().min(3).max(255).required().label("Title"),
     content: Joi.string().trim().min(3).required().label("Content"),
-    photos: Joi.array().items(Joi.number()) // kumpulan id (1, 2, 3)
 });
-
-export {
-    isBlog,
-    isBlogTitle
-}

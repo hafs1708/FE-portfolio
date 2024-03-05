@@ -17,21 +17,27 @@ export const useBlogStore = defineStore('blog', {
             const Api = useApiStore();
             this.data = await Api.get(`/blogs?limit=12&page=${page}&search=${search}`);
         },
+        async create(data, photos) {
+            const Api = useApiStore();
+
+            data = Validate(isCreateBlog, data);
+
+            // buat FORM DATA
+            const formData = new formData();
+            formData.append("title", data.title);
+            formData.append("content", data.content);
+
+            // append foto dengan loop
+            for(const photo of photos) {
+                formData.append('photos', photos)
+            }
+
+            await Api.post('/blog/', formData);
+        },
         async remove(id) {
             const Api = useApiStore();
 
             await Api.delete('/blog/' + id)
         },
-        async update(avatar) {
-            const Api = useApiStore();
-            const formData = new FormData();
-
-            if (avatar) {
-                // append avatar jika is null
-                formData.append('avatar', avatar)
-            }
-
-            this.blogs = await Api.put('/blog', formData);
-        }
     }
 });

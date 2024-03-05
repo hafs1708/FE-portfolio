@@ -34,7 +34,8 @@
                             <ul tabindex="0"
                                 class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
                                 <li>
-                                    <button @click="photoPreviews.splice(index, 1)" class="btn btn-sm btn-error my-1">
+                                    <button @click="photoPreviews.splice(index, 1); file_photos.splice(index, 1)"
+                                        class="btn btn-sm btn-error my-1">
                                         <LucideTrash2 :size="16" />
                                         Remove
                                     </button>
@@ -57,20 +58,27 @@
         <!-- CONTENT -->
         <label class="form-control w-full max-w-xs">
             <div class="label label-text">Content</div>
-            <textarea v-modal="formData.content" rows="10" class="textarea textarea-bordered"
+            <textarea v-model="formData.content" rows="10" class="textarea textarea-bordered"
                 placeholder="Content"></textarea>
             <div class="text-error text-right text-sm" v-if="errors.content">{{ errors.content }}</div>
         </label>
 
-
         <div class="flex justify-end gap-2 my-4">
             <NuxtLink to="/admin/blogs" class="btn">Cancel</NuxtLink>
-            <button class="btn btn-neutral">Save</button>
+            <button @click="showCreateConfirmation = true" class="btn btn-neutral">Save</button>
         </div>
     </div>
+
+    <!-- Modal confirmation -->
+    <AdminModalConfirm :show="showCreateConfirmation" text_confirm="save" @close="showCreateConfirmation = false"
+        @saved="handleSave" class="btn btn-neutral">
+        Are you sure to save this new blog ?
+    </AdminModalConfirm>
 </template>
 
 <script setup>
+import Joi from 'joi';
+
 definePageMeta({
     layout: 'admin',
     middleware: ['auth']
@@ -86,7 +94,9 @@ const formData = ref({
     content: ''
 });
 
+// PHOTO PREVIEW
 const photoPreviews = ref([]);
+const file_photos = [];
 const handleFile = (e) => {
     for (const file of e.target.files) {
 
@@ -96,6 +106,10 @@ const handleFile = (e) => {
         reader.readAsDataURL(file);
         reader.onload = () => {
             if (photoPreviews.value.length < 10) {
+                // tampung photo
+                file_photos.push(file);
+
+                // tampung preview
                 photoPreviews.value.push(reader.result);
             }
         }
@@ -103,5 +117,43 @@ const handleFile = (e) => {
 
     // reset input file selected
     e.target.value = ''
+}
+
+// HANDLE SAVE
+const BlogStore = useBlogStore();
+const showCreateConfirmation = ref(false);
+const fetchError = ref('');
+const isLoading = ref(false);
+const handleSave = async () => {
+    // reset error
+    errors.value = {};
+    fetchError.value = '';
+
+    // hide confirmation
+    showCreateConfirmation.value = false;
+
+    try {
+        isLoading.value = true;
+        await BlogStore.create(formData.value, file_photos)
+
+        navigateTo('/admin/blogs');
+    } catch (error) {
+        isLoading.value = false;
+        // reset loading indicator
+        // isLoading.value = false
+
+        if (error instanceof Joi.ValidationError) {
+            // joi error
+            errors.value = joiError(error);
+        } else {
+            if (error.data) {
+                // fetch error
+                fetchError.value = error.data.message;
+            } else {
+                // code error
+                console.log(error);
+            }
+        }
+    }
 }
 </script>
