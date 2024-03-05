@@ -23,13 +23,13 @@ export const useBlogStore = defineStore('blog', {
             data = Validate(isCreateBlog, data);
 
             // buat FORM DATA
-            const formData = new formData();
+            const formData = new FormData();
             formData.append("title", data.title);
             formData.append("content", data.content);
 
             // append foto dengan loop
             for(const photo of photos) {
-                formData.append('photos', photos)
+                formData.append('photos', photo)
             }
 
             await Api.post('/blog/', formData);

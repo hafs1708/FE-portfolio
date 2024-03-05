@@ -71,7 +71,7 @@
 
     <!-- Modal confirmation -->
     <AdminModalConfirm :show="showCreateConfirmation" text_confirm="save" @close="showCreateConfirmation = false"
-        @saved="handleSave" class="btn btn-neutral">
+        @saved="handleSave">
         Are you sure to save this new blog ?
     </AdminModalConfirm>
 </template>
