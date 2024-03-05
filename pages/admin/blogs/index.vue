@@ -33,7 +33,7 @@
                         </button>
                     </li>
                     <li>
-                        <button class="btn btn-sm btn-error my-1">
+                        <button @click="removeData = blog; showRemoveModal = true" class="btn btn-sm btn-error my-1">
                             <LucideTrash2 :size="16" />
                             Remove
                         </button>
@@ -57,7 +57,8 @@
                         <LucidePencilLine :size="16" />
                         Edit
                     </button>
-                    <button class="btn btn-xs xl:btn-sm btn-error my-1">
+                    <button @click="removeData = blog; showRemoveModal = true"
+                        class="btn btn-xs xl:btn-sm btn-error my-1">
                         <LucideTrash2 :size="16" />
                         Remove
                     </button>
@@ -78,11 +79,21 @@
             <button class="join-item btn btn-sm" @click="nextPage">»</button>
         </div>
     </div>
+
+    <!-- Modal confirmation -->
+    <AdminModalConfirm :show="showRemoveModal" text_confirm="remove" @close="showRemoveModal = false"
+        @saved="handleRemove">
+        Are you sure to remove ?
+        <div v-if="removeData" class="font-bold">{{ removeData.institutionName }}</div>
+    </AdminModalConfirm>
+
+    <!-- Modal success alert -->
+    <AdminModalSuccess :show="showsuccessModal" @close="showsuccessModal = false" />
 </template>
 
 <script setup>
 definePageMeta({
-    layout: 'admin',
+    layout: 'ad(min',
     middleware: ['auth']
 });
 
@@ -117,6 +128,31 @@ const nextPage = async () => {
 
         // fetch ulang
         await getData();
+    }
+}
+
+// REMOVE
+const removeData = ref(null);
+const showRemoveModal = ref(false);
+const showsuccessModal = ref(false);
+const handleRemove = async () => {
+    // prevent remove if no data
+    if (!removeData.value) return;
+
+    try {
+        // process delete
+        await BlogStore.delete(removeData.value.id);
+
+        // success modal
+        showsuccessModal.value = true;
+
+        // hide modal
+        showRemoveModal.value = false;
+
+        // refresh data
+        await getData();
+    } catch (error) {
+        console.log(error);
     }
 }
 </script>
