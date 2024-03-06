@@ -38,12 +38,34 @@ export const useBlogStore = defineStore('blog', {
 
             await Api.post('/blog/', formData);
         },
-        // async update(id, data) {
-        //     const Api = useApiStore();
+        async update(data, new_photos) {
+            const Api = useApiStore();
             
-        //     // validasi
-        //     data = Validate()
-        // },
+            // validasi
+            data = Validate(isUpdateBlog, data);
+
+            console.log('data setelah validasi')
+            console.log(data);
+
+            // buat FORM DATA
+            const formData = new FormData();
+            formData.append("title", data.title);
+            formData.append("content", data.content);
+
+            // append photo lama by looping
+            for (let i = 0; i < data.photos.length; i++) {
+                const id = data.photos[i];
+                
+                formData.append(`photos[${i}]`, id)
+            }
+
+            // append foto baru
+            for ( const photo of new_photos) {
+                formData.append('photos', photos);
+            }
+
+            await Api.put(`/blog/${id}`, formData)
+        },
         async remove(id) {
             const Api = useApiStore();
 

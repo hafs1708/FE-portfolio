@@ -1,8 +1,8 @@
 <template>
-    <div>
+    <div v-if="data">
         <div class="font-semibold mb-6 pb-2 border-b border-b-neutral flex items-center justify-between">
             <div class="flex items-center gap-2">
-                <LucideGraduationCap :size="26" /> C R E A T E _ B L O G
+                <LucideGraduationCap :size="26" /> U P D A T E _ B L O G: " {{ data.title }}"
             </div>
         </div>
 
@@ -23,7 +23,7 @@
                 <div class="flex flex-nowrap overflow-x-auto gap-2">
                     <div v-for="(photo, i) in photoPreviews" :key="(photo, i)"
                         class="min-w-60 max-w-60 aspect-video rounded-lg overflow-hidden bg-neutral/10 flex justify-center items-center relative">
-                        <img :src="photo" class="max-h-full max-w-full">
+                        <img :src="photo.path" class="max-h-full max-w-full">
 
                         <!-- action button -->
                         <div class="dropdown dropdown-end absolute right-0 top-0">
@@ -87,7 +87,12 @@ definePageMeta({
 const BlogStore = useBlogStore();
 const route = useRoute();
 const { id } = route.query;
-const data = await BlogStore.getById(id)
+
+const config = useRuntimeConfig();
+const apiUri = config.public.apiUri;
+
+const fetch_data = await BlogStore.getById(id);
+const data = ref(fetch_data);
 console.log(data)
 
 const errors = ref({
@@ -96,12 +101,30 @@ const errors = ref({
 });
 
 const formData = ref({
-    title: '',
-    content: ''
+    title: data.value ? data.value.title : '',
+    content: data.value ? data.value.content : ''
 });
 
-// PHOTO PREVIEW
-const photoPreviews = ref([]);
+// map photo
+const current_photos = data.value.photos.map(photo => {
+    return apiUri + photo.path
+});
+console.log(current_photos);
+
+// // PHOTO PREVIEW
+// [
+//     {
+//         path: 'http://localhost/upload/photo/asjdkfjdfji.jpg',
+//         id: 10,
+//         // data foto lama
+//     },
+//     {
+//         // foto baru
+//         path: 'data:image/png;anfufjudjf.............'
+//     }
+// ]
+
+const photoPreviews = ref(current_photos);
 const file_photos = [];
 const handleFile = (e) => {
     for (const file of e.target.files) {
@@ -116,14 +139,17 @@ const handleFile = (e) => {
                 file_photos.push(file);
 
                 // tampung preview
-                photoPreviews.value.push(reader.result);
+                photoPreviews.value.push({
+                    path: reader.result,
+                    // tanpa id karena foto baru
+                })
             }
         }
     }
 
     // reset input file selected
     e.target.value = ''
-}
+};
 
 // HANDLE SAVE
 const showCreateConfirmation = ref(false);
@@ -138,10 +164,21 @@ const handleSave = async () => {
     showCreateConfirmation.value = false;
 
     try {
-        // isLoading.value = true;
-        // await BlogStore.create(formData.value, file_photos)
+        isLoading.value = true;
+        const dataUpdate = { ...formData.value };
 
-        // navigateTo('/admin/blogs');
+        // tambahin foto lama
+        dataUpdate.photos = [];
+        for (const p of photoPreviews.value) {
+            if (p.id != undefined) {
+                dataUpdate.photos.path(p.id);
+            }
+        }
+
+        // do fetch update
+        await BlogStore.update(data.value.id, dataUpdate, file_photos)
+
+        navigateTo('/admin/blogs');
     } catch (error) {
         isLoading.value = false;
         // reset loading indicator
