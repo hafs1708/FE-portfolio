@@ -27,10 +27,10 @@
                 </div>
                 <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
                     <li>
-                        <button class="btn btn-sm my-1 btn-success">
+                        <NuxtLink :to="`/admin/blogs/update?id=${blog.id}`" class="btn btn-sm my-1 btn-success">
                             <LucidePencilLine :size="16" />
                             Edit
-                        </button>
+                        </NuxtLink>
                     </li>
                     <li>
                         <button @click="removeData = blog; showRemoveModal = true;" class="btn btn-sm btn-error my-1">
@@ -53,10 +53,10 @@
                 <p class="line-clamp-2 xl:line-clamp-3">{{ blog.content }}</p>
 
                 <div class="max-lg:hidden flex gap-2 justify-end">
-                    <button class="btn btn-xs xl:btn-sm my-1 btn-success">
+                    <NuxtLink :to="`/admin/blogs/update?id=${blog.id}`" class="btn btn-xs xl:btn-sm my-1 btn-success">
                         <LucidePencilLine :size="16" />
                         Edit
-                    </button>
+                    </NuxtLink>
                     <button @click="removeData = blog; showRemoveModal = true;"
                         class="btn btn-xs xl:btn-sm btn-error my-1">
                         <LucideTrash2 :size="16" />
@@ -155,4 +155,19 @@ const handleRemove = async () => {
         console.log(error);
     }
 }
+
+// // CREATE
+// const showForm = ref(false);
+
+// // berhasil create blog
+// const saved = async () => {
+//     // tutup form
+//     showForm.value = false;
+
+//     // fetch ulang data blog
+//     await BlogStore.get();
+// }
+
+// EDIT
+// const editData = ref(null);
 </script>
