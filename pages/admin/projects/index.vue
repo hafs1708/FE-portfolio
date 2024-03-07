@@ -3,9 +3,9 @@
         <div class="flex items-center gap-2">
             <LucideBriefcase :size="26" /> P R O J E C T S
         </div>
-        <!-- <NuxtLink to="/" class="btn btn-neutral">
+        <NuxtLink to="/admin/projects/new" class="btn btn-neutral">
             <LucidePlus :size="16" /> Add Projects
-        </NuxtLink> -->
+        </NuxtLink>
     </div>
 
     <div class="flex max-sm:flex-col max-sm:items-center sm:justify-between gap-2">
