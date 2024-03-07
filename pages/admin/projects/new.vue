@@ -124,8 +124,25 @@
         </label>
     </div>
 
+    <!-- photos -->
+
+    <div class="flex justify-end gap-2 my-4">
+        <NuxtLink to="/admin/projects" class="btn">Cancel</NuxtLink>
+        <button @click="showCreateConfirmation = true" class="btn btn-neutral">
+            Save
+            <ImagesLoading v-show="isLoading" class="w-10" />
+        </button>
+    </div>
+
+    <!-- skill selector -->
     <AdminProjectSkillSelector :show="showSkillSelector" @close="showSkillSelector = false" :selected="selectedSkill"
         @addSkill="addSkill" />
+
+    <!-- Modal confirmation -->
+    <AdminModalConfirm :show="showCreateConfirmation" text_confirm="save" @close="showCreateConfirmation = false"
+        @saved="handleSave">
+        Are you sure to save this new Project ?
+    </AdminModalConfirm>
 </template>
 
 
@@ -175,6 +192,53 @@ const addSkill = (skill) => {
         selectedSkill.value.push(skill);
     } else {
         selectedSkill.value.splice(index, 1);
+    }
+}
+
+// handle save
+const fetchError = ref({});
+const showCreateConfirmation = ref(false);
+const isLoading = ref(false);
+const ProjectStore = useProjectStore();
+
+const handleSave = () => {
+    // reset error
+    errors.value = {};
+    fetchError.value = '';
+
+    // hide confirmation
+    showCreateConfirmation.value = false;
+
+    try {
+        isLoading.value = true;
+        const dataSave = { ...formData.value };
+
+        // endDate jika null jadikan ''
+        // if (!dataSave.endDate) dataSave.endDate;
+
+        // skill => array of id
+        const skill_id = selectedSkill.value.map(s => s.id);
+
+        ProjectStore.create(dataSave, skill_id);
+
+        navigateTo('/admin/projects');
+    } catch (error) {
+        isLoading.value = false;
+        // reset loading indicator
+        // isLoading.value = false
+
+        if (error instanceof Joi.ValidationError) {
+            // joi error
+            errors.value = joiError(error);
+        } else {
+            if (error.data) {
+                // fetch error
+                fetchError.value = error.data.message;
+            } else {
+                // code error
+                console.log(error);
+            }
+        }
     }
 
 }
