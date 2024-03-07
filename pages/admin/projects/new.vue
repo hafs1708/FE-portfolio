@@ -98,6 +98,23 @@
             </label>
         </div>
 
+        <!-- SKILL -->
+        <div class="flex gap-2 items-center my-2">
+            <div class="label label-text">Skills</div>
+            <button class="btn btn-xs btn-neutral" @click="showSkillSelector = true">
+                <LucidePlus :size="10" /> Add Skill
+            </button>
+        </div>
+        <div class="card min-h-20 w-full bg-neutral/10 p-4">
+
+            <div class="flex flex-wrap gap-2">
+                <button v-for="skill in selectedSkill" :key="skill.id" class="btn btn-neutral btn-sm w-max">
+                    <div v-html="skill.svg" class="w-6 h-6"></div>
+                    {{ skill.title }}
+                </button>
+            </div>
+        </div>
+
         <!-- DESCRIPTION -->
         <label class="form-control w-full">
             <div class="label label-text">Description</div>
@@ -105,8 +122,10 @@
                 class="textarea textarea-bordered h-52"></textarea>
             <div class="text-error text-right text-sm" v-if="errors.description">{{ errors.description }}</div>
         </label>
-
     </div>
+
+    <AdminProjectSkillSelector :show="showSkillSelector" @close="showSkillSelector = false" :selected="selectedSkill"
+        @addSkill="addSkill" />
 </template>
 
 
@@ -118,6 +137,11 @@ definePageMeta({
     layout: 'admin',
     middleware: ['auth']
 });
+
+const SkillStore = useSkillStore();
+onBeforeMount(async () => {
+    await SkillStore.getSkillsByCategory();
+})
 
 const formData = ref({
     title: '',
@@ -137,5 +161,21 @@ const isPresent = ref(true);
 const handlePresent = (e) => {
     const checked = e.target.checked;
     formData.value.endDate = checked ? null : new Date()
+};
+
+const showSkillSelector = ref(false);
+const selectedSkill = ref([]);
+const addSkill = (skill) => {
+    const index = selectedSkill.value.findIndex(s => {
+        return s.id == skill.id;
+    });
+
+    if (index == -1) {
+        // tambahkan
+        selectedSkill.value.push(skill);
+    } else {
+        selectedSkill.value.splice(index, 1);
+    }
+
 }
 </script>
