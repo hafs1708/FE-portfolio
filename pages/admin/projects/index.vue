@@ -21,34 +21,48 @@
 
     <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 pt-5">
         <div v-for="project in ProjectStore.projects" :key="project.id" class="card card-compact bg-base-100 shadow-xl">
-            <div class="xl:hidden dropdown dropdown-end absolute right-0 top-0">
-                <div tabindex="0" role="button" class="btn btn-sm px-1 m-1 btn-opacity-70 rounded-md border-0">
-                    <LucideMoreVertical :size="16" />
+            <div class="card w-96 bg-base-100 shadow-xl">
+                <div class="xl:hidden dropdown dropdown-end absolute right-0 top-0">
+                    <div tabindex="0" role="button" class="btn btn-sm px-1 m-1 btn-opacity-70 rounded-md border-0">
+                        <LucideMoreVertical :size="16" />
+                    </div>
+                    <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                        <li>
+                            <!-- <NuxtLink :to="`/admin/projects/update?id=${project.id}`" class="btn btn-sm my-1 btn-success">
+                                <LucidePencilLine :size="16" />
+                                Edit
+                            </NuxtLink> -->
+                        </li>
+                        <li>
+                            <button @click="removeData = project; showRemoveModal = true;"
+                                class="btn btn-sm btn-error my-1">
+                                <LucideTrash2 :size="16" />
+                                Remove
+                            </button>
+                        </li>
+                    </ul>
                 </div>
-                <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                    <li>
-                        <!-- <NuxtLink :to="`/admin/projects/update?id=${project.id}`" class="btn btn-sm my-1 btn-success">
-                            <LucidePencilLine :size="16" />
-                            Edit
-                        </NuxtLink> -->
-                    </li>
-                    <li>
-                        <button @click="removeData = project; showRemoveModal = true;"
-                            class="btn btn-sm btn-error my-1">
-                            <LucideTrash2 :size="16" />
-                            Remove
-                        </button>
-                    </li>
-                </ul>
             </div>
 
-            <figure>
+            <div class="card-body flex-none !pb-1">
+                <h2 class="card-title max-md:text-sm">{{ project.title }}</h2>
+                <div class="flex max-sm:flex-col gap-1 justify-between">
+                    <p class="text-xs">{{ project.readStartDate }} - {{ project.readEndDate }}</p>
+                    <p class="text-xs font-semibold">{{ project.status }}</p>
+                </div>
+            </div>
+
+            <figure class="relative">
                 <img v-if="project.photos.length" :src="apiUri + project.photos[0].path" />
 
                 <div v-else class="bg-neutral/20 aspect-video w-full"></div>
+
+                <div class="absolute badge left-1 bottom-1" v-if="project.skills.length">
+                    {{ project.skills.length }} Skills
+                </div>
             </figure>
             <div class="card-body">
-                <h2 class="card-title">{{ project.title }}</h2>
+                <h2 class="text-md font-semibold" v-if="project.company">{{ project.company }}</h2>
                 <p class="line-clamp-2">{{ project.description }}</p>
 
                 <div class="max-lg:hidden flex gap-2 justify-end">
