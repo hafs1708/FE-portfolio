@@ -20,11 +20,11 @@ const menus = [
         to: "/admin/profile",
         icon: resolveComponent("LucideUserRound")
     },
-    // {
-    //     title: "Projects",
-    //     to: "/admin/projects",
-    //     icon: resolveComponent("LucideBriefcase"),
-    // },
+    {
+        title: "Projects",
+        to: "/admin/projects",
+        icon: resolveComponent("LucideBriefcase"),
+    },
     {
         title: "Education",
         to: "/admin/education",
