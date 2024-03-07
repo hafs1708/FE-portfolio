@@ -38,7 +38,7 @@ export const useBlogStore = defineStore('blog', {
 
             await Api.post('/blog/', formData);
         },
-        async update(data, new_photos) {
+        async update(id, data, new_photos) {
             const Api = useApiStore();
             
             // validasi
@@ -61,7 +61,7 @@ export const useBlogStore = defineStore('blog', {
 
             // append foto baru
             for ( const photo of new_photos) {
-                formData.append('photos', photos);
+                formData.append('photos', photo);
             }
 
             await Api.put(`/blog/${id}`, formData)

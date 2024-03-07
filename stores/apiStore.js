@@ -58,20 +58,17 @@ export const useApiStore = defineStore('api', {
             }
 
             try {
-                const response = await $fetch(apiUri + path, {
-                    method: 'PUT',
-                    body: data,
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    credentials: 'include'
+                const userData = await $fetch(apiUri + path, {
+                  method: "PUT",
+                  body: data,
+                  // below is deleted because it will automatically be mounted
+                  // headers: { "Content-Type": "application/json" },
+                  credentials: "include",
                 });
-
-                // RETURN DATA
-                return response
-            } catch (error) {
+                return userData;
+              } catch (error) {
                 this.handleError(error);
-            }
+              }
         },
         // patch
         async patch(path, data) {

@@ -107,7 +107,10 @@ const formData = ref({
 
 // map photo
 const current_photos = data.value.photos.map(photo => {
-    return apiUri + photo.path
+    return {
+        path: apiUri + photo.path,
+        id: photo.id
+    }
 });
 console.log(current_photos);
 
@@ -171,7 +174,7 @@ const handleSave = async () => {
         dataUpdate.photos = [];
         for (const p of photoPreviews.value) {
             if (p.id != undefined) {
-                dataUpdate.photos.path(p.id);
+                dataUpdate.photos.push(p.id);
             }
         }
 
