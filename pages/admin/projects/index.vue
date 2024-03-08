@@ -29,10 +29,10 @@
                 </div>
                 <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
                     <li>
-                        <!-- <NuxtLink :to="`/admin/projects/update?id=${project.id}`" class="btn btn-sm my-1 btn-success">
-                                <LucidePencilLine :size="16" />
-                                Edit
-                            </NuxtLink> -->
+                        <NuxtLink :to="`/admin/projects/update?id=${project.id}`" class="btn btn-sm my-1 btn-success">
+                            <LucidePencilLine :size="16" />
+                            Edit
+                        </NuxtLink>
                     </li>
                     <li>
                         <button @click="removeData = project; showRemoveModal = true;"
@@ -66,10 +66,11 @@
                 <p class="line-clamp-2">{{ project.description }}</p>
 
                 <div class="max-lg:hidden flex gap-2 justify-end">
-                    <!-- <NuxtLink :to="`/admin/projects/update?id=${project.id}`" class="btn btn-xs xl:btn-sm my-1 btn-success">
+                    <NuxtLink :to="`/admin/projects/update?id=${project.id}`"
+                        class="btn btn-xs xl:btn-sm my-1 btn-success">
                         <LucidePencilLine :size="16" />
                         Edit
-                    </NuxtLink> -->
+                    </NuxtLink>
                     <button @click="removeData = project; showRemoveModal = true;"
                         class="btn btn-xs xl:btn-sm btn-error my-1">
                         <LucideTrash2 :size="16" />

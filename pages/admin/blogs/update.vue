@@ -84,6 +84,7 @@ definePageMeta({
     middleware: ['auth']
 });
 
+// check query
 const BlogStore = useBlogStore();
 const route = useRoute();
 const { id } = route.query;
@@ -93,7 +94,6 @@ const apiUri = config.public.apiUri;
 
 const fetch_data = await BlogStore.getById(id);
 const data = ref(fetch_data);
-console.log(data)
 
 const errors = ref({
     title: '',
@@ -112,7 +112,6 @@ const current_photos = data.value.photos.map(photo => {
         id: photo.id
     }
 });
-console.log(current_photos);
 
 // // PHOTO PREVIEW
 // [
