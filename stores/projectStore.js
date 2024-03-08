@@ -21,7 +21,8 @@ export const useProjectStore = defineStore('project', {
         //     const Api = useApiStore();
         //     return Api.get('/project/' + id);
         // },
-        async create(data, skills) {
+        async create(data, skills, photos) {
+            console.log(photos);
             const Api = useApiStore();
 
             data = Validate(isCreateProject, data);
@@ -44,9 +45,9 @@ export const useProjectStore = defineStore('project', {
             }
 
             // append foto dengan loop
-            // for(const photo of photos) {
-                // formData.append('photos', photo)
-            // }
+            for(const photo of photos) {
+                formData.append('photos', photo)
+            }
 
             await Api.post('/project', formData);
         },
