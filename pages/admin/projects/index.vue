@@ -20,28 +20,28 @@
     </div>
 
     <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 pt-5">
-        <div v-for="project in ProjectStore.projects" :key="project.id" class="card card-compact bg-base-100 shadow-xl">
-            <div class="card w-96 bg-base-100 shadow-xl">
-                <div class="xl:hidden dropdown dropdown-end absolute right-0 top-0">
-                    <div tabindex="0" role="button" class="btn btn-sm px-1 m-1 btn-opacity-70 rounded-md border-0">
-                        <LucideMoreVertical :size="16" />
-                    </div>
-                    <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                        <li>
-                            <!-- <NuxtLink :to="`/admin/projects/update?id=${project.id}`" class="btn btn-sm my-1 btn-success">
+        <div v-for="project in ProjectStore.projects" :key="project.id"
+            class="card card-compact bg-base-100 shadow-xl overflow-hidden relative">
+            <div class="lg:hidden dropdown dropdown-end absolute right-0 top-0">
+
+                <div tabindex="0" role="button" class="btn btn-sm px-1 m-1 btn-opacity-70 rounded-md border-0">
+                    <LucideMoreVertical :size="16" />
+                </div>
+                <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                    <li>
+                        <!-- <NuxtLink :to="`/admin/projects/update?id=${project.id}`" class="btn btn-sm my-1 btn-success">
                                 <LucidePencilLine :size="16" />
                                 Edit
                             </NuxtLink> -->
-                        </li>
-                        <li>
-                            <button @click="removeData = project; showRemoveModal = true;"
-                                class="btn btn-sm btn-error my-1">
-                                <LucideTrash2 :size="16" />
-                                Remove
-                            </button>
-                        </li>
-                    </ul>
-                </div>
+                    </li>
+                    <li>
+                        <button @click="removeData = project; showRemoveModal = true;"
+                            class="btn btn-sm btn-error my-1">
+                            <LucideTrash2 :size="16" />
+                            Remove
+                        </button>
+                    </li>
+                </ul>
             </div>
 
             <div class="card-body flex-none !pb-1">
@@ -169,19 +169,4 @@ const handleRemove = async () => {
         console.log(error);
     }
 }
-
-// // CREATE
-// const showForm = ref(false);
-
-// // berhasil create project
-// const saved = async () => {
-//     // tutup form
-//     showForm.value = false;
-
-//     // fetch ulang data project
-//     await ProjectStore.get();
-// }
-
-// EDIT
-// const editData = ref(null);
 </script>

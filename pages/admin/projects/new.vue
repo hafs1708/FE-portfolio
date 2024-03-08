@@ -132,6 +132,7 @@
             Save
             <ImagesLoading v-show="isLoading" class="w-10" />
         </button>
+        <div class="text-error text-right text-sm" v-if="fetchError">{{ fetchError }}</div>
     </div>
 
     <!-- skill selector -->
@@ -147,6 +148,7 @@
 
 
 <script setup>
+import Joi from 'joi';
 import dayjs from 'dayjs';
 import { DatePicker } from 'v-calendar';
 
@@ -196,12 +198,12 @@ const addSkill = (skill) => {
 }
 
 // handle save
-const fetchError = ref({});
+const fetchError = ref('');
 const showCreateConfirmation = ref(false);
 const isLoading = ref(false);
 const ProjectStore = useProjectStore();
 
-const handleSave = () => {
+const handleSave = async () => {
     // reset error
     errors.value = {};
     fetchError.value = '';
@@ -214,18 +216,18 @@ const handleSave = () => {
         const dataSave = { ...formData.value };
 
         // endDate jika null jadikan ''
-        // if (!dataSave.endDate) dataSave.endDate;
+        if (!dataSave.endDate) dataSave.endDate;
 
         // skill => array of id
-        const skill_id = selectedSkill.value.map(s => s.id);
+        const skill_ids = selectedSkill.value.map(s => s.id);
 
-        ProjectStore.create(dataSave, skill_id);
+        await ProjectStore.create(dataSave, skill_ids);
 
         navigateTo('/admin/projects');
     } catch (error) {
         isLoading.value = false;
         // reset loading indicator
-        // isLoading.value = false
+        showCreateConfirmation.value = false;
 
         if (error instanceof Joi.ValidationError) {
             // joi error
