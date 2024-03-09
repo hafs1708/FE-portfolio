@@ -10,8 +10,18 @@ export const useSkillStore = defineStore('skill', {
     actions: {
         async get() {
             const Api = useApiStore();
+            const timeoutPromise = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve();
+                }, 10000);
+            });
 
-            this.skills = await Api.get('/skills');
+            const response = await Promise.all([
+                Api.get('/skills'),
+                timeoutPromise
+            ]);
+
+            this.skills = response[0] ;
 
             // RETURN VOID
         },

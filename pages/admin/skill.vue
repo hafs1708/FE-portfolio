@@ -27,19 +27,19 @@
                 <thead>
                     <tr>
                         <th>SVG</th>
-                        <th>Title</th>
+                        <th class="text-center">Title</th>
                         <th class="text-center">Category</th>
                         <th class="text-center">Projects</th>
                         <th class="text-center">Action</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody v-if="SkillStore.skills">
                     <!-- row 1 -->
                     <tr v-for="skill in dataTable" :key="skill.id">
                         <th>
                             <div v-html="skill.svg" class="w-8 overflow-hidden"></div>
                         </th>
-                        <td class="font-semibold">{{ skill.title }}</td>
+                        <td class="font-semibold text-center">{{ skill.title }}</td>
                         <td class="text-center text-xs">
                             <span
                                 class="badge badge-sm badge-outline border-neutral/25 text-center font-semibold pb-px">
@@ -60,11 +60,14 @@
                         </td>
                     </tr>
                 </tbody>
+
+                <!-- SKELETON TABLE -->
+                <AdminSkillSkeletonTable v-else />
             </table>
         </div>
 
         <!-- MOBILE -->
-        <div class="lg:hidden flex flex-col gap-3 sm:gap-4 pt-5">
+        <div v-if="SkillStore.skills" class="lg:hidden flex flex-col gap-3 sm:gap-4 pt-5">
             <div v-for="skill in dataTable" :key="skill.id" class="card bg-base-300 shadow-xl">
                 <div class="card-body max-sm:p-4">
                     <div class="flex justify-between">
@@ -108,6 +111,9 @@
                 </div>
             </div>
         </div>
+
+        <!-- SKELETON MOBILE -->
+        <AdminSkillSkeletonMobile v-else />
 
         <!-- Modal confirmation -->
         <LazyAdminModalConfirm :show="showRemoveModal" text_confirm="remove" @close="showRemoveModal = false"
