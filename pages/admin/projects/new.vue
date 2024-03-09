@@ -181,10 +181,10 @@
         @addSkill="addSkill" />
 
     <!-- Modal confirmation -->
-    <AdminModalConfirm :show="showCreateConfirmation" text_confirm="save" @close="showCreateConfirmation = false"
+    <LazyAdminModalConfirm :show="showCreateConfirmation" text_confirm="save" @close="showCreateConfirmation = false"
         @saved="handleSave">
         Are you sure to save this new Project ?
-    </AdminModalConfirm>
+    </LazyAdminModalConfirm>
 </template>
 
 
