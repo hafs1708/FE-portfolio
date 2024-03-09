@@ -25,7 +25,7 @@
                         <th class="text-center">Remove</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody v-if="EduStore.educations">
                     <!-- row 1 -->
                     <tr v-for="edu in dataTable" :key="edu.id">
                         <th>{{ edu.id }}</th>
@@ -45,11 +45,12 @@
                         </td>
                     </tr>
                 </tbody>
+                <AdminEducationSkeletonTable v-else />
             </table>
         </div>
 
         <!-- MOBILE -->
-        <div class="lg:hidden flex flex-col gap-2 sm:gap-4 pt-5">
+        <div v-if="EduStore.educations" class="lg:hidden flex flex-col gap-2 sm:gap-4 pt-5">
             <div v-for="edu in dataTable" :key="edu.id" class="card bg-base-100 shadow-xl">
                 <div class="card-body max-sm:p-4">
                     <div class="flex justify-between">
@@ -97,6 +98,9 @@
                 </div>
             </div>
         </div>
+
+        <!-- SKELETON MOBILE -->
+        <AdminEducationSkeletonMobile v-else />
 
         <!-- Modal confirmation -->
         <LazyAdminModalConfirm :show="showRemoveModal" text_confirm="remove" @close="showRemoveModal = false"

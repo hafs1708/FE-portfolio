@@ -9,7 +9,18 @@ export const useExperienceStore = defineStore('experiences', {
     actions: {
         async get() {
             const Api = useApiStore();
-            this.experiences = await Api.get('/experiences');
+            const timeoutPromise = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve();
+                }, 1000);
+            });
+
+            const response = await Promise.all([
+                Api.get('/experiences'),
+                timeoutPromise
+            ]);
+
+            this.experiences = response[0];
         },
         async delete(id) {
             const Api = useApiStore();

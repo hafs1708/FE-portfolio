@@ -24,7 +24,7 @@
                         <th class="text-center">Periode</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody v-if="ExpStore.experiences">
                     <!-- row 1 -->
                     <tr v-for="exp in dataTable" :key="exp.id">
                         <th>{{ exp.id }}</th>
@@ -44,11 +44,14 @@
                         </td>
                     </tr>
                 </tbody>
+
+                <!-- SKELETON TABLE -->
+                <AdminExperienceSkeletonTable v-else />
             </table>
         </div>
 
         <!-- MOBILE -->
-        <div class="lg:hidden flex flex-col gap-3 sm:gap-4 pt-5">
+        <div v-if="ExpStore.experiences" class="lg:hidden flex flex-col gap-3 sm:gap-4 pt-5">
             <div v-for="exp in dataTable" :key="exp.id" class="card bg-base-300 shadow-xl">
                 <div class="card-body max-sm:p-4">
                     <div class="flex justify-between">
@@ -96,6 +99,9 @@
                 </div>
             </div>
         </div>
+
+        <!-- SKELETON MOBILE -->
+        <AdminExperienceSkeletonMobile v-else />
 
         <!-- Modal confirmation -->
         <LazyAdminModalConfirm :show="showRemoveModal" text_confirm="remove" @close="showRemoveModal = false"
