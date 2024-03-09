@@ -36,8 +36,9 @@
     </div>
 
     <!-- MODAL CONFIRM -->
-    <AdminModalConfirm :show="confirm" text_confirm="Change Password" @close="confirm = false" @saved="handleUpdate" />
-    <AdminModalSuccess :show="success" @close="success = false" />
+    <LazyAdminModalConfirm :show="confirm" text_confirm="Change Password" @close="confirm = false"
+        @saved="handleUpdate" />
+    <LazyAdminModalSuccess :show="success" @close="success = false" />
 </template>
 
 <script setup>
@@ -84,5 +85,3 @@ const handleUpdate = async () => {
 }
 
 </script>
-
-

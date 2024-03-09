@@ -3,14 +3,16 @@
         <!-- GITHUB -->
         <label class="form-control w-full max-w-xs">
             <div class="label label-text">Github</div>
-            <input v-model="formData.github" type="text" placeholder="Github" class="input input-bordered w-full max-w-xs">
+            <input v-model="formData.github" type="text" placeholder="Github"
+                class="input input-bordered w-full max-w-xs">
             <div class="text-error text-right text-sm" v-if="errors.github">{{ errors.github }}</div>
         </label>
 
         <!-- gitlab -->
         <label class="form-control w-full max-w-xs">
             <div class="label label-text">Gitlab</div>
-            <input v-model="formData.gitlab" type="text" placeholder="Gitlab" class="input input-bordered w-full max-w-xs">
+            <input v-model="formData.gitlab" type="text" placeholder="Gitlab"
+                class="input input-bordered w-full max-w-xs">
             <div class="text-error text-right text-sm" v-if="errors.gitlab">{{ errors.gitlab }}</div>
         </label>
 
@@ -64,13 +66,13 @@
     </div>
 
     <!-- MODAL CONFIRM -->
-    <AdminModalConfirm :show="confirm" @close="confirm = false" @saved="handleUpdate">
+    <LazyAdminModalConfirm :show="confirm" @close="confirm = false" @saved="handleUpdate">
         <h3 class="font-bold text-lg">Confirm</h3>
         <p class="py-4">Are you sure to update social media ?</p>
-    </AdminModalConfirm>
+    </LazyAdminModalConfirm>
 
     <!-- MODAL SUCCESS -->
-    <AdminModalSuccess :show="success" @close="success = false" />
+    <LazyAdminModalSucces :show="success" @close="success = false" />
 </template>
 
 <script setup>

@@ -50,7 +50,8 @@
             <!-- CITY -->
             <label class="form-control w-full max-w-xs">
                 <div class="label label-text">City</div>
-                <input v-model="formData.city" type="text" placeholder="City" class="input input-bordered w-full max-w-xs">
+                <input v-model="formData.city" type="text" placeholder="City"
+                    class="input input-bordered w-full max-w-xs">
                 <div class="text-error text-right text-sm" v-if="errors.city">{{ errors.city }}</div>
             </label>
 
@@ -65,7 +66,8 @@
             <!-- JOB -->
             <label class="form-control w-full max-w-xs">
                 <div class="label label-text">Job</div>
-                <input v-model="formData.job" type="text" placeholder="Job" class="input input-bordered w-full max-w-xs">
+                <input v-model="formData.job" type="text" placeholder="Job"
+                    class="input input-bordered w-full max-w-xs">
                 <div class="text-error text-right text-sm" v-if="errors.job">{{ errors.job }}</div>
             </label>
 
@@ -101,7 +103,8 @@
             <!-- BIO -->
             <label class="form-control w-full">
                 <div class="label label-text">Bio</div>
-                <textarea v-model="formData.bio" placeholder="Bio" rows="10" class="textarea textarea-bordered"></textarea>
+                <textarea v-model="formData.bio" placeholder="Bio" rows="10"
+                    class="textarea textarea-bordered"></textarea>
                 <div class="text-error text-right text-sm pr-2" v-if="errors.name">{{ errors.bio }}</div>
             </label>
         </div>
@@ -115,13 +118,13 @@
     </div>
 
     <!-- MODAL CONFIRM -->
-    <AdminModalConfirm :show="confirm" @close="confirm = false" @saved="handleUpdate">
+    <LazyAdminModalConfirm :show="confirm" @close="confirm = false" @saved="handleUpdate">
         <h3 class="font-bold text-lg">Confirm</h3>
         <p class="py-4">Are you sure to update profile ?</p>
-    </AdminModalConfirm>
+    </LazyAdminModalConfirm>
 
     <!-- MODAL SUCCESS -->
-    <AdminModalSuccess :show="success" @close="success = false" />
+    <LazyAdminModalSuccess :show="success" @close="success = false" />
 </template>
 
 

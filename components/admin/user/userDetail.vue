@@ -10,7 +10,8 @@
         <!-- EMAIL -->
         <label class="form-control w-full max-w-xs">
             <div class="label label-text">Email</div>
-            <input v-model="formData.email" type="text" placeholder="Email" class="input input-bordered w-full max-w-xs">
+            <input v-model="formData.email" type="text" placeholder="Email"
+                class="input input-bordered w-full max-w-xs">
             <div class="text-error text-right text-sm pr-2" v-if="errors.email">{{ errors.email }}</div>
         </label>
     </div>
@@ -23,13 +24,13 @@
     </div>
 
     <!-- MODAL CONFIRM -->
-    <AdminModalConfirm :show="confirm" @close="confirm = false" @saved="handleUpdate">
+    <LazyAdminModalConfirm :show="confirm" @close="confirm = false" @saved="handleUpdate">
         <h3 class="font-bold text-lg">Confirm</h3>
         <p class="py-4">Are you sure to update user detail ?</p>
-    </AdminModalConfirm>
+    </LazyAdminModalConfirm>
 
     <!-- MODAL SUCCESS -->
-    <AdminModalSuccess :show="success" @close="success = false" />
+    <LazyAdminModalSuccess :show="success" @close="success = false" />
 </template>
 
 <script setup>
@@ -76,5 +77,3 @@ const handleUpdate = async () => {
 }
 
 </script>
-
-
