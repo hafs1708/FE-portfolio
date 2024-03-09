@@ -11,7 +11,7 @@
                         </div>
                     </div>
                     <div>
-                        <div class="skeleton w-8 h-8 rounded"></div>
+                        <div class="skeleton w-8 h-8 rounded-full"></div>
                     </div>
                 </div>
                 <div>

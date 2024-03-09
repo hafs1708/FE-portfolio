@@ -13,7 +13,7 @@ export const useSkillStore = defineStore('skill', {
             const timeoutPromise = new Promise((resolve, reject) => {
                 setTimeout(() => {
                     resolve();
-                }, 10000);
+                }, 1000);
             });
 
             const response = await Promise.all([

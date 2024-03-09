@@ -5,7 +5,7 @@
                 <div>
                     <div class="skeleton w-40 h-6 mb-2"></div>
                     <div class="flex justify-between gap-2">
-                        <div class="skeleton w-32 h-4"></div>
+                        <div class="skeleton w-20 h-4"></div>
                         <div class="skeleton w-20 h-4"></div>
                     </div>
                 </div>

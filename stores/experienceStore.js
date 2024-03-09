@@ -12,7 +12,7 @@ export const useExperienceStore = defineStore('experiences', {
             const timeoutPromise = new Promise((resolve, reject) => {
                 setTimeout(() => {
                     resolve();
-                }, 1000);
+                }, 10000);
             });
 
             const response = await Promise.all([

@@ -17,8 +17,8 @@
                 <!-- head -->
                 <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Institution</th>
+                        <th class="text-center">Id</th>
+                        <th class="text-center">Institution</th>
                         <th class="text-center">Periode</th>
                         <th class="text-center">Major</th>
                         <th class="text-center">Degree</th>
@@ -28,8 +28,8 @@
                 <tbody v-if="EduStore.educations">
                     <!-- row 1 -->
                     <tr v-for="edu in dataTable" :key="edu.id">
-                        <th>{{ edu.id }}</th>
-                        <td>{{ edu.institutionName }}</td>
+                        <th class="text-center">{{ edu.id }}</th>
+                        <td class="text-center">{{ edu.institutionName }}</td>
                         <td class="text-center">{{ edu.startYear }} - {{ edu.endYear || 'Present' }}</td>
                         <td class="text-center">{{ edu.major }}</td>
                         <td class="text-center">{{ edu.degree }}</td>

@@ -17,8 +17,8 @@
                 <!-- head -->
                 <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Company</th>
+                        <th class="text-center">Id</th>
+                        <th class="text-center">Company</th>
                         <th class="text-center">Location</th>
                         <th class="text-center">Title</th>
                         <th class="text-center">Periode</th>
@@ -28,8 +28,8 @@
                 <tbody v-if="ExpStore.experiences">
                     <!-- row 1 -->
                     <tr v-for="exp in dataTable" :key="exp.id">
-                        <th>{{ exp.id }}</th>
-                        <td>{{ exp.company }}</td>
+                        <th class="text-center">{{ exp.id }}</th>
+                        <td class="text-center">{{ exp.company }}</td>
                         <td class="text-center">{{ exp.location }}</td>
                         <td class="text-center">{{ exp.title }}</td>
                         <td class="text-center">{{ exp.readStartDate }} - {{ exp.readEndDate }}</td>

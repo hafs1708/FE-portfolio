@@ -61,9 +61,13 @@
                     {{ project.skills.length }} Skills
                 </div>
             </figure>
-            <div class="card-body">
-                <h2 class="text-md font-semibold" v-if="project.company">{{ project.company }}</h2>
-                <p class="line-clamp-2">{{ project.description }}</p>
+            <div class="card-body flex justify-end grow">
+                <div class="flex flex-col gap-0">
+                    <p v-if="project.company" class="font-semibold text-lg capitalize">{{ project.company }}</p>
+                    <p class="xl:line-clamp-3 line-clamp-2 text-sm">
+                        {{ project.description }}
+                    </p>
+                </div>
 
                 <div class="max-lg:hidden flex gap-2 justify-end">
                     <NuxtLink :to="`/admin/projects/update?id=${project.id}`"
