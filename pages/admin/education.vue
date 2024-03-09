@@ -22,7 +22,7 @@
                         <th class="text-center">Periode</th>
                         <th class="text-center">Major</th>
                         <th class="text-center">Degree</th>
-                        <th class="text-center">Remove</th>
+                        <th class="text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody v-if="EduStore.educations">

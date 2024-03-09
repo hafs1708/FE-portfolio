@@ -9,16 +9,16 @@
                 <div class="skeleton w-20 h-6"></div>
             </td>
             <td>
+                <div class="skeleton w-20 h-6 mx-auto"></div>
+            </td>
+            <td>
+                <div class="skeleton w-20 h-6 mx-auto"></div>
+            </td>
+            <td>
                 <div class="flex gap-3 justify-center">
                     <div class="skeleton w-20 h-6"></div>
                     <div class="skeleton w-20 h-6"></div>
                 </div>
-            </td>
-            <td>
-                <div class="skeleton w-20 h-6 mx-auto"></div>
-            </td>
-            <td>
-                <div class="skeleton w-20 h-6 mx-auto"></div>
             </td>
             <td>
                 <div class="flex gap-3 justify-center">

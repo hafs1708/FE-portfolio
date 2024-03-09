@@ -22,6 +22,7 @@
                         <th class="text-center">Location</th>
                         <th class="text-center">Title</th>
                         <th class="text-center">Periode</th>
+                        <th class="text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody v-if="ExpStore.experiences">
