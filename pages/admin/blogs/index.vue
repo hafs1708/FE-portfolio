@@ -43,10 +43,13 @@
 
             <figure>
                 <!-- kalau ada foto minimal 1 -->
-                <img v-if="blog.photos.length" :src="apiUri + blog.photos[0].path" />
-
-                <!-- dummy photo  -->
-                <div v-else class="bg-neutral/20 aspect-video w-full"></div>
+                <div v-if="blog.photos.length" class="aspect-video flex justify-center items-center bg-neutral/10">
+                    <img :src="apiUri + blog.photos[0].path" class="max-h-full max-w-full" />
+                </div>
+                <!-- dummy photo -->
+                <div v-else class="bg-neutral/20 aspect-video w-full flex justify-center items-center">
+                    <ImagesDummyImage class="w-28 max-h-full max-w-full" />
+                </div>
             </figure>
             <div class="card-body">
                 <h2 class="card-title">{{ blog.title }}</h2>

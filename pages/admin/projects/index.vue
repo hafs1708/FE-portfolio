@@ -53,9 +53,12 @@
             </div>
 
             <figure class="relative">
-                <img v-if="project.photos.length" :src="apiUri + project.photos[0].path" />
-
-                <div v-else class="bg-neutral/20 aspect-video w-full"></div>
+                <div v-if="project.photos.length" class="aspect-video flex justify-center items-center bg-neutral/10">
+                    <img :src="apiUri + project.photos[0].path" class="max-h-full max-w-full" />
+                </div>
+                <div v-else class="bg-neutral/20 aspect-video w-full flex justify-center items-center">
+                    <ImagesDummyImage class="w-28 max-h-full max-w-full" />
+                </div>
 
                 <div class="absolute badge left-1 bottom-1" v-if="project.skills.length">
                     {{ project.skills.length }} Skills
