@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { useApiStore } from './apiStore';
+import { delay } from '../utils/delay';
 
 export const useBlogStore = defineStore('blog', {
     state: () => ({

@@ -8,7 +8,8 @@
         </NuxtLink>
     </div>
 
-    <div v-if="ProjectStore.data">
+    <div v-if="ProjectStore.data != null">
+        <!-- <div v-if="false"> -->
         <div class="flex max-sm:flex-col max-sm:items-center sm:justify-between gap-2">
             <input @keyup.enter="page = 1; getData()" v-model="filter" type="text" placeholder="Search"
                 class="input input-sm input-bordered input-primary w-full sm:max-w-xs" />
@@ -108,8 +109,10 @@
     </div>
 
     <!-- SKELETON -->
-    <AdminProjectSkeletonTable />
+    <AdminProjectSkeletonTable v-else />
 
+    <!-- SKELETON MOBILE -->
+    <AdminProjectSkeletonMobile />
 
     <!-- Modal confirmation -->
     <LazyAdminModalConfirm :show="showRemoveModal" text_confirm="remove" @close="showRemoveModal = false"
