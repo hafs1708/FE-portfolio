@@ -15,7 +15,11 @@ export const useBlogStore = defineStore('blog', {
     actions: {
         async get(page = 1, search = '') {
             const Api = useApiStore();
-            this.data = await Api.get(`/blogs?limit=12&page=${page}&search=${search}`);
+            const response = await Promise.all([
+                Api.get(`/blogs?limit=12&page=${page}&search=${search}`),
+                delay
+            ]);
+            this.data = response[0] ;
         },
         async getById(id) {
             const Api = useApiStore();

@@ -41,7 +41,7 @@
                 </ul>
             </div>
 
-            <figure>
+            <figure class="relative">
                 <!-- kalau ada foto minimal 1 -->
                 <div v-if="blog.photos.length" class="aspect-video flex justify-center items-center bg-neutral/10">
                     <img :src="apiUri + blog.photos[0].path" class="max-h-full max-w-full" />

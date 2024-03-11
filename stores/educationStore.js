@@ -9,18 +9,10 @@ export const useEducationStore = defineStore('educations', {
     actions: {
         async get() {
             const Api = useApiStore();
-            const timeoutPromise = new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    resolve();
-                }, 5000);
-            })
-
             const response = await Promise.all([
                 Api.get('/educations'),
-                timeoutPromise
+                delay
             ]);
-            console.log('response');
-            console.log(response);
 
             this.educations = response[0];
         },
