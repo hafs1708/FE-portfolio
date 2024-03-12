@@ -111,9 +111,6 @@
     <!-- SKELETON -->
     <AdminProjectSkeletonTable v-else />
 
-    <!-- SKELETON MOBILE -->
-    <AdminProjectSkeletonMobile />
-
     <!-- Modal confirmation -->
     <LazyAdminModalConfirm :show="showRemoveModal" text_confirm="remove" @close="showRemoveModal = false"
         @saved="handleRemove">
