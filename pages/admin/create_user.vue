@@ -15,8 +15,8 @@
                     <!--input nama-->
                     <div class="w-full font-arc-daughter text-xl md:text-2xl">
                         <label>Nama</label>
-                        <input v-model="formData.nama" type="text" placeholder="nama" class="input w-full bg-[#bfc5c5]">
-                        <div class="text-error text-sm text-right mr-2" v-if="errorMessage.nama">{{ errorMessage.nama }}
+                        <input v-model="formData.name" type="text" placeholder="name" class="input w-full bg-[#bfc5c5]">
+                        <div class="text-error text-sm text-right mr-2" v-if="errorMessage.name">{{ errorMessage.name }}
                         </div>
                     </div>
 
